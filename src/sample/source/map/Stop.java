@@ -18,10 +18,10 @@ public class Stop implements iStop {
     public boolean inStreet(List<Coordinate> coor) {
 
         boolean switcher = true;
-        int x = 0;
-        int y = 0;
-        int result_x;
-        int result_y;
+        double x = 0;
+        double y = 0;
+        double result_x;
+        double result_y;
 
         for (Coordinate coordinate : coor) {
             result_x = coordinate.getX();

@@ -1,10 +1,10 @@
 package sample.source.map;
 
 public class Coordinate {
-    private int x;
-    private int y;
+    private double x;
+    private double y;
 
-    public Coordinate(int x, int y) {
+    public Coordinate(double x, double y) {
         if (x > 0 && y > 0){
             this.x = x;
             this.y = y;
@@ -16,17 +16,15 @@ public class Coordinate {
         if (x < 0 || y < 0) {
             return null;
         }
-        x = x;
-        y = y;
 
         return new Coordinate(x,y);
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() { return y; }
+    public double getY() { return y; }
 
     @Override
     public boolean equals(Object obj) {

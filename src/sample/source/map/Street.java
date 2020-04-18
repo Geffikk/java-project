@@ -1,5 +1,9 @@
 package sample.source.map;
 
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
+import sample.source.imap.Drawable;
 import sample.source.imap.iStreet;
 
 import java.util.ArrayList;
@@ -7,7 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Street implements iStreet {
+public class Street implements iStreet, Drawable {
 
     private String id;
     private List<Coordinate> coordinates;
@@ -21,10 +25,10 @@ public class Street implements iStreet {
     @Override
     public boolean rightAngle() {
         boolean switcher = true;
-        int x = 0;
-        int y = 0;
-        int result_x;
-        int result_y;
+        double x = 0;
+        double y = 0;
+        double result_x;
+        double result_y;
 
         for(Coordinate coordinate:this.coordinates)
         {
@@ -86,5 +90,12 @@ public class Street implements iStreet {
     @Override
     public String toString() {
         return String.format("stop(%s)", id);
+    }
+
+    @Override
+    public List<Shape> getGUI() {
+        return Arrays.asList(
+                new Text(this.coordinates.get(0).getX() + (this.coordinates.get(1).getX()/4), this.coordinates.get(0).getY() + (this.coordinates.get(1).getY()/4), this.id),
+                new Line(this.coordinates.get(0).getX(), this.coordinates.get(0).getY(), this.coordinates.get(1).getX(), this.coordinates.get(1).getY()));
     }
 }
