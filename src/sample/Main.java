@@ -8,10 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import sample.source.imap.Drawable;
-import sample.source.map.Autobus;
-import sample.source.map.Coordinate;
-import sample.source.map.Line;
-import sample.source.map.Street;
+import sample.source.map.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -31,9 +28,13 @@ public class Main extends Application {
         Controller controller = loader.getController();
 
         List<Drawable> elements = new ArrayList<>();
-        elements.add(new Autobus(new Coordinate(100, 100), 2));
-        elements.add(new Autobus(new Coordinate(200, 100), 2));
-        elements.add(new Autobus(new Coordinate(400, 250), 2));
+        elements.add(new Autobus(new Coordinate(100, 100), 2, new Path(Arrays.asList(
+                new Coordinate(100, 100),
+                    new Coordinate(500, 500),
+                new Coordinate(1000, 600)
+        ))));
+        //elements.add(new Autobus(new Coordinate(200, 100), 2));
+        //elements.add(new Autobus(new Coordinate(400, 250), 2));
         elements.add(new Street("Komenskeho", new Coordinate(100, 100), new Coordinate(200, 100)));
         elements.add(new Street("Sazavskeho", new Coordinate(200, 100), new Coordinate(350, 300)));
         elements.add(new Street("Tacevska", new Coordinate(400, 250), new Coordinate(350, 400)));
@@ -42,7 +43,7 @@ public class Main extends Application {
         elements.add(new Street("Tota na picu", new Coordinate(200, 400), new Coordinate(100, 100)));
 
         controller.setElements(elements);
-
+        controller.startTime();
     }
 
 

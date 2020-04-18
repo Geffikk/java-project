@@ -37,4 +37,5 @@ public class Path {
         return new Coordinate(a.getX() + (b.getX() - a.getX()) * driven, a.getY() + (b.getY() - a.getY()) * driven);
 
     }
+    
 }
