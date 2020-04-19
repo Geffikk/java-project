@@ -1,8 +1,16 @@
 package sample.source.map;
 
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Coordinate {
     private double x;
     private double y;
+
+    private Coordinate() {
+    }
 
     public Coordinate(double x, double y) {
         if (x > 0 && y > 0){
@@ -38,6 +46,15 @@ public class Coordinate {
         Coordinate a = (Coordinate) obj;
         return a.getX()==(getX()) && a.getY()==(getY());
     }
+
+    @Override
+    public String toString() {
+        return "Coordinate{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
 
 }
 

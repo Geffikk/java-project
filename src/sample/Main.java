@@ -1,8 +1,10 @@
 package sample;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -10,9 +12,8 @@ import javafx.stage.Stage;
 import sample.source.imap.Drawable;
 import sample.source.map.*;
 
-import java.lang.reflect.Array;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Main extends Application {
@@ -26,26 +27,33 @@ public class Main extends Application {
         primaryStage.show();
 
         Controller controller = loader.getController();
-
         List<Drawable> elements = new ArrayList<>();
-        elements.add(new Autobus(new Coordinate(100, 100), 2, new Path(Arrays.asList(
-                new Coordinate(100, 100),
-                    new Coordinate(500, 500),
-                new Coordinate(1000, 600)
-        ))));
-        //elements.add(new Autobus(new Coordinate(200, 100), 2));
-        //elements.add(new Autobus(new Coordinate(400, 250), 2));
-        elements.add(new Street("Komenskeho", new Coordinate(100, 100), new Coordinate(200, 100)));
-        elements.add(new Street("Sazavskeho", new Coordinate(200, 100), new Coordinate(350, 300)));
-        elements.add(new Street("Tacevska", new Coordinate(400, 250), new Coordinate(350, 400)));
-        elements.add(new Street("Kokotna", new Coordinate(350, 400), new Coordinate(200, 560)));
-        elements.add(new Street("Jebo", new Coordinate(200, 560), new Coordinate(200, 400)));
-        elements.add(new Street("Tota na picu", new Coordinate(200, 400), new Coordinate(100, 100)));
+
+
+        //elements.add(new Stop("stop1", new Coordinate(100,100)));
+
+        //controller.setElements(elements);
+        //controller.startTime();
+
+        elements.add(new Street("Tacevska", new Coordinate(100,100), new Coordinate(200, 100)));
+        elements.add(new Street("Komenskeho", new Coordinate(100,100), new Coordinate(200, 200)));
+        elements.add(new Street("Bezrucova", new Coordinate(200,200), new Coordinate(300, 200)));
+       // DataStreets data = new DataStreets(stops);
+
+
+        YAMLFactory factory = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
+        ObjectMapper mapper = new ObjectMapper(factory);
+
+        DataAutobuses data1 = mapper.readValue(new File("data.yml"), DataAutobuses.class);
+
+        elements.addAll(data1.getAutobuses());
 
         controller.setElements(elements);
         controller.startTime();
+        //mapper.writeValue(new File("data2.yml"), data);
+
     }
 
 
-    public static void main(String[] args) { launch(args); }
+
 }
