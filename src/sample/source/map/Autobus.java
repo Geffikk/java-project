@@ -55,7 +55,7 @@ public class Autobus implements Drawable, TimerUpdate {
     public void update(LocalTime time) {
         distance += speed;
         if (path.getPathSize() <= distance) {
-            return;
+            distance = 0;
         }
         Coordinate coords = path.getCoordinateByDistance(distance);
         moveGui(coords);

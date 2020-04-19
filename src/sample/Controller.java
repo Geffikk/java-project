@@ -51,6 +51,6 @@ public class Controller {
                     update.update(time);
                 }
             }
-        }, 0, 300);
+        }, 0, 50);
     }
 }

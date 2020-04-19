@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 import sample.source.imap.Drawable;
 import sample.source.map.*;
 
+import java.net.URL;
+import com.google.transit.realtime.GtfsRealtime.FeedEntity;
+import com.google.transit.realtime.GtfsRealtime.FeedMessage;
 
 import java.io.File;
 import java.io.File;
@@ -31,39 +34,53 @@ public class Main extends Application {
         Controller controller = loader.getController();
         List<Drawable> elements = new ArrayList<>();
 
+        Street str1 = new Street("Tacevska", new Coordinate(100,100), new Coordinate(200, 100));
+        Street str2 = new Street("Komenskeho", new Coordinate(100,100), new Coordinate(200, 200));
+        Street str3 = new Street("Bezrucova", new Coordinate(200,200), new Coordinate(300, 200));
+        Street str4 = new Street("Komenskeho", new Coordinate(300,200), new Coordinate(300, 500));
+        Street str5 = new Street("Kokotna", new Coordinate(300,500), new Coordinate(100, 500));
+        Street str6 = new Street("Ajaja", new Coordinate(300,200), new Coordinate(600, 200));
+        Street str7 = new Street("Tuhore", new Coordinate(600,200), new Coordinate(600, 400));
+        Street str8 = new Street("Trinac", new Coordinate(600,400), new Coordinate(300, 400));
+        Street str9 = new Street("Bacovska", new Coordinate(300,200), new Coordinate(600, 400));
 
-        //elements.add(new Stop("stop1", new Coordinate(100,100)));
+        elements.add(str1);
+        elements.add(str2);
+        elements.add(str3);
 
-        //controller.setElements(elements);
-        //controller.startTime();
-
-        elements.add(new Street("Tacevska", new Coordinate(100,100), new Coordinate(200, 100)));
-        elements.add(new Street("Komenskeho", new Coordinate(100,100), new Coordinate(200, 200)));
-        elements.add(new Street("Bezrucova", new Coordinate(200,200), new Coordinate(300, 200)));
        // DataStreets data = new DataStreets(stops);
-
 
         YAMLFactory factory = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
         ObjectMapper mapper = new ObjectMapper(factory);
-
         DataAutobuses data1 = mapper.readValue(new File("data.yml"), DataAutobuses.class);
 
-        elements.addAll(data1.getAutobuses());
-        /*
-        elements.add(new Vehicle(new Coordinate(0, 0), 2, new Path(Arrays.asList(
-                new Coordinate(100, 100),
-                    new Coordinate(150, 150)
-        ))));*/
-        /*elements.add(new Street("Komenskeho", new Coordinate(100, 100), new Coordinate(200, 100)));
-        elements.add(new Street("Sazavskeho", new Coordinate(400, 250), new Coordinate(350, 300)));
-        */
+        Line line = new Line("1");
+        Line line2 = new Line("2");
 
+        line2.addStreet(str3, str9);
+        line.addStreet(str5, str4, str6, str7, str8);
+
+        for( int i = 0; i<line.getRoute().size(); i++) {
+            elements.add(line);
+        }
+        for( int i = 0; i<line2.getRoute().size(); i++) {
+            elements.add(line2);
+        }
+
+        /*
+        URL url = new URL("URL OF YOUR GTFS-REALTIME SOURCE GOES HERE");
+        FeedMessage feed = FeedMessage.parseFrom(url.openStream());
+        for (FeedEntity entity : feed.getEntityList()) {
+            if (entity.hasTripUpdate()) {
+                System.out.println(entity.getTripUpdate());
+            }
+        }*/
+
+        elements.addAll(data1.getAutobuses());
+        
         controller.setElements(elements);
         controller.startTime();
         //mapper.writeValue(new File("data2.yml"), data);
 
     }
-
-
-
 }
