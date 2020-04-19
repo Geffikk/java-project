@@ -1,0 +1,42 @@
+streets:
+- &1 id: "Tacevska"
+  coordinates:
+  - &2 x: 100.0
+    y: 100.0
+  - &3 x: 200.0
+    y: 100.0
+  stops:
+  - &4 id: "stop1"
+    street: *1
+    coordinate:
+      &5 x: 100.0
+      y: 100.0
+  - &6 id: "stop2"
+    street: *1
+    coordinate:
+      &7 x: 150.0
+      y: 100.0
+- &8 id: "Komenskeho"
+  coordinates:
+  - &9 x: 100.0
+    y: 100.0
+  - &10 x: 200.0
+    y: 200.0
+  stops:
+  - &11 id: "stop3"
+    street: *8
+    coordinate:
+      &12 x: 150.0
+      y: 150.0
+- &13 id: "Bezrucova"
+  coordinates:
+  - &14 x: 200.0
+    y: 200.0
+  - &15 x: 300.0
+    y: 200.0
+  stops:
+  - &16 id: "stop4"
+    street: *13
+    coordinate:
+      &17 x: 250.0
+      y: 200.0

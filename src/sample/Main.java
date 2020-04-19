@@ -15,7 +15,9 @@ import sample.source.map.*;
 
 import java.io.File;
 import java.io.File;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main extends Application {
@@ -31,36 +33,32 @@ public class Main extends Application {
         Controller controller = loader.getController();
         List<Drawable> elements = new ArrayList<>();
 
-
-        //elements.add(new Stop("stop1", new Coordinate(100,100)));
-
-        //controller.setElements(elements);
-        //controller.startTime();
-
-        elements.add(new Street("Tacevska", new Coordinate(100,100), new Coordinate(200, 100)));
-        elements.add(new Street("Komenskeho", new Coordinate(100,100), new Coordinate(200, 200)));
-        elements.add(new Street("Bezrucova", new Coordinate(200,200), new Coordinate(300, 200)));
-       // DataStreets data = new DataStreets(stops);
-
-
         YAMLFactory factory = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
         ObjectMapper mapper = new ObjectMapper(factory);
 
-        DataAutobuses data1 = mapper.readValue(new File("data.yml"), DataAutobuses.class);
+        // Load streets and stops
+        DataStreets data2 = mapper.readValue(new File("data2.yml"), DataStreets.class);
+        // Add streets to map
+        elements.addAll(data2.getStreets());
+        // Add all stops on each street to map
+        for (Street street: data2.getStreets()) {
+            List<Stop> stops = street.getStops();
+            for (Stop stop: stops) {
+                elements.add(stop);
+            }
+        }
 
+        // Load vehicles and their path *//
+        DataAutobuses data1 = mapper.readValue(new File("data.yml"), DataAutobuses.class);
+        // Add vehicles to map
         elements.addAll(data1.getAutobuses());
-        /*
-        elements.add(new Vehicle(new Coordinate(0, 0), 2, new Path(Arrays.asList(
-                new Coordinate(100, 100),
-                    new Coordinate(150, 150)
-        ))));*/
-        /*elements.add(new Street("Komenskeho", new Coordinate(100, 100), new Coordinate(200, 100)));
-        elements.add(new Street("Sazavskeho", new Coordinate(400, 250), new Coordinate(350, 300)));
-        */
+
+
+
 
         controller.setElements(elements);
         controller.startTime();
-        //mapper.writeValue(new File("data2.yml"), data);
+       // mapper.writeValue(new File("data2.yml"), data);
 
     }
 

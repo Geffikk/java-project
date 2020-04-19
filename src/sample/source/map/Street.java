@@ -1,6 +1,8 @@
 package sample.source.map;
 
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
@@ -14,18 +16,23 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Street implements iStreet, Drawable {
 
     // Street ID, List<Coordinates>, List<Stops>
     private String id;
     private List<Coordinate> coordinates;
-    private List<Stop> stops  = new ArrayList<>();
+    private List<Stop> stops = new ArrayList<>();
+
+
+    public Street() {
+    }
 
     public Street(String id, Coordinate... coordinates) {
         this.id = id;
         this.coordinates = new ArrayList<>(Arrays.asList(coordinates));
     }
+
 
     // If street is in right angle, in this project we do not need
     @Override
@@ -105,6 +112,7 @@ public class Street implements iStreet, Drawable {
         return String.format("street(%s)", id);
     }
 
+    @JsonIgnore
     /** Paint streets to GUI **/
     @Override
     public List<Shape> getGUI() {

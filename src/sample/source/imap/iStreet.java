@@ -1,8 +1,8 @@
 package sample.source.imap;
 
+import sample.source.map.Coordinate;
 import sample.source.map.Stop;
 import sample.source.map.Street;
-import sample.source.map.Coordinate;
 
 import java.util.List;
 
