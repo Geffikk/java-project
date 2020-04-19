@@ -11,21 +11,33 @@ import sample.source.imap.iStop;
 import java.util.Arrays;
 import java.util.List;
 
+<<<<<<< HEAD
 
 public class Stop implements iStop, Drawable {
 
+=======
+public class Stop implements iStop {
+    //Stop ID
+>>>>>>> master
     private String id;
+    // Coordinate of stop
     private Coordinate c;
-    private Street streetofStop;
+    // Under which street is this stop
+    private Street streetOfStop;
 
+<<<<<<< HEAD
     public Stop() {
     }
 
+=======
+    // Stop ID and COOR
+>>>>>>> master
     public Stop(String id, Coordinate c) {
         this.id = id;
         this.c = c;
     }
 
+    // If stop is placed on existing street
     public boolean inStreet(List<Coordinate> coor) {
 
         boolean switcher = true;
@@ -53,23 +65,31 @@ public class Stop implements iStop, Drawable {
         return false;
     }
 
+<<<<<<< HEAD
 
+=======
+    /** Set street by stop **/
+>>>>>>> master
     public void setStreet(Street s) {
-        streetofStop = s;
+        streetOfStop = s;
     }
 
+    /** Get street of stop **/
     public Street getStreet() {
-        return this.streetofStop;
+        return this.streetOfStop;
     }
 
+    /** Return id of stop **/
     public String getId() {
         return id;
     }
 
+    /** Get coordinates of stop **/
     public Coordinate getCoordinate() {
         return c;
     }
 
+    // Override function equal
     public boolean equals(Object obj) {
         if (!(obj instanceof Stop)) {
             return false;
@@ -78,6 +98,7 @@ public class Stop implements iStop, Drawable {
         return a.getId().equals(getId());
     }
 
+    // Return ID of stop
     @Override
     public String toString() {
         return String.format("stop(%s)", id);

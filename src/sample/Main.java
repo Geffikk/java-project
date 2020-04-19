@@ -12,7 +12,10 @@ import javafx.stage.Stage;
 import sample.source.imap.Drawable;
 import sample.source.map.*;
 
+<<<<<<< HEAD
 import java.io.File;
+=======
+>>>>>>> master
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +26,12 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/sample.fxml"));
         BorderPane root = loader.load();
         primaryStage.setTitle("Map");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(new Scene(root, 1000, 600));
         primaryStage.show();
 
         Controller controller = loader.getController();
         List<Drawable> elements = new ArrayList<>();
+<<<<<<< HEAD
 
 
         //elements.add(new Stop("stop1", new Coordinate(100,100)));
@@ -47,6 +51,14 @@ public class Main extends Application {
         DataAutobuses data1 = mapper.readValue(new File("data.yml"), DataAutobuses.class);
 
         elements.addAll(data1.getAutobuses());
+=======
+        elements.add(new Vehicle(new Coordinate(0, 0), 2, new Path(Arrays.asList(
+                new Coordinate(100, 100),
+                    new Coordinate(150, 150)
+        ))));
+        elements.add(new Street("Komenskeho", new Coordinate(100, 100), new Coordinate(200, 100)));
+        elements.add(new Street("Sazavskeho", new Coordinate(400, 250), new Coordinate(350, 300)));
+>>>>>>> master
 
         controller.setElements(elements);
         controller.startTime();

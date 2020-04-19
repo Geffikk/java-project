@@ -8,6 +8,7 @@ import javafx.scene.text.Text;
 import sample.source.imap.Drawable;
 import sample.source.imap.iStreet;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class Street implements iStreet, Drawable {
 
+    // Street ID, List<Coordinates>, List<Stops>
     private String id;
     private List<Coordinate> coordinates;
     private List<Stop> stops  = new ArrayList<>();
@@ -25,6 +27,7 @@ public class Street implements iStreet, Drawable {
         this.coordinates = new ArrayList<>(Arrays.asList(coordinates));
     }
 
+    // If street is in right angle, in this project we do not need
     @Override
     public boolean rightAngle() {
         boolean switcher = true;
@@ -46,30 +49,34 @@ public class Street implements iStreet, Drawable {
             x = coordinate.getX();
             y = coordinate.getY();
         }
-
         return true;
     }
 
+    /** Return begin coordinates of street **/
     @Override
     public Coordinate begin() {
         return this.coordinates.get(0);
     }
 
+    /** Return last coordinates of street **/
     @Override
     public Coordinate end() {
         return this.coordinates.get(this.coordinates.size() - 1);
     }
 
+    /** Get all coordinates of street **/
     @Override
     public List<Coordinate> getCoordinates() {
         return Collections.unmodifiableList(this.coordinates);
     }
 
+    /** Return true if one street follow next one **/
     @Override
     public boolean follows(Street s2) {
         return (s2.begin().equals(begin()) || s2.begin().equals(end()) || s2.end().equals(end()) || s2.end().equals(begin()));
     }
 
+    /** add stop to street **/
     @Override
     public boolean addStop(Stop stop1) {
         if(stop1.inStreet(this.coordinates)) {
@@ -80,25 +87,28 @@ public class Street implements iStreet, Drawable {
         return false;
     }
 
+    /** Get list of stops **/
     @Override
     public List<Stop> getStops() {
         return Collections.unmodifiableList(stops);
     }
 
+    /** Get id of street **/
     @Override
     public String getId() {
         return id;
     }
 
+    /** Get id of street **/
     @Override
     public String toString() {
         return String.format("street(%s)", id);
     }
 
+    /** Paint streets to GUI **/
     @Override
     public List<Shape> getGUI() {
-        return Arrays.asList(
-                new Text(this.coordinates.get(0).getX() + (this.coordinates.get(1).getX()/4), this.coordinates.get(0).getY() + (this.coordinates.get(1).getY()/4), this.id),
+        return Collections.singletonList(
                 new Line(this.coordinates.get(0).getX(), this.coordinates.get(0).getY(), this.coordinates.get(1).getX(), this.coordinates.get(1).getY()));
     }
 }
