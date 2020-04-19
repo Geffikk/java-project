@@ -36,7 +36,6 @@ public class Main extends Application {
         Controller controller = loader.getController();
         List<Drawable> elements = new ArrayList<>();
 
-<<<<<<< HEAD
         Street str1 = new Street("Tacevska", new Coordinate(100,100), new Coordinate(200, 100));
         Street str2 = new Street("Komenskeho", new Coordinate(100,100), new Coordinate(200, 200));
         Street str3 = new Street("Bezrucova", new Coordinate(200,200), new Coordinate(300, 200));
@@ -55,7 +54,6 @@ public class Main extends Application {
 
         YAMLFactory factory = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
         ObjectMapper mapper = new ObjectMapper(factory);
-        DataAutobuses data1 = mapper.readValue(new File("data.yml"), DataAutobuses.class);
 
         Line line = new Line("1");
         Line line2 = new Line("2");
@@ -78,12 +76,12 @@ public class Main extends Application {
                 System.out.println(entity.getTripUpdate());
             }
         }*/
-=======
-        YAMLFactory factory = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
-        ObjectMapper mapper = new ObjectMapper(factory);
+
+        YAMLFactory factory2 = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
+        ObjectMapper mapper2 = new ObjectMapper(factory2);
 
         // Load streets and stops
-        DataStreets data2 = mapper.readValue(new File("data2.yml"), DataStreets.class);
+        DataStreets data2 = mapper2.readValue(new File("data2.yml"), DataStreets.class);
         // Add streets to map
         elements.addAll(data2.getStreets());
         // Add all stops on each street to map
@@ -96,13 +94,8 @@ public class Main extends Application {
 
         // Load vehicles and their path *//
         DataAutobuses data1 = mapper.readValue(new File("data.yml"), DataAutobuses.class);
+
         // Add vehicles to map
-        elements.addAll(data1.getAutobuses());
-
-
-
->>>>>>> master
-
         elements.addAll(data1.getAutobuses());
         
         controller.setElements(elements);

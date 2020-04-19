@@ -25,7 +25,6 @@ public class Street implements iStreet, Drawable {
     private List<Coordinate> coordinates;
     private List<Stop> stops = new ArrayList<>();
 
-
     public Street() {
     }
 
