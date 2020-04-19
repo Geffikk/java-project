@@ -1,5 +1,7 @@
 package sample.source.map;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 
 public class Street implements iStreet, Drawable {
 
@@ -89,7 +92,7 @@ public class Street implements iStreet, Drawable {
 
     @Override
     public String toString() {
-        return String.format("stop(%s)", id);
+        return String.format("street(%s)", id);
     }
 
     @Override

@@ -1,14 +1,25 @@
 package sample.source.map;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
+import sample.source.imap.Drawable;
 import sample.source.imap.iStop;
 
+import java.util.Arrays;
 import java.util.List;
 
-public class Stop implements iStop {
+
+public class Stop implements iStop, Drawable {
 
     private String id;
     private Coordinate c;
     private Street streetofStop;
+
+    public Stop() {
+    }
 
     public Stop(String id, Coordinate c) {
         this.id = id;
@@ -42,6 +53,7 @@ public class Stop implements iStop {
         return false;
     }
 
+
     public void setStreet(Street s) {
         streetofStop = s;
     }
@@ -69,5 +81,11 @@ public class Stop implements iStop {
     @Override
     public String toString() {
         return String.format("stop(%s)", id);
+    }
+
+    public List<Shape> getGUI() {
+        return Arrays.asList(
+                new Text(this.c.getX() + (this.c.getX()/4), this.c.getY() + (this.c.getY()/4), this.id),
+                new Circle(c.getX(),c.getY(), 8, Color.GREEN));
     }
 }

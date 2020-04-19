@@ -1,14 +1,19 @@
 package sample.source.map;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Path {
-
     private List<Coordinate> path;
+
+    private Path() {
+    }
 
     public Path(List<Coordinate> path) {
         this.path = path;
+    }
+
+    public List<Coordinate> getPath() {
+        return path;
     }
 
     private double getDistanceBetweenCoordinates(Coordinate a, Coordinate b) {
