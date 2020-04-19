@@ -35,8 +35,8 @@ public class Autobus implements Drawable, TimerUpdate {
 
     private void moveGui(Coordinate coordinate) {
         for (Shape shape : gui) {
-            shape.setTranslateX((coordinate.getX() - position.getX()) + shape.getTranslateX());
-            shape.setTranslateX((coordinate.getY() - position.getY()) + shape.getTranslateY());
+            shape.setTranslateX((coordinate.getX()));
+            shape.setTranslateY((coordinate.getY()));
         }
     }
 
@@ -54,6 +54,9 @@ public class Autobus implements Drawable, TimerUpdate {
     @Override
     public void update(LocalTime time) {
         distance += speed;
+        if (path.getPathSize() <= distance) {
+            return;
+        }
         Coordinate coords = path.getCoordinateByDistance(distance);
         moveGui(coords);
 

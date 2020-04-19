@@ -3,45 +3,21 @@ package sample.source.map;
 import java.util.List;
 
 public class Path {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     private List<Coordinate> path;
 
-    private Path() {
+    public Path() {
     }
 
-=======
-
-    // List of coordinates (path of line)
-    private List<Coordinate> path;
-
-    // Path (List of coordinates)
->>>>>>> master
-=======
-    private List<Coordinate> path;
-
-    private Path() {
-    }
-
->>>>>>> master
     public Path(List<Coordinate> path) {
         this.path = path;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> master
     public List<Coordinate> getPath() {
         return path;
     }
 
-<<<<<<< HEAD
-=======
     /** Distance between two coordinates **/
->>>>>>> master
-=======
->>>>>>> master
     private double getDistanceBetweenCoordinates(Coordinate a, Coordinate b) {
         // Everything ok
         return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));

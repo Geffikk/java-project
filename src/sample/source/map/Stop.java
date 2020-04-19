@@ -11,36 +11,20 @@ import sample.source.imap.iStop;
 import java.util.Arrays;
 import java.util.List;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> master
 
 public class Stop implements iStop, Drawable {
 
-=======
-public class Stop implements iStop {
     //Stop ID
->>>>>>> master
     private String id;
     // Coordinate of stop
     private Coordinate c;
     // Under which street is this stop
     private Street streetOfStop;
 
-<<<<<<< HEAD
     public Stop() {
     }
 
-<<<<<<< HEAD
-=======
     // Stop ID and COOR
->>>>>>> master
-=======
-    public Stop() {
-    }
-
->>>>>>> master
     public Stop(String id, Coordinate c) {
         this.id = id;
         this.c = c;
@@ -74,15 +58,7 @@ public class Stop implements iStop {
         return false;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
     /** Set street by stop **/
->>>>>>> master
-=======
-
->>>>>>> master
     public void setStreet(Street s) {
         streetOfStop = s;
     }

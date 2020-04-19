@@ -11,44 +11,43 @@ public class Coordinate {
     private double x;
     private double y;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    private Coordinate() {
-    }
-
-=======
     // Coordinates
->>>>>>> master
-=======
     private Coordinate() {
     }
 
->>>>>>> master
     public Coordinate(double x, double y) {
-        if (x > 0 && y > 0){
+        if (x > 0 && y > 0) {
             this.x = x;
             this.y = y;
         }
     }
 
     // Create base coordinates
-    public static Coordinate create(int x, int y){
+    public static Coordinate create(int x, int y) {
 
         if (x < 0 || y < 0) {
             return null;
         }
-        return new Coordinate(x,y);
+        return new Coordinate(x, y);
     }
 
-    /** Return X **/
+    /**
+     * Return X
+     **/
     public double getX() {
         return x;
     }
 
-    /** Return Y **/
-    public double getY() { return y; }
+    /**
+     * Return Y
+     **/
+    public double getY() {
+        return y;
+    }
 
-    /**  Override function equal **/
+    /**
+     * Override function equal
+     **/
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -59,9 +58,8 @@ public class Coordinate {
             return false;
         }
         Coordinate a = (Coordinate) obj;
-        return a.getX()==(getX()) && a.getY()==(getY());
+        return a.getX() == (getX()) && a.getY() == (getY());
     }
-<<<<<<< HEAD
 
     @Override
     public String toString() {
@@ -70,21 +68,4 @@ public class Coordinate {
                 ", y=" + y +
                 '}';
     }
-
-
-<<<<<<< HEAD
-=======
->>>>>>> master
-=======
-    @Override
-    public String toString() {
-        return "Coordinate{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
-    }
-
-
->>>>>>> master
 }
-
