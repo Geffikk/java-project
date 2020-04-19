@@ -1,34 +1,40 @@
 package sample.source.map;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import sample.source.imap.Drawable;
 import sample.source.imap.iStop;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Stop implements iStop, Drawable {
 
     //Stop ID
     private String id;
     // Coordinate of stop
-    private Coordinate c;
+    private Coordinate coordinate;
     // Under which street is this stop
     private Street streetOfStop;
+
+
 
     public Stop() {
     }
 
     // Stop ID and COOR
-    public Stop(String id, Coordinate c) {
+    public Stop(String id, Coordinate coordinate) {
         this.id = id;
-        this.c = c;
+        this.coordinate = coordinate;
     }
+
 
     // If stop is placed on existing street
     public boolean inStreet(List<Coordinate> coor) {
@@ -43,10 +49,10 @@ public class Stop implements iStop, Drawable {
             result_x = coordinate.getX();
             result_y = coordinate.getY();
 
-            if (((x <= c.getX() && c.getX() <= result_x) ||
-                    (x >= c.getX() && c.getX() >= result_x)) &&
-                    ((y <= c.getY() && c.getY() <= result_y) ||
-                            (y >= c.getY() && c.getY() >= result_y)) &&
+            if (((x <= this.coordinate.getX() && this.coordinate.getX() <= result_x) ||
+                    (x >= this.coordinate.getX() && this.coordinate.getX() >= result_x)) &&
+                    ((y <= this.coordinate.getY() && this.coordinate.getY() <= result_y) ||
+                            (y >= this.coordinate.getY() && this.coordinate.getY() >= result_y)) &&
                     !switcher) {
                 return true;
             }
@@ -58,16 +64,6 @@ public class Stop implements iStop, Drawable {
         return false;
     }
 
-    /** Set street by stop **/
-    public void setStreet(Street s) {
-        streetOfStop = s;
-    }
-
-    /** Get street of stop **/
-    public Street getStreet() {
-        return this.streetOfStop;
-    }
-
     /** Return id of stop **/
     public String getId() {
         return id;
@@ -75,8 +71,20 @@ public class Stop implements iStop, Drawable {
 
     /** Get coordinates of stop **/
     public Coordinate getCoordinate() {
-        return c;
+        return coordinate;
     }
+
+    /** Get street of stop **/
+    public Street getStreet() {
+        return this.streetOfStop;
+    }
+
+
+    /** Set street by stop **/
+    public void setStreet(Street s) {
+        streetOfStop = s;
+    }
+
 
     // Override function equal
     public boolean equals(Object obj) {
@@ -93,9 +101,9 @@ public class Stop implements iStop, Drawable {
         return String.format("stop(%s)", id);
     }
 
+    @JsonIgnore
     public List<Shape> getGUI() {
-        return Arrays.asList(
-                new Text(this.c.getX() + (this.c.getX()/4), this.c.getY() + (this.c.getY()/4), this.id),
-                new Circle(c.getX(),c.getY(), 8, Color.GREEN));
+        return Collections.singletonList(
+                new Circle(coordinate.getX(), coordinate.getY(), 6, Color.GREEN));
     }
 }
