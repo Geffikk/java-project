@@ -13,8 +13,12 @@ import sample.source.imap.Drawable;
 import sample.source.map.*;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.io.File;
 =======
+>>>>>>> master
+=======
+import java.io.File;
 >>>>>>> master
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +36,9 @@ public class Main extends Application {
         Controller controller = loader.getController();
         List<Drawable> elements = new ArrayList<>();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 
 
         //elements.add(new Stop("stop1", new Coordinate(100,100)));
@@ -51,6 +58,7 @@ public class Main extends Application {
         DataAutobuses data1 = mapper.readValue(new File("data.yml"), DataAutobuses.class);
 
         elements.addAll(data1.getAutobuses());
+<<<<<<< HEAD
 =======
         elements.add(new Vehicle(new Coordinate(0, 0), 2, new Path(Arrays.asList(
                 new Coordinate(100, 100),
@@ -58,6 +66,8 @@ public class Main extends Application {
         ))));
         elements.add(new Street("Komenskeho", new Coordinate(100, 100), new Coordinate(200, 100)));
         elements.add(new Street("Sazavskeho", new Coordinate(400, 250), new Coordinate(350, 300)));
+>>>>>>> master
+=======
 >>>>>>> master
 
         controller.setElements(elements);

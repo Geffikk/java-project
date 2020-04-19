@@ -12,11 +12,17 @@ public class Coordinate {
     private double y;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private Coordinate() {
     }
 
 =======
     // Coordinates
+>>>>>>> master
+=======
+    private Coordinate() {
+    }
+
 >>>>>>> master
     public Coordinate(double x, double y) {
         if (x > 0 && y > 0){
@@ -66,7 +72,19 @@ public class Coordinate {
     }
 
 
+<<<<<<< HEAD
 =======
+>>>>>>> master
+=======
+    @Override
+    public String toString() {
+        return "Coordinate{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
+
 >>>>>>> master
 }
 

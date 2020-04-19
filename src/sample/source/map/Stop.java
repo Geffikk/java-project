@@ -12,6 +12,9 @@ import java.util.Arrays;
 import java.util.List;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 
 public class Stop implements iStop, Drawable {
 
@@ -29,8 +32,14 @@ public class Stop implements iStop {
     public Stop() {
     }
 
+<<<<<<< HEAD
 =======
     // Stop ID and COOR
+>>>>>>> master
+=======
+    public Stop() {
+    }
+
 >>>>>>> master
     public Stop(String id, Coordinate c) {
         this.id = id;
@@ -66,9 +75,13 @@ public class Stop implements iStop {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
     /** Set street by stop **/
+>>>>>>> master
+=======
+
 >>>>>>> master
     public void setStreet(Street s) {
         streetOfStop = s;
