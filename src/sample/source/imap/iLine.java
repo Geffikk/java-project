@@ -14,7 +14,8 @@ public interface iLine {
         return line;
     }
 
-    boolean addStop(Stop... stops);
+    boolean addStop(Stop stops);
+    //boolean addStop(Stop... stops);
     boolean addStreet(Street... street);
 
     java.util.List<java.util.AbstractMap.SimpleImmutableEntry<Street,Stop>> getRoute();

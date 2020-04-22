@@ -23,19 +23,16 @@ public class Line implements iLine, Drawable {
     // Return Simmutable list with lines
     @JsonIgnore
     java.util.List<java.util.AbstractMap.SimpleImmutableEntry<Street, Stop>> abs_map = new ArrayList<>();
-<<<<<<< HEAD
     java.util.List<java.util.AbstractMap.SimpleImmutableEntry<String, List<Stop>>> informationQueue = new ArrayList<>();
-=======
     @JsonIgnore
->>>>>>> master
     static int counter = 0;
     @JsonIgnore
     Stop first_stop;
     @JsonIgnore
     Stop last_stop;
-<<<<<<< HEAD
+
     List<Stop> lineStops = new ArrayList<>();
-=======
+
     @JsonIgnore
     private List<Line> lineInformation = new ArrayList<>();
     private List<Street> streetList = new ArrayList<>();
@@ -45,7 +42,7 @@ public class Line implements iLine, Drawable {
 
     private Line() {
     }
->>>>>>> master
+
 
     public Line(String id) {
         this.id = id;
@@ -53,7 +50,7 @@ public class Line implements iLine, Drawable {
 
 
     /** Add stop to LINE **/
-<<<<<<< HEAD
+/*
     public boolean addStop(Stop... stops) {
         for (Stop stop: stops) {
             if (first) {
@@ -72,8 +69,7 @@ public class Line implements iLine, Drawable {
             last_stop = stop;
             lineStops.add(stop);
         }
-=======
-    @Override
+*/
     public boolean addStop(Stop stop) {
         if(first) {
             first_stop = stop;
@@ -97,7 +93,6 @@ public class Line implements iLine, Drawable {
             this.streetList.add(stop.getStreet());
         }
         str_before = stop.getStreet();
->>>>>>> master
         return true;
     }
 
