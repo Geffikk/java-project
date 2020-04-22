@@ -1,12 +1,19 @@
 package sample;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import sample.source.imap.Drawable;
 import sample.source.imap.TimerUpdate;
 
+import javax.swing.*;
+import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +28,35 @@ public class Controller {
     private Timer timer;
     private LocalTime time = LocalTime.now();
     private List<TimerUpdate> updates = new ArrayList<>();
+    private Time mapTime = new Time(10, 10, 5);
+    private float scale;
+
+    @FXML
+    private TextField timeScale;
+    @FXML
+    private Label showTime;
+
+    @FXML
+    private void  onTimeScaleChange(){
+        try {
+            scale = Float.parseFloat(timeScale.getText());
+            if (scale <= 0 || scale > 10.0) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Invalind time scale");
+                alert.showAndWait();
+            }
+            scale = scale + 5;
+            timer.cancel();
+            startTime(scale);
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Invalind time scale");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void onBaseTime() {
+        mapTime = new Time(10, 10, 5);
+    }
 
     @FXML
     private void onZoom(ScrollEvent event) {
@@ -36,21 +72,38 @@ public class Controller {
 
         for (Drawable drawable : elements) {
             content.getChildren().addAll(drawable.getGUI());
-            if(drawable instanceof  TimerUpdate) {
+            if(drawable instanceof TimerUpdate) {
                 updates.add((TimerUpdate) drawable);
             }
         }
     }
 
-    public void startTime() {
+    @FXML
+    public void initialize() {
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            LocalTime currentTime = LocalTime.now();
+            showTime.setText(mapTime.toString());
+            showTime.setTranslateX(990);
+            showTime.setTranslateY(5);
+        }),
+                new KeyFrame(Duration.millis(100))
+        );
+        clock.setCycleCount(Animation.INDEFINITE);
+        clock.play();
+    }
+
+    public void startTime(float scale) {
         timer = new Timer(false);
         timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
             public void run() {
                 time = time.plusSeconds(1);
                 for (TimerUpdate update : updates) {
-                    update.update(time);
+                    //System.out.println(mapTime.toString());
+                    mapTime.setSeconds(mapTime.getSeconds()+1);
+                    update.update(mapTime);
                 }
             }
-        }, 0, 50);
+        }, 0, (long) (500 / scale));
     }
 }

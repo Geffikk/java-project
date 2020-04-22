@@ -33,7 +33,6 @@ public class Street implements iStreet, Drawable {
         this.coordinates = new ArrayList<>(Arrays.asList(coordinates));
     }
 
-
     // If street is in right angle, in this project we do not need
     @Override
     public boolean rightAngle() {
@@ -112,11 +111,12 @@ public class Street implements iStreet, Drawable {
         return String.format("street(%s)", id);
     }
 
-    @JsonIgnore
     /** Paint streets to GUI **/
+    @JsonIgnore
     @Override
     public List<Shape> getGUI() {
         return Collections.singletonList(
                 new Line(this.coordinates.get(0).getX(), this.coordinates.get(0).getY(), this.coordinates.get(1).getX(), this.coordinates.get(1).getY()));
     }
+
 }

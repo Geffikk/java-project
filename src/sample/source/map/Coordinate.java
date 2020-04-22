@@ -31,23 +31,17 @@ public class Coordinate {
         return new Coordinate(x, y);
     }
 
-    /**
-     * Return X
-     **/
+    /** Return X **/
     public double getX() {
         return x;
     }
 
-    /**
-     * Return Y
-     **/
+    /** Return Y **/
     public double getY() {
         return y;
     }
 
-    /**
-     * Override function equal
-     **/
+    /** Override function equal **/
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -61,6 +55,7 @@ public class Coordinate {
         return a.getX() == (getX()) && a.getY() == (getY());
     }
 
+    // Override function toString for printing
     @Override
     public String toString() {
         return "Coordinate{" +

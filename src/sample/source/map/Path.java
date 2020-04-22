@@ -54,6 +54,7 @@ public class Path {
         return new Coordinate(a.getX() + (b.getX() - a.getX()) * driven, a.getY() + (b.getY() - a.getY()) * driven);
     }
 
+    // Return size of all the way
     public double getPathSize() {
         double size = 0;
         for(int i=0; i< path.size() - 1; i++) {

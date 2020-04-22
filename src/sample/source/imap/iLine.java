@@ -1,6 +1,7 @@
 package sample.source.imap;
 
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import sample.source.map.Line;
 import sample.source.map.Stop;
 import sample.source.map.Street;
@@ -13,9 +14,8 @@ public interface iLine {
         return line;
     }
 
-    boolean addStop(Stop stop);
+    boolean addStop(Stop... stops);
     boolean addStreet(Street... street);
-    public List<Shape> getGUI();
 
     java.util.List<java.util.AbstractMap.SimpleImmutableEntry<Street,Stop>> getRoute();
 }

@@ -24,12 +24,10 @@ public class Stop implements iStop, Drawable {
     // Under which street is this stop
     private Street streetOfStop;
 
-
-
     public Stop() {
     }
 
-    // Stop ID and COOR
+    // <Stop ID>, <Coordinate of Stop>
     public Stop(String id, Coordinate coordinate) {
         this.id = id;
         this.coordinate = coordinate;
@@ -95,15 +93,17 @@ public class Stop implements iStop, Drawable {
         return a.getId().equals(getId());
     }
 
-    // Return ID of stop
+    /** Return ID of stop **/
     @Override
     public String toString() {
         return String.format("stop(%s)", id);
     }
 
+    /** Paint stop to GUI **/
     @JsonIgnore
     public List<Shape> getGUI() {
         return Collections.singletonList(
                 new Circle(coordinate.getX(), coordinate.getY(), 6, Color.GREEN));
     }
+
 }

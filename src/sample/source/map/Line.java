@@ -2,6 +2,7 @@ package sample.source.map;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import sample.source.imap.Drawable;
 import sample.source.imap.iLine;
 
@@ -18,10 +19,11 @@ public class Line implements iLine, Drawable {
     Street str_before;
     // Return Simmutable list with lines
     java.util.List<java.util.AbstractMap.SimpleImmutableEntry<Street, Stop>> abs_map = new ArrayList<>();
+    java.util.List<java.util.AbstractMap.SimpleImmutableEntry<String, List<Stop>>> informationQueue = new ArrayList<>();
     static int counter = 0;
     Stop first_stop;
     Stop last_stop;
-    private List<Line> lineInformation = new ArrayList<>();
+    List<Stop> lineStops = new ArrayList<>();
 
     // Line ID
     public Line(String id) {
@@ -29,22 +31,24 @@ public class Line implements iLine, Drawable {
     }
 
     /** Add stop to LINE **/
-    @Override
-    public boolean addStop(Stop stop) {
-        if(first) {
-            first_stop = stop;
-            // Add first stop to line
-            abs_map.add(new AbstractMap.SimpleImmutableEntry<>(stop.getStreet(), stop));
-            str_before = stop.getStreet();
-            first = false;
-            return true;
+    public boolean addStop(Stop... stops) {
+        for (Stop stop: stops) {
+            if (first) {
+                first_stop = stop;
+                // Add first stop to line
+                abs_map.add(new AbstractMap.SimpleImmutableEntry<>(stop.getStreet(), stop));
+                str_before = stop.getStreet();
+                first = false;
+            } else if (!str_before.follows(stop.getStreet())) {
+                return false;
+            }
+            else {
+                abs_map.add(new AbstractMap.SimpleImmutableEntry<>(stop.getStreet(), stop));
+                str_before = stop.getStreet();
+            }
+            last_stop = stop;
+            lineStops.add(stop);
         }
-        else if(!str_before.follows(stop.getStreet())) {
-            return false;
-        }
-        last_stop = stop;
-        abs_map.add(new AbstractMap.SimpleImmutableEntry<>(stop.getStreet(), stop));
-        str_before = stop.getStreet();
         return true;
     }
 
@@ -93,7 +97,17 @@ public class Line implements iLine, Drawable {
             counter = 0;
         }
         return Collections.singletonList(line);
+    }
 
+    /** Show line informations **/
+    public Text showInformation() {
+        informationQueue.add(new AbstractMap.SimpleImmutableEntry<>(this.id, lineStops));
+        String output = null;
+
+        for (Stop stop : lineStops) {
+            output = output + "\n" + stop.getId();
+        }
+        return new Text(400, 400, output);
     }
 }
 
