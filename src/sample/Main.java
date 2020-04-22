@@ -18,6 +18,7 @@ import java.net.URL;
 import com.google.transit.realtime.GtfsRealtime.FeedEntity;
 import com.google.transit.realtime.GtfsRealtime.FeedMessage;
 
+<<<<<<< HEAD
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -30,6 +31,16 @@ import java.io.File;
 import java.io.File;
 import java.sql.Array;
 import java.util.*;
+=======
+import javax.xml.crypto.Data;
+import java.io.File;
+import java.io.File;
+import java.sql.Array;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+>>>>>>> master
 
 public class Main extends Application {
 
@@ -38,12 +49,17 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/sample.fxml"));
         BorderPane root = loader.load();
         primaryStage.setTitle("Map");
+<<<<<<< HEAD
         primaryStage.setScene(new Scene(root, 1500, 1000));
+=======
+        primaryStage.setScene(new Scene(root, 1200, 800));
+>>>>>>> master
         primaryStage.show();
 
         Controller controller = loader.getController();
         List<Drawable> elements = new ArrayList<>();
 
+<<<<<<< HEAD
         // Show Line information ///
         final JFrame frame = new JFrame();
         JPanel panel = new JPanel();
@@ -92,45 +108,77 @@ public class Main extends Application {
         */
        // DataStreets data = new DataStreets(stops);
 
+=======
+>>>>>>> master
         YAMLFactory factory = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
         ObjectMapper mapper = new ObjectMapper(factory);
         // Load vehicles and their path *//
         DataAutobuses data1 = mapper.readValue(new File("data.yml"), DataAutobuses.class);
 
-        Line line = new Line("1");
-        Line line2 = new Line("2");
+        // Load streets and stops
+        DataStreets dataOfStreets = mapper.readValue(new File("data2.yml"), DataStreets.class);
+        // Add STREETS to map
+        elements.addAll(dataOfStreets.getStreets());
 
-        line2.addStreet(str3, str9);
-        line.addStreet(str5, str4, str6, str7, str8);
+        // Load lines
+        DataLines dataOfLines = mapper.readValue(new File("data3.yml"), DataLines.class);
 
-        for( int i = 0; i<line.getRoute().size(); i++) {
-            elements.add(line);
-        }
-        for( int i = 0; i<line2.getRoute().size(); i++) {
-            elements.add(line2);
-        }
+        // Make route of each line
+        for (Line line: dataOfLines.getLines()) {
 
+<<<<<<< HEAD
         YAMLFactory factory2 = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
         ObjectMapper mapper2 = new ObjectMapper(factory2);
+=======
+            List<Street> streets1 = line.getStreetList();
 
-        // Load streets and stops
-        DataStreets data2 = mapper2.readValue(new File("data2.yml"), DataStreets.class);
-        // Add streets to map
-        elements.addAll(data2.getStreets());
-        // Add all stops on each street to map
-        for (Street street: data2.getStreets()) {
+            for (Street str: streets1) {
+                List<Stop> stops = str.getStops();
+                if (stops.isEmpty()){
+                    line.addStreetAndStopToAbsMap(str, null);
+                }
+                else{
+                    for (Stop stop: stops) {
+                        line.addStreetAndStopToAbsMap(stop.getStreet(), stop);
+
+                    }
+                }
+            }
+            // Add LINE to map
+            for(int i = 0; i<line.getRoute().size(); i++){
+                elements.add(line);
+            }
+
+        }
+
+        // Add all STOPS on each street to map
+        for (Street street: dataOfStreets.getStreets()) {
+            //streets.add(street);
+>>>>>>> master
+
             List<Stop> stops = street.getStops();
             for (Stop stop: stops) {
                 elements.add(stop);
             }
         }
 
+<<<<<<< HEAD
+=======
+        // Load vehicles and their path
+        DataAutobuses dataOfVehicles = mapper.readValue(new File("data.yml"), DataAutobuses.class);
+
+>>>>>>> master
         // Add vehicles to map
-        elements.addAll(data1.getAutobuses());
+        elements.addAll(dataOfVehicles.getAutobuses());
         
         controller.setElements(elements);
+<<<<<<< HEAD
         controller.startTime(5);
        // mapper.writeValue(new File("data2.yml"), data);
+=======
+        controller.startTime();
+        //mapper.writeValue(new File("data3.yml"), data);
+>>>>>>> master
 
     }
 

@@ -1,0 +1,112 @@
+lines:
+- id: "1"
+  streetList:
+  - &1 id: "Street1"
+    coordinates:
+    - &2 x: 100.0
+      y: 300.0
+    - &3 x: 400.0
+      y: 100.0
+    stops:
+    - &4 id: "stop1"
+      coordinate:
+        &5 x: 400.0
+        y: 100.0
+      street: *1
+    - &6 id: "stop2"
+      coordinate:
+        &7 x: 100.0
+        y: 300.0
+      street: *1
+  - &8 id: "Street4"
+    coordinates:
+    - &9 x: 300.0
+      y: 600.0
+    - &10 x: 100.0
+      y: 300.0
+    stops: []
+  - &11 id: "Street5"
+    coordinates:
+    - &12 x: 300.0
+      y: 600.0
+    - &13 x: 400.0
+      y: 600.0
+    stops: []
+  - &14 id: "Street6"
+    coordinates:
+    - &15 x: 400.0
+      y: 600.0
+    - &16 x: 400.0
+      y: 100.0
+    stops:
+    - &17 id: "stop5"
+      coordinate:
+        &18 x: 400.0
+        y: 300.0
+      street: *14
+    - &19 id: "stop6"
+      coordinate:
+        &20 x: 400.0
+        y: 500.0
+      street: *14
+  stopList:
+  - *4
+  - *6
+  - *17
+  - *19
+  listOfDepartures:
+  - - "10:00"
+    - "11:00"
+    - "12:00"
+    - "13:00"
+  - - "10:00"
+    - "11:00"
+    - "12:00"
+    - "13:00"
+  - - "10:00"
+    - "11:00"
+    - "12:00"
+    - "13:00"
+  - - "10:00"
+    - "11:00"
+    - "12:00"
+    - "13:00"
+- id: "2"
+  streetList:
+  - &21 id: "Street2"
+    coordinates:
+    - &22 x: 100.0
+      y: 300.0
+    - &23 x: 200.0
+      y: 800.0
+    stops:
+    - &24 id: "stop3"
+      coordinate:
+        &25 x: 200.0
+        y: 800.0
+      street: *21
+  - &26 id: "Street3"
+    coordinates:
+    - &27 x: 200.0
+      y: 800.0
+    - &28 x: 300.0
+      y: 600.0
+    stops:
+    - &29 id: "stop4"
+      coordinate:
+        &30 x: 300.0
+        y: 600.0
+      street: *26
+  - *8
+  stopList:
+  - *24
+  - *29
+  listOfDepartures:
+  - - "10:00"
+    - "11:00"
+    - "12:00"
+    - "13:00"
+  - - "10:00"
+    - "11:00"
+    - "12:00"
+    - "13:00"
