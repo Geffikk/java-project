@@ -1,42 +1,119 @@
 streets:
-- &1 id: "Tacevska"
+- &1 id: "Street1"
   coordinates:
   - &2 x: 100.0
-    y: 100.0
-  - &3 x: 200.0
+    y: 300.0
+  - &3 x: 400.0
     y: 100.0
   stops:
   - &4 id: "stop1"
     street: *1
     coordinate:
-      &5 x: 100.0
+      &5 x: 400.0
       y: 100.0
   - &6 id: "stop2"
     street: *1
     coordinate:
-      &7 x: 150.0
-      y: 100.0
-- &8 id: "Komenskeho"
+      &7 x: 100.0
+      y: 300.0
+- &8 id: "Street2"
   coordinates:
   - &9 x: 100.0
-    y: 100.0
+    y: 300.0
   - &10 x: 200.0
-    y: 200.0
+    y: 800.0
   stops:
   - &11 id: "stop3"
     street: *8
     coordinate:
-      &12 x: 150.0
-      y: 150.0
-- &13 id: "Bezrucova"
+      &12 x: 200.0
+      y: 800.0
+- &13 id: "Street3"
   coordinates:
   - &14 x: 200.0
-    y: 200.0
+    y: 800.0
   - &15 x: 300.0
-    y: 200.0
+    y: 600.0
   stops:
   - &16 id: "stop4"
     street: *13
     coordinate:
-      &17 x: 250.0
+      &17 x: 300.0
+      y: 600.0
+- &18 id: "Street4"
+  coordinates:
+  - &19 x: 300.0
+    y: 600.0
+  - &20 x: 100.0
+    y: 300.0
+- &23 id: "Street5"
+  coordinates:
+  - &24 x: 300.0
+    y: 600.0
+  - &25 x: 400.0
+    y: 600.0
+- &26 id: "Street6"
+  coordinates:
+  - &27 x: 400.0
+    y: 600.0
+  - &28 x: 400.0
+    y: 100.0
+  stops:
+  - &29 id: "stop5"
+    street: *26
+    coordinate:
+      &30 x: 400.0
+      y: 300.0
+  - &31 id: "stop6"
+    street: *26
+    coordinate:
+      &32 x: 400.0
+      y: 500.0
+- &33 id: "Street7"
+  coordinates:
+  - &34 x: 200.0
+    y: 800.0
+  - &35 x: 600.0
+    y: 900.0
+  stops:
+  - &36 id: "stop7"
+    street: *33
+    coordinate:
+      &37 x: 600.0
+      y: 900.0
+- &38 id: "Street8"
+  coordinates:
+  - &39 x: 600.0
+    y: 900.0
+  - &40 x: 500.0
+    y: 700.0
+  stops:
+  - &41 id: "stop8"
+    street: *38
+    coordinate:
+      &42 x: 500.0
+      y: 700.0
+- &43 id: "Street9"
+  coordinates:
+  - &44 x: 500.0
+    y: 700.0
+  - &45 x: 400.0
+    y: 600.0
+- &46 id: "Street10"
+  coordinates:
+  - &47 x: 500.0
+    y: 700.0
+  - &48 x: 700.0
+    y: 200.0
+  stops:
+  - &49 id: "stop9"
+    street: *46
+    coordinate:
+      &50 x: 700.0
       y: 200.0
+- &51 id: "Street11"
+  coordinates:
+  - &52 x: 700.0
+    y: 200.0
+  - &53 x: 400.0
+    y: 100.0
