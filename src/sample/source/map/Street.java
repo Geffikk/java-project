@@ -30,15 +30,17 @@ public class Street implements iStreet, Drawable{
     private List<Stop> stops = new ArrayList<>();
     private List<Shape> gui = new ArrayList<>();
 
+    /** Empty constructor for yaml **/
     public Street() {
     }
 
+    /** Normal constructor **/
     public Street(String id, Coordinate... coordinates) {
         this.id = id;
         this.coordinates = new ArrayList<>(Arrays.asList(coordinates));
     }
 
-    // If street is in right angle, in this project we do not need
+    /** Not used **/
     @Override
     public boolean rightAngle() {
         boolean switcher = true;
@@ -101,7 +103,7 @@ public class Street implements iStreet, Drawable{
     /** Get list of stops **/
     @Override
     public List<Stop> getStops() {
-        return Collections.unmodifiableList(stops);
+        return stops;
     }
 
     /** Get id of street **/
@@ -120,8 +122,43 @@ public class Street implements iStreet, Drawable{
     @JsonIgnore
     @Override
     public List<Shape> getGUI() {
+<<<<<<< HEAD
         return Collections.singletonList(
                 new Line(this.coordinates.get(0).getX(), this.coordinates.get(0).getY(),
                         this.coordinates.get(1).getX(), this.coordinates.get(1).getY()));
+=======
+
+        //If there is street with more than 2 coordiantes
+        List<Shape> shapes = new ArrayList<>();
+
+        //Gui for street with 2 coords
+        if(coordinates.size() == 2){
+            return Arrays.asList(
+                    new Text(Math.abs((coordinates.get(0).getX() + coordinates.get(1).getX()) /2) - 30, Math.abs((coordinates.get(0).getY() + coordinates.get(1).getY()) /2) + 20, this.id),
+                    new Line(this.coordinates.get(0).getX(), this.coordinates.get(0).getY(), this.coordinates.get(1).getX(), this.coordinates.get(1).getY()));
+
+        }
+        //Gui for street with 3 and more coords
+        else
+        {
+            int numberOfCoordiantes = coordinates.size();
+            for(int i = 0; i<numberOfCoordiantes; i++){
+                if(i == numberOfCoordiantes - 1){
+                    break;
+                }
+                shapes.add(new Line(this.coordinates.get(i).getX(), this.coordinates.get(i).getY(), this.coordinates.get(i+1).getX(), this.coordinates.get(i+1).getY()));
+            }
+            //When number of coords is even (TEXT centring)
+            int mid =(numberOfCoordiantes-1) / 2;
+            if((numberOfCoordiantes%2)==0){
+                shapes.add(new Text(Math.abs((coordinates.get(mid).getX() + coordinates.get(mid+1).getX()) /2) - 30, Math.abs((coordinates.get(mid).getY() + coordinates.get(mid+1).getY()) /2) + 20, this.id));
+            }
+            //When number of coords is odd (TEXT centring)
+            else {
+                shapes.add(new Text(coordinates.get(mid).getX() + 20, coordinates.get(mid).getY(), this.id));
+            }
+            return shapes;
+        }
+>>>>>>> master
     }
 }

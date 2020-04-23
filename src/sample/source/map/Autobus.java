@@ -24,10 +24,12 @@ public class Autobus implements Drawable, TimerUpdate {
     // Vehicle <position> <speed> <distance> <path>
     private Coordinate position;
     private double speed = 0;
+    private Path path;
+    private String idOfLine;
     @JsonIgnore
     private double distance = 0;
-    private Path path;
     @JsonIgnore
+<<<<<<< HEAD
     private List<Shape> gui = new ArrayList<>();
     private Line line;
     private String idOfLine;
@@ -109,10 +111,17 @@ public class Autobus implements Drawable, TimerUpdate {
         traceOfStops.setStroke(Color.RED);
         traceOfStops.setEndX(x);
     }
+=======
+    private List<Shape> gui;
+    @JsonIgnore
+    private Color color;
+>>>>>>> master
 
+    /** Empty constructor for yaml **/
     private Autobus() {
     }
 
+    /** Normal constructor **/
     public Autobus(Coordinate position, double speed, Path path) {
         this.position = position;
         this.path = path;
@@ -165,6 +174,7 @@ public class Autobus implements Drawable, TimerUpdate {
         moveGui(coords);
     }
 
+
     // Get position of vehicle
     public Coordinate getPosition() {
         return position;
@@ -178,6 +188,10 @@ public class Autobus implements Drawable, TimerUpdate {
     // Get path of vehicle
     public Path getPath() {
         return path;
+    }
+
+    public String getIdOfLine() {
+        return idOfLine;
     }
 
     // Overide functions toString for printing

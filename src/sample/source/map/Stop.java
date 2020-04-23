@@ -11,7 +11,6 @@ import sample.source.imap.Drawable;
 import sample.source.imap.iStop;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
@@ -24,17 +23,18 @@ public class Stop implements iStop, Drawable {
     // Under which street is this stop
     private Street streetOfStop;
 
+    /** Empty constructor for yaml **/
     public Stop() {
     }
 
-    // <Stop ID>, <Coordinate of Stop>
+    /** Normal constructor **/
     public Stop(String id, Coordinate coordinate) {
         this.id = id;
         this.coordinate = coordinate;
     }
 
 
-    // If stop is placed on existing street
+    /** Not used **/
     public boolean inStreet(List<Coordinate> coor) {
 
         boolean switcher = true;
@@ -62,21 +62,20 @@ public class Stop implements iStop, Drawable {
         return false;
     }
 
-    /** Return id of stop **/
+    /** Return id of stop (getter for yaml) **/
     public String getId() {
         return id;
     }
 
-    /** Get coordinates of stop **/
+    /** Get coordinates of stop (getter for yaml) **/
     public Coordinate getCoordinate() {
         return coordinate;
     }
 
-    /** Get street of stop **/
+    /** Get street of stop (getter for yaml) **/
     public Street getStreet() {
         return this.streetOfStop;
     }
-
 
     /** Set street by stop **/
     public void setStreet(Street s) {
@@ -102,7 +101,8 @@ public class Stop implements iStop, Drawable {
     /** Paint stop to GUI **/
     @JsonIgnore
     public List<Shape> getGUI() {
-        return Collections.singletonList(
+        return Arrays.asList(
+                new Text(coordinate.getX() - 22, coordinate.getY() + 20, this.id),
                 new Circle(coordinate.getX(), coordinate.getY(), 6, Color.GREEN));
     }
 

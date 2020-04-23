@@ -6,12 +6,12 @@ streets:
   - &3 x: 400.0
     y: 100.0
   stops:
-  - &4 id: "stop1"
+  - &4 id: "s1"
     street: *1
     coordinate:
       &5 x: 400.0
       y: 100.0
-  - &6 id: "stop2"
+  - &6 id: "s2"
     street: *1
     coordinate:
       &7 x: 100.0
@@ -23,7 +23,7 @@ streets:
   - &10 x: 200.0
     y: 800.0
   stops:
-  - &11 id: "stop3"
+  - &11 id: "s3"
     street: *8
     coordinate:
       &12 x: 200.0
@@ -35,7 +35,7 @@ streets:
   - &15 x: 300.0
     y: 600.0
   stops:
-  - &16 id: "stop4"
+  - &16 id: "s4"
     street: *13
     coordinate:
       &17 x: 300.0
@@ -59,12 +59,12 @@ streets:
   - &28 x: 400.0
     y: 100.0
   stops:
-  - &29 id: "stop5"
+  - &29 id: "s5"
     street: *26
     coordinate:
       &30 x: 400.0
       y: 300.0
-  - &31 id: "stop6"
+  - &31 id: "s6"
     street: *26
     coordinate:
       &32 x: 400.0
@@ -76,7 +76,7 @@ streets:
   - &35 x: 600.0
     y: 900.0
   stops:
-  - &36 id: "stop7"
+  - &36 id: "s7"
     street: *33
     coordinate:
       &37 x: 600.0
@@ -88,7 +88,7 @@ streets:
   - &40 x: 500.0
     y: 700.0
   stops:
-  - &41 id: "stop8"
+  - &41 id: "s8"
     street: *38
     coordinate:
       &42 x: 500.0
@@ -106,7 +106,7 @@ streets:
   - &48 x: 700.0
     y: 200.0
   stops:
-  - &49 id: "stop9"
+  - &49 id: "s9"
     street: *46
     coordinate:
       &50 x: 700.0
@@ -117,3 +117,11 @@ streets:
     y: 200.0
   - &53 x: 400.0
     y: 100.0
+- &54 id: "Street12"
+  coordinates:
+  - &55 x: 700.0
+    y: 200.0
+  - &56 x: 700.0
+    y: 700.0
+  - &57 x: 600.0
+    y: 900.0

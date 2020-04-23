@@ -1,5 +1,7 @@
 package sample.source.map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 public class Path {
@@ -55,6 +57,7 @@ public class Path {
     }
 
     // Return size of all the way
+    @JsonIgnore
     public double getPathSize() {
         double size = 0;
         for(int i=0; i< path.size() - 1; i++) {
