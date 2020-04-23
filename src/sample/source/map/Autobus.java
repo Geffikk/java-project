@@ -3,19 +3,15 @@ package sample.source.map;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.util.StdConverter;
-import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
-import javafx.scene.text.Text;
-import org.omg.CORBA.Any;
 import sample.source.imap.Drawable;
 import sample.source.imap.TimerUpdate;
 
 import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,11 +25,10 @@ public class Autobus implements Drawable, TimerUpdate {
     @JsonIgnore
     private double distance = 0;
     @JsonIgnore
-<<<<<<< HEAD
     private List<Shape> gui = new ArrayList<>();
+    @JsonIgnore
     private Line line;
-    private String idOfLine;
-
+    @JsonIgnore
     private Shape daco;
 
 
@@ -111,21 +106,18 @@ public class Autobus implements Drawable, TimerUpdate {
         traceOfStops.setStroke(Color.RED);
         traceOfStops.setEndX(x);
     }
-=======
-    private List<Shape> gui;
-    @JsonIgnore
-    private Color color;
->>>>>>> master
+
 
     /** Empty constructor for yaml **/
     private Autobus() {
     }
 
     /** Normal constructor **/
-    public Autobus(Coordinate position, double speed, Path path) {
+    public Autobus(Coordinate position, double speed, Path path, String idOfLine) {
         this.position = position;
         this.path = path;
         this.speed = speed;
+        this.idOfLine = idOfLine;
         this.line = null;
         setGui();
     }
@@ -190,9 +182,6 @@ public class Autobus implements Drawable, TimerUpdate {
         return path;
     }
 
-    public String getIdOfLine() {
-        return idOfLine;
-    }
 
     // Overide functions toString for printing
     @Override

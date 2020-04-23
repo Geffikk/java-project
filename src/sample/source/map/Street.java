@@ -4,18 +4,13 @@ package sample.source.map;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
+
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import sample.source.imap.Drawable;
-import sample.source.imap.TimerUpdate;
 import sample.source.imap.iStreet;
 
-import java.awt.*;
-import java.lang.reflect.Array;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -122,11 +117,6 @@ public class Street implements iStreet, Drawable{
     @JsonIgnore
     @Override
     public List<Shape> getGUI() {
-<<<<<<< HEAD
-        return Collections.singletonList(
-                new Line(this.coordinates.get(0).getX(), this.coordinates.get(0).getY(),
-                        this.coordinates.get(1).getX(), this.coordinates.get(1).getY()));
-=======
 
         //If there is street with more than 2 coordiantes
         List<Shape> shapes = new ArrayList<>();
@@ -159,6 +149,5 @@ public class Street implements iStreet, Drawable{
             }
             return shapes;
         }
->>>>>>> master
     }
 }
