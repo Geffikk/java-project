@@ -30,13 +30,7 @@ public class Line implements iLine, Drawable {
     Stop first_stop;
     @JsonIgnore
     Stop last_stop;
-<<<<<<< HEAD
-
-=======
->>>>>>> master
     List<Stop> lineStops = new ArrayList<>();
-    @JsonIgnore
-    private List<Line> lineInformation = new ArrayList<>();
     //List of streets in line
     private List<Street> streetList = new ArrayList<>();
     //List of stops in line
@@ -47,16 +41,13 @@ public class Line implements iLine, Drawable {
     /** Empty constructor for yaml**/
     private Line() {
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> master
     /** Normal constructor **/
     public Line(String id) {
         this.id = id;
     }
 
-<<<<<<< HEAD
+
     /** Add stop to LINE **/
     /** Not used **/
     public boolean addStop(Stop stop) {
@@ -106,7 +97,6 @@ public class Line implements iLine, Drawable {
         }
         return true;
     }
-=======
     /** Not used **/
 /*
     public boolean addStop(Stop... stops) {
@@ -176,7 +166,6 @@ public class Line implements iLine, Drawable {
 //        }
 //        return true;
 //    }
->>>>>>> master
 
     /** Return id of line (getter for yaml) **/
     public String getId() {

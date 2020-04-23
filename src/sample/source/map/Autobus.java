@@ -105,10 +105,7 @@ public class Autobus implements Drawable, TimerUpdate {
         traceOfStops.setStroke(Color.RED);
         traceOfStops.setEndX(x);
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 
     /** Empty constructor for yaml **/
     private Autobus() {
@@ -184,10 +181,6 @@ public class Autobus implements Drawable, TimerUpdate {
         return path;
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     // Overide functions toString for printing
     @Override
     public String toString() {
