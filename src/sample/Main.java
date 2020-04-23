@@ -71,8 +71,6 @@ public class Main extends Application {
             }
         });
 
-        ////////////////////////////
-
        // DataStreets data = new DataStreets(stops);
 
         YAMLFactory factory = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
@@ -124,12 +122,15 @@ public class Main extends Application {
 
         // Load vehicles and their path
         DataAutobuses dataOfVehicles = mapper.readValue(new File("data.yml"), DataAutobuses.class);
-
+        dataOfVehicles.getAutobuses().get(0).set_line(dataOfLines.getLines().get(0));
+        dataOfVehicles.getAutobuses().get(1).set_line(dataOfLines.getLines().get(1));
+        dataOfVehicles.getAutobuses().get(2).set_line(dataOfLines.getLines().get(0));
         // Add vehicles to map
         elements.addAll(dataOfVehicles.getAutobuses());
-        
+        //controller.setKokot(dataOfVehicles.getAutobuses().get(0).getGUI().get(0), dataOfLines.getLines().get(0));
         controller.setElements(elements);
 
+        //controller.setClearPane();
         controller.startTime(5);
         //mapper.writeValue(new File("data3.yml"), data);
 

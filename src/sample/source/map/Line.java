@@ -165,9 +165,11 @@ public class Line implements iLine, Drawable {
 
         if (this.id.equals("1")) {
             line.setStroke(Color.RED);
+            line.setId("1");
         }
         else if(this.id.equals("2")) {
             line.setStroke(Color.GREEN);
+            line.setId("2");
         }
 
         if (str_before.getId().equals(this.abs_map.get(counter-1).getKey().getId())){

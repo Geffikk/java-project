@@ -3,6 +3,9 @@ package sample.source.map;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.util.StdConverter;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
@@ -25,8 +28,87 @@ public class Autobus implements Drawable, TimerUpdate {
     private double distance = 0;
     private Path path;
     @JsonIgnore
-    private List<Shape> gui;
-    private Color color;
+    private List<Shape> gui = new ArrayList<>();
+    private Line line;
+    private String idOfLine;
+
+    private Shape daco;
+
+
+    @JsonIgnore
+    @Override
+    public void setKokot(Label label, Label label2, javafx.scene.shape.Line traceOfStops, Pane content) {
+        for (Shape shape : gui) {
+            shape.setOnMouseClicked(mouseEvent -> setData(label, label2, traceOfStops, content));
+        }
+    }
+
+    @JsonIgnore
+    @Override
+    public void setPane(Label label, Label label2, javafx.scene.shape.Line traceOfStops, Pane pane, Pane content) {
+        pane.setOnMouseClicked(mouseEvent -> clearData(label, label2, traceOfStops, pane, content));
+    }
+
+    public void clearData(Label label, Label label2, javafx.scene.shape.Line traceOfStops, Pane pane, Pane content) {
+        label.setText("");
+        label2.setText("");
+        traceOfStops.setVisible(false);
+        for (int i = 0; i<content.getChildren().size(); i++){
+            String id;
+            id = content.getChildren().get(i).getId();
+            if (id == null) {
+                id = "";
+            }
+
+            if (id.equals("1")) {
+                daco = (Shape) content.getChildren().get(i);
+                daco.setStrokeWidth(1);
+                content.getChildren().set(i, daco);
+            }
+        }
+    }
+
+    public void setData(Label label, Label label2, javafx.scene.shape.Line traceOfStops, Pane content){
+        String departures = "";
+        String stops = "";
+        String idcko;
+        double x = 0;
+        for (int j = 0; j < 4; j++) {
+
+            for (int i = 0; i < line.getListOfDepartures().size(); i++) {
+                departures = departures + "\t\t\t\t   " + line.getListOfDepartures().get(i).get(j);
+            }
+            departures = departures + "\n";
+        }
+
+        for(int i = 0; i < line.getListOfDepartures().size(); i++) {
+            stops = stops + "\t\t\t" + line.getStopList().get(i).getId();
+            x = x + 130;
+        }
+
+        for (int i = 0; i<content.getChildren().size(); i++){
+            String id;
+            id = content.getChildren().get(i).getId();
+            if (id == null) {
+                id = "";
+            }
+            //System.out.println(elements.get(i).getGUI().get(0));
+            if ( id.equals("1"))
+            {
+                daco = (Shape) content.getChildren().get(i);
+                daco.setStrokeWidth(10);
+                content.getChildren().set(i, daco);
+            }
+        }
+
+        label.setText(departures);
+        label2.setText(stops);
+        label2.setTranslateX(8);
+
+        traceOfStops.setVisible(true);
+        traceOfStops.setStroke(Color.RED);
+        traceOfStops.setEndX(x);
+    }
 
     private Autobus() {
     }
@@ -35,7 +117,16 @@ public class Autobus implements Drawable, TimerUpdate {
         this.position = position;
         this.path = path;
         this.speed = speed;
+        this.line = null;
         setGui();
+    }
+
+    public String getIdOfLine() {
+        return idOfLine;
+    }
+
+    public void set_line(Line line){
+        this.line = line;
     }
 
     // Move with pictures in our map
@@ -46,18 +137,9 @@ public class Autobus implements Drawable, TimerUpdate {
         }
     }
 
-    private void setKokot() {
-        for (Shape shape : gui) {
-            if(shape.getFill() == Color.GREEN) {
-                shape.setOnMouseClicked(mouseEvent -> System.out.println("KOKOT"));
-            }
-        }
-    }
-
     // Set first image to map
     private void setGui(){
-        gui = new ArrayList<>();
-        if(this.speed == 0.5) {
+        if(this.speed == 1) {
             gui.add(new Circle(position.getX(), position.getY(), 8, Color.RED));
         }
         else  {
@@ -79,11 +161,6 @@ public class Autobus implements Drawable, TimerUpdate {
         if (path.getPathSize() <= distance) {
             distance = 0;
         }
-        int i = 1;
-        if(i == 1){
-            setKokot();
-        }
-        i = i+1;
         Coordinate coords = path.getCoordinateByDistance(distance);
         moveGui(coords);
     }

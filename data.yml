@@ -5,7 +5,7 @@ coordinates:
   y: 0.0
 autobuses:
 - position: *1
-  speed: 8.0
+  speed: 1.5
   path:
     path:
     - &3 x: 100.0
@@ -18,8 +18,9 @@ autobuses:
       y: 100.0
     - &7 x: 100.0
       y: 300.0
+  idOfLine: "1"
 - position: *2
-  speed: 12.0
+  speed: 1.0
   path:
     path:
     - &8 x: 200.0
@@ -30,6 +31,21 @@ autobuses:
       y: 300.0
     - &11 x: 200.0
       y: 800.0
+  idOfLine: "1"
+- position: *1
+  speed: 2.0
+  path:
+    path:
+    - &12 x: 100.0
+      y: 300.0
+    - &13 x: 300.0
+      y: 600.0
+    - &14 x: 400.0
+      y: 600.0
+    - &15 x: 400.0
+      y: 100.0
+    - &16 x: 100.0
+      y: 300.0
 
 
 

@@ -8,6 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 import sample.source.imap.Drawable;
 import sample.source.imap.TimerUpdate;
@@ -35,9 +37,24 @@ public class Controller {
     private TextField timeScale;
     @FXML
     private Label showTime;
+    @FXML
+    private Label showDepartures;
+    @FXML
+    private Label showPathStops;
+    @FXML
+    private Pane rightSide;
+    @FXML
+    private Line traceOfStops;
+
+
+    /*
+    @FXML
+    public void onReset() {
+        odchody.setVisible(false);
+    }*/
 
     @FXML
-    private void  onTimeScaleChange(){
+    private void onTimeScaleChange(){
         try {
             scale = Float.parseFloat(timeScale.getText());
             if (scale <= 0 || scale > 10.0) {
@@ -83,8 +100,8 @@ public class Controller {
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime currentTime = LocalTime.now();
             showTime.setText(mapTime.toString());
-            showTime.setTranslateX(990);
-            showTime.setTranslateY(5);
+            showTime.setTranslateX(850);
+            //showTime.setTranslateY(5);
         }),
                 new KeyFrame(Duration.millis(100))
         );
@@ -100,6 +117,8 @@ public class Controller {
                 time = time.plusSeconds(1);
                 for (TimerUpdate update : updates) {
                     //System.out.println(mapTime.toString());
+                    update.setKokot(showDepartures, showPathStops, traceOfStops, content);
+                    update.setPane(showDepartures, showPathStops, traceOfStops,rightSide, content);
                     mapTime.setSeconds(mapTime.getSeconds()+1);
                     update.update(mapTime);
                 }

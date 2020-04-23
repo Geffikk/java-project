@@ -8,11 +8,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="459.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <right>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="rightSide" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="timeScale" layoutX="26.0" layoutY="14.0" />
             <Button layoutX="123.0" layoutY="49.0" mnemonicParsing="false" onAction="#onTimeScaleChange" text="Speed" />
@@ -20,21 +21,35 @@
          </children></AnchorPane>
    </right>
    <center>
-      <ScrollPane pannable="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ScrollPane pannable="true" prefHeight="494.0" prefWidth="638.0" BorderPane.alignment="CENTER">
          <content>
             <Group>
                <children>
-                  <Pane fx:id="content" layoutX="-123.0" layoutY="-100.0" onScroll="#onZoom" prefHeight="456.0" prefWidth="461.0">
-                     <children>
-                        <Label fx:id="showTime" layoutX="200.0" layoutY="6.0" prefHeight="30.0" prefWidth="175.0">
-                           <font>
-                              <Font name="Berlin Sans FB" size="25.0" />
-                           </font>
-                        </Label>
-                     </children></Pane>
+                  <Pane fx:id="content" layoutX="-137.0" layoutY="-94.0" onScroll="#onZoom" prefHeight="581.0" prefWidth="711.0" />
                </children>
             </Group>
          </content>
       </ScrollPane>
    </center>
+   <bottom>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="showDepartures" layoutX="31.0" layoutY="28.0" prefHeight="78.0" prefWidth="594.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="showPathStops" layoutX="31.0" layoutY="99.0" prefHeight="70.0" prefWidth="584.0">
+               <font>
+                  <Font name="Bauhaus 93" size="17.0" />
+               </font></Label>
+            <Label fx:id="showTime" layoutX="528.0" layoutY="155.0" prefHeight="30.0" prefWidth="175.0">
+               <font>
+                  <Font name="Berlin Sans FB" size="25.0" />
+               </font>
+            </Label>
+            <Line fx:id="traceOfStops" endX="515.7999267578125" endY="3.0517578125E-5" fill="BLACK" layoutX="142.0" layoutY="147.0" startX="-82.60001373291016" startY="3.0517578125E-5" stroke="#f2f2f2" strokeWidth="3.0" visible="false" />
+         </children>
+      </AnchorPane>
+   </bottom>
 </BorderPane>

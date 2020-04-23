@@ -4,26 +4,31 @@ package sample.source.map;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import sample.source.imap.Drawable;
+import sample.source.imap.TimerUpdate;
 import sample.source.imap.iStreet;
 
 import java.awt.*;
 import java.lang.reflect.Array;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-public class Street implements iStreet, Drawable {
+public class Street implements iStreet, Drawable{
 
     // Street ID, List<Coordinates>, List<Stops>
     private String id;
     private List<Coordinate> coordinates;
     private List<Stop> stops = new ArrayList<>();
+    private List<Shape> gui = new ArrayList<>();
 
     public Street() {
     }
@@ -116,7 +121,7 @@ public class Street implements iStreet, Drawable {
     @Override
     public List<Shape> getGUI() {
         return Collections.singletonList(
-                new Line(this.coordinates.get(0).getX(), this.coordinates.get(0).getY(), this.coordinates.get(1).getX(), this.coordinates.get(1).getY()));
+                new Line(this.coordinates.get(0).getX(), this.coordinates.get(0).getY(),
+                        this.coordinates.get(1).getX(), this.coordinates.get(1).getY()));
     }
-
 }
