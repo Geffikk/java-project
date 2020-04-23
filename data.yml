@@ -31,7 +31,6 @@ autobuses:
       y: 300.0
     - &11 x: 200.0
       y: 800.0
-<<<<<<< HEAD
   idOfLine: "1"
 - position: *1
   speed: 2.0
@@ -47,9 +46,4 @@ autobuses:
       y: 100.0
     - &16 x: 100.0
       y: 300.0
-
-
-
-=======
   idOfLine: "2"
->>>>>>> master

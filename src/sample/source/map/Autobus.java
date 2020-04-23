@@ -29,13 +29,11 @@ public class Autobus implements Drawable, TimerUpdate {
     @JsonIgnore
     private double distance = 0;
     @JsonIgnore
-<<<<<<< HEAD
     private List<Shape> gui = new ArrayList<>();
+    @JsonIgnore
     private Line line;
-    private String idOfLine;
-
+    @JsonIgnore
     private Shape daco;
-
 
     @JsonIgnore
     @Override
@@ -111,11 +109,6 @@ public class Autobus implements Drawable, TimerUpdate {
         traceOfStops.setStroke(Color.RED);
         traceOfStops.setEndX(x);
     }
-=======
-    private List<Shape> gui;
-    @JsonIgnore
-    private Color color;
->>>>>>> master
 
     /** Empty constructor for yaml **/
     private Autobus() {
@@ -188,10 +181,6 @@ public class Autobus implements Drawable, TimerUpdate {
     // Get path of vehicle
     public Path getPath() {
         return path;
-    }
-
-    public String getIdOfLine() {
-        return idOfLine;
     }
 
     // Overide functions toString for printing

@@ -48,7 +48,7 @@
                   <Font name="Berlin Sans FB" size="25.0" />
                </font>
             </Label>
-            <Line fx:id="traceOfStops" endX="515.7999267578125" endY="3.0517578125E-5" fill="BLACK" layoutX="142.0" layoutY="147.0" startX="-82.60001373291016" startY="3.0517578125E-5" stroke="#f2f2f2" strokeWidth="3.0" visible="false" />
+            <Line fx:id="traceOfStops" endX="515.7999267578125" endY="3.0517578125E-5" fill="BLACK" layoutX="142.0" layoutY="147.0" startX="-100.0" startY="3.0517578125E-5" stroke="#f2f2f2" strokeWidth="3.0" visible="false" />
          </children>
       </AnchorPane>
    </bottom>

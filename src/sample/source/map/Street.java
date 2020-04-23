@@ -122,11 +122,6 @@ public class Street implements iStreet, Drawable{
     @JsonIgnore
     @Override
     public List<Shape> getGUI() {
-<<<<<<< HEAD
-        return Collections.singletonList(
-                new Line(this.coordinates.get(0).getX(), this.coordinates.get(0).getY(),
-                        this.coordinates.get(1).getX(), this.coordinates.get(1).getY()));
-=======
 
         //If there is street with more than 2 coordiantes
         List<Shape> shapes = new ArrayList<>();
@@ -159,6 +154,5 @@ public class Street implements iStreet, Drawable{
             }
             return shapes;
         }
->>>>>>> master
     }
 }

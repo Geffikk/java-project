@@ -116,7 +116,6 @@ public class Controller {
             public void run() {
                 time = time.plusSeconds(1);
                 for (TimerUpdate update : updates) {
-                    //System.out.println(mapTime.toString());
                     update.setKokot(showDepartures, showPathStops, traceOfStops, content);
                     update.setPane(showDepartures, showPathStops, traceOfStops,rightSide, content);
                     mapTime.setSeconds(mapTime.getSeconds()+1);
