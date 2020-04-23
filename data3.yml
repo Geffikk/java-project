@@ -24,14 +24,14 @@ lines:
       y: 600.0
     - &10 x: 100.0
       y: 300.0
-    stops: []
+    stops:
   - &11 id: "Street5"
     coordinates:
     - &12 x: 300.0
       y: 600.0
     - &13 x: 400.0
       y: 600.0
-    stops: []
+    stops:
   - &14 id: "Street6"
     coordinates:
     - &15 x: 400.0

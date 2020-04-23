@@ -26,16 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 
 import java.io.File;
-import java.io.File;
-import java.sql.Array;
-import java.util.*;
-import javax.xml.crypto.Data;
-import java.io.File;
-import java.io.File;
-import java.sql.Array;
-import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Main extends Application {
@@ -73,8 +64,6 @@ public class Main extends Application {
 
         ////////////////////////////
 
-       // DataStreets data = new DataStreets(stops);
-
         YAMLFactory factory = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
         ObjectMapper mapper = new ObjectMapper(factory);
 
@@ -89,18 +78,15 @@ public class Main extends Application {
         // Make route of each line
         for (Line line: dataOfLines.getLines()) {
 
-        YAMLFactory factory2 = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
-        ObjectMapper mapper2 = new ObjectMapper(factory2);
+        List<Street> streetsOfLine = line.getStreetList();
 
-        List<Street> streets1 = line.getStreetList();
-
-        for (Street str: streets1) {
-            List<Stop> stops = str.getStops();
-            if (stops.isEmpty()){
+        for (Street str: streetsOfLine) {
+            List<Stop> stopsOfStreet = str.getStops();
+            if (stopsOfStreet == null){
                 line.addStreetAndStopToAbsMap(str, null);
             }
             else{
-                for (Stop stop: stops) {
+                for (Stop stop: stopsOfStreet) {
                     line.addStreetAndStopToAbsMap(stop.getStreet(), stop);
 
                 }
@@ -124,14 +110,12 @@ public class Main extends Application {
 
         // Load vehicles and their path
         DataAutobuses dataOfVehicles = mapper.readValue(new File("data.yml"), DataAutobuses.class);
-
         // Add vehicles to map
         elements.addAll(dataOfVehicles.getAutobuses());
         
         controller.setElements(elements);
-
         controller.startTime(5);
-        //mapper.writeValue(new File("data3.yml"), data);
+        //mapper.writeValue(new File("data.yml"), data);
 
     }
 
