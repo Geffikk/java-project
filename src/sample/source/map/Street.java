@@ -4,18 +4,13 @@ package sample.source.map;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
+
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import sample.source.imap.Drawable;
-import sample.source.imap.TimerUpdate;
 import sample.source.imap.iStreet;
 
-import java.awt.*;
-import java.lang.reflect.Array;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
