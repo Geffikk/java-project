@@ -31,6 +31,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.sql.Time;
 import javax.swing.*;
 import java.sql.Time;
 import java.text.DateFormat;
@@ -140,7 +141,6 @@ public class Controller {
                 }
             }
         };
-
         timeline.play();
         timer.start();
 

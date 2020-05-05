@@ -24,10 +24,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
+import javax.xml.crypto.Data;
 
 import java.io.File;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main extends Application {
@@ -44,25 +46,6 @@ public class Main extends Application {
 
         Controller controller = loader.getController();
         List<Drawable> elements = new ArrayList<>();
-
-        // Show Line information //
-//        final JFrame frame = new JFrame();
-//        JPanel panel = new JPanel();
-//
-//        JButton button1 = new JButton();
-//
-//        frame.add(panel);
-//        panel.add(button1);
-//        frame.setVisible(true);
-//
-//        button1.addActionListener(new ActionListener() {
-//
-//            public void actionPerformed(ActionEvent arg0) {
-//                JOptionPane.showMessageDialog(frame.getComponent(0), "Hello World");
-//
-//            }
-//        });
-
 
         YAMLFactory factory = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
         ObjectMapper mapper = new ObjectMapper(factory);
@@ -111,31 +94,8 @@ public class Main extends Application {
         // Add vehicles to map
         elements.addAll(dataOfVehicles.getAutobuses());
 
-        dataOfVehicles.getAutobuses().get(0).set_line(dataOfLines.getLines().get(0));
-        dataOfVehicles.getAutobuses().get(1).set_line(dataOfLines.getLines().get(0));
-        dataOfVehicles.getAutobuses().get(2).set_line(dataOfLines.getLines().get(0));
-        dataOfVehicles.getAutobuses().get(3).set_line(dataOfLines.getLines().get(0));
-        dataOfVehicles.getAutobuses().get(4).set_line(dataOfLines.getLines().get(0));
-        dataOfVehicles.getAutobuses().get(5).set_line(dataOfLines.getLines().get(0));
-        dataOfVehicles.getAutobuses().get(6).set_line(dataOfLines.getLines().get(0));
-        dataOfVehicles.getAutobuses().get(7).set_line(dataOfLines.getLines().get(0));
-        dataOfVehicles.getAutobuses().get(8).set_line(dataOfLines.getLines().get(0));
-        dataOfVehicles.getAutobuses().get(9).set_line(dataOfLines.getLines().get(0));
-
-        dataOfVehicles.getAutobuses().get(10).set_line(dataOfLines.getLines().get(1));
-        dataOfVehicles.getAutobuses().get(11).set_line(dataOfLines.getLines().get(1));
-        dataOfVehicles.getAutobuses().get(12).set_line(dataOfLines.getLines().get(1));
-        dataOfVehicles.getAutobuses().get(13).set_line(dataOfLines.getLines().get(1));
-        dataOfVehicles.getAutobuses().get(14).set_line(dataOfLines.getLines().get(1));
-        dataOfVehicles.getAutobuses().get(15).set_line(dataOfLines.getLines().get(1));
-        dataOfVehicles.getAutobuses().get(16).set_line(dataOfLines.getLines().get(1));
-        dataOfVehicles.getAutobuses().get(17).set_line(dataOfLines.getLines().get(1));
-        dataOfVehicles.getAutobuses().get(18).set_line(dataOfLines.getLines().get(1));
-        dataOfVehicles.getAutobuses().get(19).set_line(dataOfLines.getLines().get(1));
-
-
         controller.setElements(elements);
         controller.startTime(5);
-        //mapper.writeValue(new File("data3.yml"), data);
+        //mapper.writeValue(new File("data.yml"), data);
     }
 }

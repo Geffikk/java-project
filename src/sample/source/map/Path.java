@@ -8,6 +8,7 @@ public class Path {
 
     private List<Coordinate> path;
 
+
     public Path() {
     }
 
@@ -23,22 +24,27 @@ public class Path {
     private double getDistanceBetweenCoordinates(Coordinate a, Coordinate b) {
         // Everything ok
         return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
+
     }
 
+
     /** Calculate new coordinates after move **/
-    public Coordinate getCoordinateByDistance(double distance) {
+    public Coordinate getCoordinateByDistance(double distance, Path pathOfAutobus, Coordinate startOfAutobus) {
 
         // Length of all ways in path
         double length = 0;
+
+        int j = pathOfAutobus.getPath().indexOf(startOfAutobus);
+
 
         // Initialize coordinates two null (get coordinates with function getDistBetweenCoor)
         Coordinate a = null;
         Coordinate b = null;
 
         // Iterate over all coordinates
-        for(int i=0; i< path.size() - 1; i++) {
+        for(int i=j; i< path.size() - 1; i++) {
             a = path.get(i);
-            b = path.get(i+1);
+            b = path.get(i + 1);
 
             if(length + getDistanceBetweenCoordinates(a, b) >= distance) {
                 break;

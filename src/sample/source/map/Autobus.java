@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
+import org.yaml.snakeyaml.util.ArrayUtils;
 import sample.source.imap.Drawable;
 import sample.source.imap.TimerUpdate;
 
@@ -16,6 +17,9 @@ import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
+import java.lang.Object;
+
 
 @JsonDeserialize(converter = Autobus.AutobusConstruct.class)
 public class Autobus implements Drawable, TimerUpdate {
@@ -29,11 +33,17 @@ public class Autobus implements Drawable, TimerUpdate {
     @JsonIgnore
     private List<Shape> gui = new ArrayList<>();
     @JsonIgnore
-    private Line line;
+    private boolean start;
+    @JsonIgnore
+    private Coordinate startOfAutobus;
+    @JsonIgnore
+    private Path temporaryPath;
     @JsonIgnore
     private Shape daco;
     @JsonIgnore
     private Shape daco1;
+    @JsonIgnore
+    private Line line;
 
     @JsonIgnore
     @Override
@@ -147,38 +157,26 @@ public class Autobus implements Drawable, TimerUpdate {
         this.path = path;
         this.speed = speed;
         this.idOfLine = idOfLine;
-        this.line = null;
+        this.start = true;
+        this.startOfAutobus = position;
         setGui();
     }
 
-    public String getIdOfLine() {
-        return idOfLine;
-    }
-
-    public void set_line(Line line){
-        this.line = line;
-    }
 
     // Move with pictures in our map
     private void moveGui(Coordinate coordinate) {
         for (Shape shape : gui) {
-            shape.setTranslateX((coordinate.getX()));
-            shape.setTranslateY((coordinate.getY()));
+            shape.setTranslateX(coordinate.getX() - position.getX() + shape.getTranslateX());
+            shape.setTranslateY(coordinate.getY() - position.getY() + shape.getTranslateY());
         }
     }
 
     // Set first image to map
     private void setGui(){
-        if(this.idOfLine.equals("1")) {
             Circle circle = new Circle(position.getX(), position.getY(), 8, Color.RED);
-            circle.setId("1");
             gui.add(circle);
-        }
-        else if (this.idOfLine.equals("2")){
-            Circle circle = new Circle(position.getX(), position.getY(), 8, Color.GREEN);
-            circle.setId("2");
-            gui.add(circle);
-        }
+            this.start = true;
+            this.startOfAutobus = position;
     }
 
     // Return all GUI elements
@@ -191,12 +189,55 @@ public class Autobus implements Drawable, TimerUpdate {
     // Update images in map
     @Override
     public void update(Time mapTime) {
+
         distance += speed;
+
+        // reverse path of line
         if (path.getPathSize() <= distance) {
+            List<Coordinate> reverseList1 = new ArrayList<>();
+            for (int i = path.getPath().size() - 1; i >= 0 ; i--){
+                Coordinate c1 = path.getPath().get(i);
+                reverseList1.add(c1);
+            }
+            Path reversePath1 = new Path (reverseList1);
+            this.path = reversePath1;
             distance = 0;
+            startOfAutobus = path.getPath().get(0);
         }
-        Coordinate coords = path.getCoordinateByDistance(distance);
+        else{
+            //if autobus doesnt start on begging of path modifie path
+            if(!path.getPath().get(0).equals(startOfAutobus)){
+                if(this.start){
+                    //Path tempPath = null;
+                    List <Coordinate> tempList = new ArrayList<>();
+                    int index = path.getPath().indexOf(startOfAutobus);
+                    for (int j = index; j < path.getPath().size(); j++){
+                        tempList.add(path.getPath().get(j));
+                    }
+                    this.temporaryPath = new Path(tempList);
+                    this.start = false;
+
+                }
+                if(this.temporaryPath != null){
+                    //reverse path
+                    if(this.temporaryPath.getPathSize() <= distance){
+                        List<Coordinate> reverseList2 = new ArrayList<>();
+                        for (int i = path.getPath().size() - 1; i >= 0 ; i--){
+                            Coordinate c1 = path.getPath().get(i);
+                            reverseList2.add(c1);
+                        }
+                        Path reversePath2 = new Path (reverseList2);
+                        this.path = reversePath2;
+                        distance = 0;
+                        startOfAutobus = path.getPath().get(0);
+                    }
+                }
+            }
+        }
+
+        Coordinate coords = path.getCoordinateByDistance(distance, path, startOfAutobus);
         moveGui(coords);
+        position = coords;
     }
 
 
@@ -213,6 +254,10 @@ public class Autobus implements Drawable, TimerUpdate {
     // Get path of vehicle
     public Path getPath() {
         return path;
+    }
+
+    public String getIdOfLine() {
+        return idOfLine;
     }
 
     // Overide functions toString for printing
