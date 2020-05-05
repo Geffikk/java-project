@@ -221,8 +221,7 @@ streets:
     street: *90
     coordinate:
       &97 x: 900.0
-      y: 2
-      00.0
+      y: 200.0
 - &98 id: "Street19"
   coordinates:
   - &99 x: 800.0

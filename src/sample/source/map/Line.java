@@ -97,8 +97,8 @@ public class Line implements iLine, Drawable {
         }
         return true;
     }
-<<<<<<< HEAD
-=======
+
+
     /** Not used **/
 /*
     public boolean addStop(Stop... stops) {
@@ -168,7 +168,7 @@ public class Line implements iLine, Drawable {
 //        }
 //        return true;
 //    }
->>>>>>> master
+
 
     /** Return id of line (getter for yaml) **/
     public String getId() {
