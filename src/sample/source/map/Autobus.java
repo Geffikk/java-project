@@ -173,10 +173,18 @@ public class Autobus implements Drawable, TimerUpdate {
 
     // Set first image to map
     private void setGui(){
+        if(this.idOfLine.equals("1")) {
             Circle circle = new Circle(position.getX(), position.getY(), 8, Color.RED);
+            circle.setId("1");
             gui.add(circle);
-            this.start = true;
-            this.startOfAutobus = position;
+        }
+        else if (this.idOfLine.equals("2")){
+            Circle circle = new Circle(position.getX(), position.getY(), 8, Color.GREEN);
+            circle.setId("2");
+            gui.add(circle);
+        }
+        this.start = true;
+        this.startOfAutobus = position;
     }
 
     // Return all GUI elements
@@ -236,6 +244,7 @@ public class Autobus implements Drawable, TimerUpdate {
         }
 
         Coordinate coords = path.getCoordinateByDistance(distance, path, startOfAutobus);
+
         moveGui(coords);
         position = coords;
     }
@@ -258,6 +267,10 @@ public class Autobus implements Drawable, TimerUpdate {
 
     public String getIdOfLine() {
         return idOfLine;
+    }
+
+    public void set_line(Line line){
+        this.line = line;
     }
 
     // Overide functions toString for printing

@@ -58,7 +58,7 @@ public class Path {
         }
 
         // Este pozriet nato
-        double driven = (distance - length) / getDistanceBetweenCoordinates(a, b);
+        double driven = (distance - length) / (getDistanceBetweenCoordinates(a, b));
         return new Coordinate(a.getX() + (b.getX() - a.getX()) * driven, a.getY() + (b.getY() - a.getY()) * driven);
     }
 

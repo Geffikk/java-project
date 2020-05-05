@@ -90,6 +90,16 @@ public class Main extends Application {
 
         // Load vehicles and their path
         DataAutobuses dataOfVehicles = mapper.readValue(new File("data.yml"), DataAutobuses.class);
+        dataOfVehicles.getAutobuses().get(0).set_line(dataOfLines.getLines().get(0));
+        dataOfVehicles.getAutobuses().get(1).set_line(dataOfLines.getLines().get(1));
+        dataOfVehicles.getAutobuses().get(2).set_line(dataOfLines.getLines().get(2));
+        dataOfVehicles.getAutobuses().get(3).set_line(dataOfLines.getLines().get(1));
+        dataOfVehicles.getAutobuses().get(4).set_line(dataOfLines.getLines().get(2));
+        dataOfVehicles.getAutobuses().get(5).set_line(dataOfLines.getLines().get(1));
+        dataOfVehicles.getAutobuses().get(6).set_line(dataOfLines.getLines().get(2));
+        dataOfVehicles.getAutobuses().get(7).set_line(dataOfLines.getLines().get(1));
+        dataOfVehicles.getAutobuses().get(8).set_line(dataOfLines.getLines().get(2));
+        dataOfVehicles.getAutobuses().get(9).set_line(dataOfLines.getLines().get(1));
 
         // Add vehicles to map
         elements.addAll(dataOfVehicles.getAutobuses());

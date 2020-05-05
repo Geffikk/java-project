@@ -85,7 +85,7 @@ public class Controller {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Invalind time scale");
                 alert.showAndWait();
             }
-            scale = scale;
+            scale = scale + 2;
             timer.stop();
             startTime(scale);
         } catch (NumberFormatException e) {
@@ -130,9 +130,9 @@ public class Controller {
             @Override
             public void handle(long l) {
                 i++;
+                showTime.setText(mapTime.toString());
+                mapTime.setSeconds(mapTime.getSeconds()+1);
                 for (TimerUpdate update : updates) {
-                    showTime.setText(mapTime.toString());
-                    mapTime.setSeconds(mapTime.getSeconds()+1);
                     if(i%scale == 0) {
                         update.setKokot(showDepartures, showPathStops, traceOfStops, content);
                         update.setPane(showDepartures, showPathStops, traceOfStops, rightSide, content);

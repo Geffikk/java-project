@@ -239,22 +239,18 @@ public class Line implements iLine, Drawable {
 
         if(shapes.isEmpty()){
             if (this.id.equals("1")) {
-                line.setStroke(Color.RED);
                 line.setId("1");
             }
             else if(this.id.equals("2")) {
-                line.setStroke(Color.GREEN);
                 line.setId("2");
             }
         }
         else{
             for (Shape lineOfStreet: shapes) {
                 if (this.id.equals("1")) {
-                    lineOfStreet.setStroke(Color.RED);
                     lineOfStreet.setId("1");
                 }
                 else if(this.id.equals("2")) {
-                    lineOfStreet.setStroke(Color.GREEN);
                     lineOfStreet.setId("2");
                 }
             }
