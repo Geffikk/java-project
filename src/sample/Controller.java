@@ -30,7 +30,7 @@ public class Controller {
     private Timer timer;
     private LocalTime time = LocalTime.now();
     private List<TimerUpdate> updates = new ArrayList<>();
-    private Time mapTime = new Time(10, 10, 5);
+    private Time mapTime = new Time(06, 20, 0);
     private float scale;
 
     @FXML
@@ -100,8 +100,8 @@ public class Controller {
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime currentTime = LocalTime.now();
             showTime.setText(mapTime.toString());
-            showTime.setTranslateX(850);
-            //showTime.setTranslateY(5);
+            showTime.setTranslateX(88);
+            showTime.setTranslateY(13);
         }),
                 new KeyFrame(Duration.millis(100))
         );

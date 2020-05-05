@@ -30,6 +30,8 @@ public class Autobus implements Drawable, TimerUpdate {
     private Line line;
     @JsonIgnore
     private Shape daco;
+    @JsonIgnore
+    private Shape daco1;
 
     @JsonIgnore
     @Override
@@ -61,39 +63,65 @@ public class Autobus implements Drawable, TimerUpdate {
                 daco.setStrokeWidth(1);
                 content.getChildren().set(i, daco);
             }
+            if (id.equals("2")) {
+                daco = (Shape) content.getChildren().get(i);
+                daco.setStrokeWidth(1);
+                content.getChildren().set(i, daco);
+            }
         }
     }
 
     public void setData(Label label, Label label2, javafx.scene.shape.Line traceOfStops, Pane content){
         String departures = "";
         String stops = "";
-        String idcko;
         double x = 0;
-        for (int j = 0; j < 4; j++) {
-
+        for (int j = 0; j < 9; j++) {
             for (int i = 0; i < line.getListOfDepartures().size(); i++) {
-                departures = departures + "\t\t\t\t   " + line.getListOfDepartures().get(i).get(j);
+                if (gui.get(0).getId().equals("2")) {
+                    departures = departures + line.getListOfDepartures().get(1).get(j) + "\t\t\t\t" ;
+                }
+                else if(gui.get(0).getId().equals("1")) {
+                    departures = departures + line.getListOfDepartures().get(0).get(j) + "\t\t\t\t";
+                }
             }
             departures = departures + "\n";
         }
 
         for(int i = 0; i < line.getListOfDepartures().size(); i++) {
-            stops = stops + "\t\t\t" + line.getStopList().get(i).getId();
-            x = x + 130;
+            stops = stops + line.getStopList().get(i).getId() + "\t\t\t\t\t\t" + "     ";
+            x = x + 100;
         }
 
-        for (int i = 0; i<content.getChildren().size(); i++){
+        System.out.println(gui.get(0).getId());
+
+        for (int f = 0; f<content.getChildren().size(); f++){
+            daco1 = (Shape) content.getChildren().get(f);
+            if(daco1.getStrokeWidth() == 4) {
+                daco1.setStrokeWidth(1);
+            }
+        }
+
+        for (int i = 0; i<content.getChildren().size(); i++) {
             String id;
             id = content.getChildren().get(i).getId();
+
             if (id == null) {
                 id = "";
             }
-            //System.out.println(elements.get(i).getGUI().get(0));
-            if ( id.equals("1"))
-            {
-                daco = (Shape) content.getChildren().get(i);
-                daco.setStrokeWidth(10);
-                content.getChildren().set(i, daco);
+            if (gui.get(0).getId().equals("1")) {
+                if (id.equals("1")) {
+                    daco = (Shape) content.getChildren().get(i);
+                    daco.setStrokeWidth(4);
+                    content.getChildren().set(i, daco);
+                }
+            }
+            else if (gui.get(0).getId().equals("2")) {
+                if (id.equals("2")) {
+                    System.out.println(content.getChildren().get(i));
+                    daco = (Shape) content.getChildren().get(i);
+                    daco.setStrokeWidth(4);
+                    content.getChildren().set(i, daco);
+                }
             }
         }
 
@@ -105,10 +133,7 @@ public class Autobus implements Drawable, TimerUpdate {
         traceOfStops.setStroke(Color.RED);
         traceOfStops.setEndX(x);
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 
     /** Empty constructor for yaml **/
     private Autobus() {
@@ -142,11 +167,15 @@ public class Autobus implements Drawable, TimerUpdate {
 
     // Set first image to map
     private void setGui(){
-        if(this.speed == 1) {
-            gui.add(new Circle(position.getX(), position.getY(), 8, Color.RED));
+        if(this.idOfLine.equals("1")) {
+            Circle circle = new Circle(position.getX(), position.getY(), 8, Color.RED);
+            circle.setId("1");
+            gui.add(circle);
         }
-        else  {
-            gui.add(new Circle(position.getX(), position.getY(), 8, Color.GREEN));
+        else if (this.idOfLine.equals("2")){
+            Circle circle = new Circle(position.getX(), position.getY(), 8, Color.GREEN);
+            circle.setId("2");
+            gui.add(circle);
         }
     }
 
@@ -184,10 +213,6 @@ public class Autobus implements Drawable, TimerUpdate {
         return path;
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     // Overide functions toString for printing
     @Override
     public String toString() {

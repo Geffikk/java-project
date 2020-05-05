@@ -26,17 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 
 import java.io.File;
-<<<<<<< HEAD
-import java.io.File;
-import java.sql.Array;
-import java.util.*;
-import javax.xml.crypto.Data;
-import java.io.File;
-import java.io.File;
-import java.sql.Array;
-import java.util.AbstractMap;
-=======
->>>>>>> master
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +38,7 @@ public class Main extends Application {
         BorderPane root = loader.load();
         primaryStage.setTitle("Map");
 
-        primaryStage.setScene(new Scene(root, 1500, 1000));
+        primaryStage.setScene(new Scene(root, 1650, 1000));
 
         primaryStage.show();
 
@@ -65,18 +55,6 @@ public class Main extends Application {
         panel.add(button1);
         frame.setVisible(true);
 
-        button1.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent arg0) {
-                JOptionPane.showMessageDialog(frame.getComponent(0), "Hello World");
-
-            }
-        });
-<<<<<<< HEAD
-       // DataStreets data = new DataStreets(stops);
-=======
-
->>>>>>> master
 
         YAMLFactory factory = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
         ObjectMapper mapper = new ObjectMapper(factory);
@@ -92,10 +70,6 @@ public class Main extends Application {
         // Make route of each line
         for (Line line: dataOfLines.getLines()) {
 
-<<<<<<< HEAD
-        //YAMLFactory factory2 = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
-        //ObjectMapper mapper2 = new ObjectMapper(factory2);
-
             List<Street> streetsOfLine = line.getStreetList();
 
             for (Street str: streetsOfLine) {
@@ -106,19 +80,6 @@ public class Main extends Application {
                 else{
                     for (Stop stop: stopsOfStreet) {
                         line.addStreetAndStopToAbsMap(stop.getStreet(), stop);
-
-=======
-            List<Street> streetsOfLine = line.getStreetList();
-
-            for (Street str: streetsOfLine) {
-                List<Stop> stopsOfStreet = str.getStops();
-                if (stopsOfStreet == null){
-                    line.addStreetAndStopToAbsMap(str, null);
-                }
-                else{
-                    for (Stop stop: stopsOfStreet) {
-                        line.addStreetAndStopToAbsMap(stop.getStreet(), stop);
->>>>>>> master
                     }
                 }
             }
@@ -138,29 +99,25 @@ public class Main extends Application {
 
         // Load vehicles and their path
         DataAutobuses dataOfVehicles = mapper.readValue(new File("data.yml"), DataAutobuses.class);
-<<<<<<< HEAD
         dataOfVehicles.getAutobuses().get(0).set_line(dataOfLines.getLines().get(0));
         dataOfVehicles.getAutobuses().get(1).set_line(dataOfLines.getLines().get(1));
         dataOfVehicles.getAutobuses().get(2).set_line(dataOfLines.getLines().get(0));
-=======
-
->>>>>>> master
+        dataOfVehicles.getAutobuses().get(3).set_line(dataOfLines.getLines().get(   0));
+        //dataOfVehicles.getAutobuses().get(2).set_line(dataOfLines.getLines().get(0));
 
         // Add vehicles to map
         elements.addAll(dataOfVehicles.getAutobuses());
         controller.setElements(elements);
-<<<<<<< HEAD
 
         //controller.setClearPane();
         controller.startTime(5);
         //mapper.writeValue(new File("data3.yml"), data);
-=======
+
 
 
         //controller.setClearPane();
-        controller.startTime(5);
 
->>>>>>> master
+
     }
 
 }
