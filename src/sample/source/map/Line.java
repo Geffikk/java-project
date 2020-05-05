@@ -207,25 +207,66 @@ public class Line implements iLine, Drawable {
     /** Paint streets to GUI **/
     @JsonIgnore
     public List<Shape> getGUI() {
-        javafx.scene.shape.Line line = new javafx.scene.shape.Line(this.abs_map.get(counter).getKey().getCoordinates().get(0).getX(),
-                this.abs_map.get(counter).getKey().getCoordinates().get(0).getY(),
-                this.abs_map.get(counter).getKey().getCoordinates().get(1).getX(),
-                this.abs_map.get(counter).getKey().getCoordinates().get(1).getY());
+
+        //If there is street with more than 2 coordiantes
+        List<Shape> shapes = new ArrayList<>();
+        javafx.scene.shape.Line line = null;
+        int numberOfCoordiantes = this.abs_map.get(counter).getKey().getCoordinates().size();
+
+        if (numberOfCoordiantes == 2){
+             line = new javafx.scene.shape.Line(this.abs_map.get(counter).getKey().getCoordinates().get(0).getX(),
+                    this.abs_map.get(counter).getKey().getCoordinates().get(0).getY(),
+                    this.abs_map.get(counter).getKey().getCoordinates().get(1).getX(),
+                    this.abs_map.get(counter).getKey().getCoordinates().get(1).getY());
+        }
+        else{
+            for(int i = 0; i<numberOfCoordiantes; i++){
+                if(i == (numberOfCoordiantes - 1)){
+                    break;
+                }
+
+                line = new javafx.scene.shape.Line(this.abs_map.get(counter).getKey().getCoordinates().get(i).getX(),
+                        this.abs_map.get(counter).getKey().getCoordinates().get(i).getY(),
+                        this.abs_map.get(counter).getKey().getCoordinates().get(i+1).getX(),
+                        this.abs_map.get(counter).getKey().getCoordinates().get(i+1).getY());
+                shapes.add(line);
+            }
+        }
         counter = counter + 1;
 
-        if (this.id.equals("1")) {
-            line.setStroke(Color.RED);
-            line.setId("1");
+        if(shapes.isEmpty()){
+            if (this.id.equals("1")) {
+                line.setStroke(Color.RED);
+                line.setId("1");
+            }
+            else if(this.id.equals("2")) {
+                line.setStroke(Color.GREEN);
+                line.setId("2");
+            }
         }
-        else if(this.id.equals("2")) {
-            line.setStroke(Color.GREEN);
-            line.setId("2");
+        else{
+            for (Shape lineOfStreet: shapes) {
+                if (this.id.equals("1")) {
+                    lineOfStreet.setStroke(Color.RED);
+                    lineOfStreet.setId("1");
+                }
+                else if(this.id.equals("2")) {
+                    lineOfStreet.setStroke(Color.GREEN);
+                    lineOfStreet.setId("2");
+                }
+            }
         }
 
         if (str_before.getId().equals(this.abs_map.get(counter-1).getKey().getId())){
             counter = 0;
         }
-        return Collections.singletonList(line);
+
+        if(shapes.isEmpty()){
+            return Collections.singletonList(line);
+        }
+        else{
+            return shapes;
+        }
     }
 
     /** Show line informations **/
