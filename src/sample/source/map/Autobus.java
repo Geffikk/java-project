@@ -3,6 +3,7 @@ package sample.source.map;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.util.StdConverter;
+import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -12,6 +13,7 @@ import sample.source.imap.Drawable;
 import sample.source.imap.TimerUpdate;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +77,7 @@ public class Autobus implements Drawable, TimerUpdate {
         String departures = "";
         String stops = "";
         double x = 0;
-        for (int j = 0; j < 9; j++) {
+        for (int j = 0; j < 4; j++) {
             for (int i = 0; i < line.getListOfDepartures().size(); i++) {
                 if (gui.get(0).getId().equals("2")) {
                     departures = departures + line.getListOfDepartures().get(1).get(j) + "\t\t\t\t" ;

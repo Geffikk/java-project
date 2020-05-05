@@ -58,7 +58,7 @@
                   <Font name="Berlin Sans FB" size="25.0" />
                </font>
             </Label>
-            <Button layoutX="1451.0" layoutY="143.0" mnemonicParsing="false" onAction="#onBaseTime" text="Set Time" />
+            <Button layoutX="1442.0" layoutY="93.0" mnemonicParsing="false" onAction="#onBaseTime" text="Set Time" />
          </children>
       </AnchorPane>
    </bottom>
