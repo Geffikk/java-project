@@ -55,6 +55,17 @@ public class Main extends Application {
         panel.add(button1);
         frame.setVisible(true);
 
+<<<<<<< HEAD
+=======
+        button1.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent arg0) {
+                JOptionPane.showMessageDialog(frame.getComponent(0), "Hello World");
+
+            }
+        });
+
+>>>>>>> master
 
         YAMLFactory factory = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
         ObjectMapper mapper = new ObjectMapper(factory);
@@ -99,11 +110,14 @@ public class Main extends Application {
 
         // Load vehicles and their path
         DataAutobuses dataOfVehicles = mapper.readValue(new File("data.yml"), DataAutobuses.class);
+<<<<<<< HEAD
         dataOfVehicles.getAutobuses().get(0).set_line(dataOfLines.getLines().get(0));
         dataOfVehicles.getAutobuses().get(1).set_line(dataOfLines.getLines().get(1));
         dataOfVehicles.getAutobuses().get(2).set_line(dataOfLines.getLines().get(0));
         dataOfVehicles.getAutobuses().get(3).set_line(dataOfLines.getLines().get(   0));
         //dataOfVehicles.getAutobuses().get(2).set_line(dataOfLines.getLines().get(0));
+=======
+>>>>>>> master
 
         // Add vehicles to map
         elements.addAll(dataOfVehicles.getAutobuses());
