@@ -21,7 +21,7 @@ coordinates:
   y: 300.0
 autobuses:
 - position: *1
-  speed: 10
+  speed: 1
   path:
     path:
     - &11 x: 100.0
@@ -46,7 +46,7 @@ autobuses:
       y: 100.0
   idOfLine: "1"
 - position: *2
-  speed: 10
+  speed: 1
   path:
     path:
     - &21 x: 100.0
@@ -71,7 +71,7 @@ autobuses:
       y: 100.0
   idOfLine: "1"
 - position: *3
-  speed: 10
+  speed: 1
   path:
     path:
     - &31 x: 100.0
@@ -96,7 +96,7 @@ autobuses:
       y: 100.0
   idOfLine: "1"
 - position: *4
-  speed: 10
+  speed: 1
   path:
     path:
     - &41 x: 100.0
@@ -121,7 +121,7 @@ autobuses:
       y: 100.0
   idOfLine: "1"
 - position: *5
-  speed: 10
+  speed: 1
   path:
     path:
     - &51 x: 100.0
@@ -146,7 +146,7 @@ autobuses:
       y: 100.0
   idOfLine: "1"
 - position: *6
-  speed: 10
+  speed: 1
   path:
     path:
     - &61 x: 400.0
@@ -171,7 +171,7 @@ autobuses:
       y: 300.0
   idOfLine: "1"
 - position: *7
-  speed: 10
+  speed: 1
   path:
     path:
     - &71 x: 400.0
@@ -196,7 +196,7 @@ autobuses:
       y: 300.0
   idOfLine: "1"
 - position: *8
-  speed: 10
+  speed: 1
   path:
     path:
     - &81 x: 400.0
@@ -221,7 +221,7 @@ autobuses:
       y: 300.0
   idOfLine: "1"
 - position: *9
-  speed: 10
+  speed: 1
   path:
     path:
     - &91 x: 400.0
@@ -246,7 +246,7 @@ autobuses:
       y: 300.0
   idOfLine: "1"
 - position: *10
-  speed: 10
+  speed: 1
   path:
     path:
     - &101 x: 400.0

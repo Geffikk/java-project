@@ -15,4 +15,5 @@ public interface TimerUpdate {
     void update(Time mapTime);
     void setKokot(Label label, Label label2, Line traceOfStops, Pane content);
     void setPane(Label label, Label label2, Line traceOfStops, Pane pane, Pane content);
+    void restartPosition();
 }

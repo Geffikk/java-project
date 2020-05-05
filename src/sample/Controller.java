@@ -97,14 +97,21 @@ public class Controller {
     @FXML
     private void onBaseTime() {
         mapTime = new Time(10, 10, 5);
+        for (TimerUpdate update: updates) {
+            update.restartPosition();
+        }
     }
 
     @FXML
     private void onZoom(ScrollEvent event) {
         event.consume();
         double zoom = event.getDeltaY() > 0 ? 1.1 : 0.9;
+        System.out.println(event.getDeltaY());
+        System.out.println(content.getScaleX());
+        System.out.println(content.getScaleY());
         content.setScaleX(zoom * content.getScaleX());
         content.setScaleY(zoom * content.getScaleY());
+
         content.layout();
     }
 
@@ -130,8 +137,10 @@ public class Controller {
             @Override
             public void handle(long l) {
                 i++;
-                showTime.setText(mapTime.toString());
-                mapTime.setSeconds(mapTime.getSeconds()+1);
+                if (i % 3 == 0) {
+                    showTime.setText(mapTime.toString());
+                    mapTime.setSeconds(mapTime.getSeconds() + 1);
+                }
                 for (TimerUpdate update : updates) {
                     if(i%scale == 0) {
                         update.setKokot(showDepartures, showPathStops, traceOfStops, content);

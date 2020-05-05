@@ -46,7 +46,7 @@ public class Path {
             a = path.get(i);
             b = path.get(i + 1);
 
-            if(length + getDistanceBetweenCoordinates(a, b) >= distance) {
+            if(length + (getDistanceBetweenCoordinates(a, b)) >= distance) {
                 break;
             }
             // Add path between 2 coords to final way

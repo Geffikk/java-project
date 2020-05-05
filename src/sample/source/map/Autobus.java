@@ -45,6 +45,10 @@ public class Autobus implements Drawable, TimerUpdate {
     @JsonIgnore
     private Line line;
 
+    Boolean first_position = true;
+    Boolean click_position = false;
+    Coordinate iPosition;
+
     @JsonIgnore
     @Override
     public void setKokot(Label label, Label label2, javafx.scene.shape.Line traceOfStops, Pane content) {
@@ -194,6 +198,10 @@ public class Autobus implements Drawable, TimerUpdate {
         return gui;
     }
 
+    public void restartPosition() {
+        click_position = true;
+    }
+
     // Update images in map
     @Override
     public void update(Time mapTime) {
@@ -212,29 +220,29 @@ public class Autobus implements Drawable, TimerUpdate {
             distance = 0;
             startOfAutobus = path.getPath().get(0);
         }
-        else{
+        else {
             //if autobus doesnt start on begging of path modifie path
-            if(!path.getPath().get(0).equals(startOfAutobus)){
-                if(this.start){
+            if (!path.getPath().get(0).equals(startOfAutobus)) {
+                if (this.start) {
                     //Path tempPath = null;
-                    List <Coordinate> tempList = new ArrayList<>();
+                    List<Coordinate> tempList = new ArrayList<>();
                     int index = path.getPath().indexOf(startOfAutobus);
-                    for (int j = index; j < path.getPath().size(); j++){
+                    for (int j = index; j < path.getPath().size(); j++) {
                         tempList.add(path.getPath().get(j));
                     }
                     this.temporaryPath = new Path(tempList);
                     this.start = false;
 
                 }
-                if(this.temporaryPath != null){
+                if (this.temporaryPath != null) {
                     //reverse path
-                    if(this.temporaryPath.getPathSize() <= distance){
+                    if (this.temporaryPath.getPathSize() <= distance) {
                         List<Coordinate> reverseList2 = new ArrayList<>();
-                        for (int i = path.getPath().size() - 1; i >= 0 ; i--){
+                        for (int i = path.getPath().size() - 1; i >= 0; i--) {
                             Coordinate c1 = path.getPath().get(i);
                             reverseList2.add(c1);
                         }
-                        Path reversePath2 = new Path (reverseList2);
+                        Path reversePath2 = new Path(reverseList2);
                         this.path = reversePath2;
                         distance = 0;
                         startOfAutobus = path.getPath().get(0);
@@ -244,6 +252,16 @@ public class Autobus implements Drawable, TimerUpdate {
         }
 
         Coordinate coords = path.getCoordinateByDistance(distance, path, startOfAutobus);
+
+        if (first_position) {
+            iPosition = coords;
+            first_position = false;
+        }
+        if(click_position) {
+            coords = iPosition;
+            distance = 0;
+            click_position = false;
+        }
 
         moveGui(coords);
         position = coords;
