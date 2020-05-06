@@ -29,13 +29,23 @@ public class Path {
 
 
     /** Calculate new coordinates after move **/
-    public Coordinate getCoordinateByDistance(double distance, Path pathOfAutobus, Coordinate startOfAutobus) {
+    public Coordinate getCoordinateByDistance(double distance, Path pathOfAutobus, Coordinate startOfAutobus, Autobus autobus) {
 
         // Length of all ways in path
         double length = 0;
 
         int j = pathOfAutobus.getPath().indexOf(startOfAutobus);
-
+        if(autobus.getAutobusIsOnStreet() == null){
+            Line lineOfAutobus = autobus.getLine();
+            List<Street> listOfStreetsInLine = lineOfAutobus.getStreetList();
+            for (Street str: listOfStreetsInLine) {
+                Coordinate streetStart = str.begin();
+                Coordinate streetEnd = str.end();
+                if (streetStart.equals(path.get(j)) && streetEnd.equals(path.get(j+1))){
+                    autobus.setAutobusIsOnStreet(str);
+                }
+            }
+        }
 
         // Initialize coordinates two null (get coordinates with function getDistBetweenCoor)
         Coordinate a = null;
@@ -49,6 +59,20 @@ public class Path {
             if(length + (getDistanceBetweenCoordinates(a, b)) >= distance) {
                 break;
             }
+
+
+            Line lineOfAutobus = autobus.getLine();
+            List<Street> listOfStreetsInLine = lineOfAutobus.getStreetList();
+            for (Street str: listOfStreetsInLine) {
+                Coordinate streetStart = str.begin();
+                Coordinate streetEnd = str.end();
+                if (streetStart.equals(path.get(i)) && streetEnd.equals(path.get(i+1))){
+                    autobus.setAutobusIsOnStreet(str);
+                }
+            }
+
+
+
             // Add path between 2 coords to final way
             length += getDistanceBetweenCoordinates(a, b);
         }
@@ -61,6 +85,7 @@ public class Path {
         double driven = (distance - length) / (getDistanceBetweenCoordinates(a, b));
         return new Coordinate(a.getX() + (b.getX() - a.getX()) * driven, a.getY() + (b.getY() - a.getY()) * driven);
     }
+
 
     // Return size of all the way
     @JsonIgnore

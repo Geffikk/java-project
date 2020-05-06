@@ -44,6 +44,8 @@ public class Autobus implements Drawable, TimerUpdate {
     private Shape daco1;
     @JsonIgnore
     private Line line;
+    @JsonIgnore
+    private Street autobusIsOnStreet = null;
 
     Boolean first_position = true;
     Boolean click_position = false;
@@ -237,7 +239,6 @@ public class Autobus implements Drawable, TimerUpdate {
             //if autobus doesnt start on begging of path modifie path
             if (!path.getPath().get(0).equals(startOfAutobus)) {
                 if (this.start) {
-                    //Path tempPath = null;
                     List<Coordinate> tempList = new ArrayList<>();
                     int index = path.getPath().indexOf(startOfAutobus);
                     for (int j = index; j < path.getPath().size(); j++) {
@@ -264,7 +265,7 @@ public class Autobus implements Drawable, TimerUpdate {
             }
         }
 
-        Coordinate coords = path.getCoordinateByDistance(distance, path, startOfAutobus);
+        Coordinate coords = path.getCoordinateByDistance(distance, path, startOfAutobus, this);
 
         if (first_position) {
             iPosition = coords;
@@ -280,6 +281,9 @@ public class Autobus implements Drawable, TimerUpdate {
         position = coords;
     }
 
+    public void setAutobusIsOnStreet(Street street) {
+        this.autobusIsOnStreet = street;
+    }
 
     // Get position of vehicle
     public Coordinate getPosition() {
@@ -302,6 +306,14 @@ public class Autobus implements Drawable, TimerUpdate {
 
     public void set_line(Line line){
         this.line = line;
+    }
+
+    public Line getLine() {
+        return line;
+    }
+
+    public Street getAutobusIsOnStreet() {
+        return autobusIsOnStreet;
     }
 
     // Overide functions toString for printing
