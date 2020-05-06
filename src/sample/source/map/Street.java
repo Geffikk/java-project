@@ -5,12 +5,16 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import sample.source.imap.Drawable;
+import sample.source.imap.TimerUpdate;
 import sample.source.imap.iStreet;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,6 +28,7 @@ public class Street implements iStreet, Drawable{
     private List<Coordinate> coordinates;
     private List<Stop> stops = new ArrayList<>();
     private List<Shape> gui = new ArrayList<>();
+    public double delay;
 
     /** Empty constructor for yaml **/
     public Street() {
@@ -33,6 +38,7 @@ public class Street implements iStreet, Drawable{
     public Street(String id, Coordinate... coordinates) {
         this.id = id;
         this.coordinates = new ArrayList<>(Arrays.asList(coordinates));
+        this.delay = 0;
     }
 
     /** Not used **/
@@ -77,6 +83,9 @@ public class Street implements iStreet, Drawable{
     public List<Coordinate> getCoordinates() {
         return Collections.unmodifiableList(this.coordinates);
     }
+
+    /** Return delay **/
+    public double getDelay() { return this.delay; }
 
     /** Return true if one street follow next one **/
     @Override
@@ -150,4 +159,9 @@ public class Street implements iStreet, Drawable{
             return shapes;
         }
     }
+
+    public void setDelayStreet() {
+            delay = 0.5;
+    }
+
 }

@@ -45,7 +45,11 @@ public class Autobus implements Drawable, TimerUpdate {
     @JsonIgnore
     private Line line;
     @JsonIgnore
+<<<<<<< Updated upstream
     private Street autobusIsOnStreet = null;
+=======
+    List<Coordinate> coorsToCompare = new ArrayList<>();
+>>>>>>> Stashed changes
 
     Boolean first_position = true;
     Boolean click_position = false;
@@ -152,7 +156,6 @@ public class Autobus implements Drawable, TimerUpdate {
         traceOfStops.setEndX(x);
     }
 
-
     /** Empty constructor for yaml **/
     private Autobus() {
     }
@@ -167,7 +170,6 @@ public class Autobus implements Drawable, TimerUpdate {
         this.startOfAutobus = position;
         setGui();
     }
-
 
     // Move with pictures in our map
     private void moveGui(Coordinate coordinate) {
@@ -217,11 +219,26 @@ public class Autobus implements Drawable, TimerUpdate {
         }
     }
 
+    public void setDelayStreet2(String delayStr) {
+        for (int i = 0; i < line.getStreetList().size(); i++) {
+            if (delayStr.equals(line.getStreetList().get(i).getId()))
+                System.out.println(line.getStreetList().get(i).getId());
+                line.getStreetList().get(i).setDelayStreet();
+        }
+    }
+
     // Update images in map
     @Override
     public void update(Time mapTime) {
 
         distance += speed;
+        /*
+        if ("Street1".equals(line.getStreetList().get(0).getId())) {
+            System.out.println(line.getStreetList().get(0).getId());
+            System.out.println(line.getStreetList().get(0).delay);
+            distance = distance - speed + line.getStreetList().get(0).delay;
+        }*/
+
 
         // reverse path of line
         if (path.getPathSize() <= distance) {

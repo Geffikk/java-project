@@ -30,6 +30,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sample.source.map.Coordinate;
 
 import java.sql.Time;
 import javax.swing.*;
@@ -51,6 +52,7 @@ public class Controller {
     private List<TimerUpdate> updates = new ArrayList<>();
     private Time mapTime = new Time(06, 20, 0);
     private float scale;
+    private String delayStr;
 
     //main timeline
     private Timeline timeline = new Timeline();
@@ -69,6 +71,8 @@ public class Controller {
     private Pane rightSide;
     @FXML
     private Line traceOfStops;
+    @FXML
+    private TextField delayStreet;
 
 
     /*
@@ -113,6 +117,14 @@ public class Controller {
     }
 
     @FXML
+    private void setDelay() {
+        delayStr = delayStreet.getText();
+        for(TimerUpdate update : updates) {
+            update.setDelayStreet2(delayStr);
+        }
+    }
+
+    @FXML
     private void onBaseTime() {
         mapTime = new Time(10, 10, 5);
         for (TimerUpdate update: updates) {
@@ -127,9 +139,13 @@ public class Controller {
         System.out.println(event.getDeltaY());
         System.out.println(content.getScaleX());
         System.out.println(content.getScaleY());
+
+        if (content.getScaleX() < 0.8058044288328456) {
+            zoom = 1.01;
+        }
+
         content.setScaleX(zoom * content.getScaleX());
         content.setScaleY(zoom * content.getScaleY());
-
         content.layout();
     }
 
