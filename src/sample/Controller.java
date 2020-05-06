@@ -13,6 +13,10 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 import sample.source.imap.Drawable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import sample.source.imap.TimerUpdate;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
@@ -40,6 +44,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.ParseException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -74,12 +79,28 @@ public class Controller {
     @FXML
     private TextField delayStreet;
 
+    @FXML
+    private ImageView iv;
+    @FXML
+    private TextField specificTime;
 
+    private static Integer switcherSong = 0;
+    private MediaPlayer mediaPlayer;
     /*
     @FXML
     public void onReset() {
         odchody.setVisible(false);
     }*/
+
+    @FXML
+    public void setImages() {
+        Image image = new Image("file:///C:\\Users\\Geffik\\Desktop\\java-project\\src\\sample\\logo_sad_presov.png");
+        iv.setImage(image);
+        iv.setScaleX(2.05);
+        iv.setScaleY(2.05);
+        iv.setTranslateY(280);
+        iv.setTranslateX(20);
+    }
 
     @FXML
     private void plusOneHour() {
@@ -118,9 +139,10 @@ public class Controller {
 
     @FXML
     private void setDelay() {
+        Boolean switcher = true;
         delayStr = delayStreet.getText();
         for(TimerUpdate update : updates) {
-            update.setDelayStreet2(delayStr);
+            update.setDelayStreet2(delayStr, switcher);
         }
     }
 
@@ -136,7 +158,6 @@ public class Controller {
     private void onZoom(ScrollEvent event) {
         event.consume();
         double zoom = event.getDeltaY() > 0 ? 1.1 : 0.9;
-<<<<<<< HEAD
         System.out.println(event.getDeltaY());
         System.out.println(content.getScaleX());
         System.out.println(content.getScaleY());
@@ -145,8 +166,6 @@ public class Controller {
             zoom = 1.01;
         }
 
-=======
->>>>>>> master
         content.setScaleX(zoom * content.getScaleX());
         content.setScaleY(zoom * content.getScaleY());
         content.layout();
@@ -190,5 +209,33 @@ public class Controller {
         timeline.play();
         timer.start();
 
+    }
+
+    @FXML
+    public void setSpecTime() throws ParseException {
+        String fajr_prayertime = specificTime.getText();
+        DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+        java.sql.Time timeValue = new java.sql.Time(formatter.parse(fajr_prayertime).getTime());
+        System.out.println(timeValue);
+    }
+
+    @FXML
+    public void playSong() {
+
+        if (switcherSong == 0) {
+            Media musicfile = new Media("file:///C:/Users/Geffik/Desktop/java-project/src/sample/song.mp3");
+            mediaPlayer = new MediaPlayer(musicfile);
+            mediaPlayer.setAutoPlay(true);
+            switcherSong = 2;
+        } else if (switcherSong == 1) {
+            mediaPlayer.play();
+            switcherSong = 2;
+        } else if (switcherSong == 2) {
+            mediaPlayer.pause();
+            switcherSong = 1;
+        }
+
+        if (mediaPlayer.getCurrentTime().equals(mediaPlayer.getTotalDuration()))
+            switcherSong = 0;
     }
 }

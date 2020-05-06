@@ -19,5 +19,5 @@ public interface TimerUpdate {
     void restartPosition();
     void movePlusHour();
     void moveMinusHour();
-    void setDelayStreet2(String delayStr);
+    void setDelayStreet2(String delayStr, Boolean switcher);
 }

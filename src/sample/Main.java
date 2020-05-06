@@ -40,7 +40,7 @@ public class Main extends Application {
         BorderPane root = loader.load();
         primaryStage.setTitle("Map");
 
-        primaryStage.setScene(new Scene(root, 1650, 1000));
+        primaryStage.setScene(new Scene(root, 1835, 1030));
 
         primaryStage.show();
 
@@ -112,7 +112,7 @@ public class Main extends Application {
 
         // Add vehicles to map
         elements.addAll(dataOfVehicles.getAutobuses());
-
+        controller.setImages();
 
 
         controller.setElements(elements);
