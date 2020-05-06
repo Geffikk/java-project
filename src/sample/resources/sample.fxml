@@ -13,7 +13,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1642.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <right>
-      <AnchorPane fx:id="rightSide" prefHeight="590.0" prefWidth="213.0" style="-fx-background-color: AliceBlue;" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="rightSide" prefHeight="682.0" prefWidth="214.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #e39d17, #FFFFFF);;" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="timeScale" layoutX="40.0" layoutY="14.0" prefHeight="26.0" prefWidth="152.0" />
             <Button layoutX="128.0" layoutY="54.0" mnemonicParsing="false" onAction="#onTimeScaleChange" text="Speed" />
@@ -31,7 +31,7 @@
       </ScrollPane>
    </center>
    <bottom>
-      <AnchorPane prefHeight="186.0" prefWidth="713.0" style="-fx-background-color: AliceBlue; -fx-background-radius: 2px;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="186.0" prefWidth="1648.0" style="-fx-background-color: white; -fx-border-color: silver; -fx-border-width: 3px; -fx-border-style: solid;" BorderPane.alignment="CENTER">
          <children>
             <ScrollPane prefHeight="186.0" prefWidth="1408.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="212.0" AnchorPane.topAnchor="0.0">
               <content>
@@ -59,6 +59,8 @@
                </font>
             </Label>
             <Button layoutX="1442.0" layoutY="93.0" mnemonicParsing="false" onAction="#onBaseTime" text="Set Time" />
+            <Button layoutX="1440.0" layoutY="58.0" mnemonicParsing="false" onAction="#plusOneHour" text="+1 hour" />
+            <Button layoutX="1440.0" layoutY="26.0" mnemonicParsing="false" onAction="#minusOneHour" text="-1 Hour" />
          </children>
       </AnchorPane>
    </bottom>

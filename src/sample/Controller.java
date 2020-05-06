@@ -78,6 +78,24 @@ public class Controller {
     }*/
 
     @FXML
+    private void plusOneHour() {
+        mapTime.setHours(mapTime.getHours()+1);
+        for (TimerUpdate update: updates) {
+            update.movePlusHour();
+        }
+
+    }
+
+    @FXML
+    private void minusOneHour() {
+        mapTime.setHours(mapTime.getHours()-1);
+        for (TimerUpdate update: updates) {
+            update.moveMinusHour();
+        }
+
+    }
+
+    @FXML
     private void onTimeScaleChange(){
         try {
             scale = Float.parseFloat(timeScale.getText());
@@ -85,7 +103,7 @@ public class Controller {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Invalind time scale");
                 alert.showAndWait();
             }
-            scale = scale + 2;
+            scale = (scale + 2);
             timer.stop();
             startTime(scale);
         } catch (NumberFormatException e) {
@@ -137,12 +155,12 @@ public class Controller {
             @Override
             public void handle(long l) {
                 i++;
-                if (i % 3 == 0) {
+                if(i%scale == 0) {
                     showTime.setText(mapTime.toString());
                     mapTime.setSeconds(mapTime.getSeconds() + 1);
                 }
-                for (TimerUpdate update : updates) {
-                    if(i%scale == 0) {
+                if (i % (scale + 3) == 0) {
+                    for (TimerUpdate update : updates) {
                         update.setKokot(showDepartures, showPathStops, traceOfStops, content);
                         update.setPane(showDepartures, showPathStops, traceOfStops, rightSide, content);
                         update.update(mapTime);
