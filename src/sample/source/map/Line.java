@@ -30,7 +30,7 @@ public class Line implements iLine, Drawable {
     Stop first_stop;
     @JsonIgnore
     Stop last_stop;
-    List<Stop> lineStops = new ArrayList<>();
+    //List<Stop> lineStops = new ArrayList<>();
     //List of streets in line
     private List<Street> streetList = new ArrayList<>();
     //List of stops in line

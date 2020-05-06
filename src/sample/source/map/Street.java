@@ -23,6 +23,7 @@ public class Street implements iStreet, Drawable{
     private String id;
     private List<Coordinate> coordinates;
     private List<Stop> stops = new ArrayList<>();
+    @JsonIgnore
     private List<Shape> gui = new ArrayList<>();
 
     /** Empty constructor for yaml **/

@@ -46,10 +46,14 @@ public class Autobus implements Drawable, TimerUpdate {
     private Line line;
     @JsonIgnore
     private Street autobusIsOnStreet = null;
-
+    @JsonIgnore
     Boolean first_position = true;
+    @JsonIgnore
     Boolean click_position = false;
+    @JsonIgnore
     Coordinate iPosition;
+    @JsonIgnore
+    Boolean flagForChangeAutobusStreet = false;
 
     @JsonIgnore
     @Override
@@ -179,6 +183,7 @@ public class Autobus implements Drawable, TimerUpdate {
 
     // Set first image to map
     private void setGui(){
+
         if(this.idOfLine.equals("1")) {
             Circle circle = new Circle(position.getX(), position.getY(), 8, Color.RED);
             circle.setId("1");
@@ -189,6 +194,9 @@ public class Autobus implements Drawable, TimerUpdate {
             circle.setId("2");
             gui.add(circle);
         }
+
+        Circle circle = new Circle(position.getX(), position.getY(), 8, Color.RED);
+        gui.add(circle);
         this.start = true;
         this.startOfAutobus = position;
     }
@@ -222,7 +230,6 @@ public class Autobus implements Drawable, TimerUpdate {
     public void update(Time mapTime) {
 
         distance += speed;
-
         // reverse path of line
         if (path.getPathSize() <= distance) {
             List<Coordinate> reverseList1 = new ArrayList<>();
@@ -316,6 +323,10 @@ public class Autobus implements Drawable, TimerUpdate {
         return autobusIsOnStreet;
     }
 
+    public Coordinate getStartOfAutobus() {
+        return startOfAutobus;
+    }
+
     // Overide functions toString for printing
     @Override
     public String toString() {
@@ -325,7 +336,7 @@ public class Autobus implements Drawable, TimerUpdate {
                 '}';
     }
 
-    // I dont know
+
     static class AutobusConstruct extends StdConverter<Autobus, Autobus> {
         @Override
         public Autobus convert(Autobus autobus) {

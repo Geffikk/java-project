@@ -124,9 +124,6 @@ public class Controller {
     private void onZoom(ScrollEvent event) {
         event.consume();
         double zoom = event.getDeltaY() > 0 ? 1.1 : 0.9;
-        System.out.println(event.getDeltaY());
-        System.out.println(content.getScaleX());
-        System.out.println(content.getScaleY());
         content.setScaleX(zoom * content.getScaleX());
         content.setScaleY(zoom * content.getScaleY());
 

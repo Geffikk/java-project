@@ -50,15 +50,20 @@ public class Main extends Application {
         YAMLFactory factory = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
         ObjectMapper mapper = new ObjectMapper(factory);
 
+
+
+
         // Load streets and stops
         DataStreets dataOfStreets = mapper.readValue(new File("data2.yml"), DataStreets.class);
         // Add STREETS to map
         elements.addAll(dataOfStreets.getStreets());
 
+
         // Load lines
         DataLines dataOfLines = mapper.readValue(new File("data3.yml"), DataLines.class);
 
         // Make route of each line
+
         for (Line line: dataOfLines.getLines()) {
 
             List<Street> streetsOfLine = line.getStreetList();
@@ -89,20 +94,26 @@ public class Main extends Application {
         }
 
         // Load vehicles and their path
+
         DataAutobuses dataOfVehicles = mapper.readValue(new File("data.yml"), DataAutobuses.class);
+
+
         dataOfVehicles.getAutobuses().get(0).set_line(dataOfLines.getLines().get(0));
-        dataOfVehicles.getAutobuses().get(1).set_line(dataOfLines.getLines().get(1));
-        dataOfVehicles.getAutobuses().get(2).set_line(dataOfLines.getLines().get(2));
-        dataOfVehicles.getAutobuses().get(3).set_line(dataOfLines.getLines().get(1));
-        dataOfVehicles.getAutobuses().get(4).set_line(dataOfLines.getLines().get(2));
-        dataOfVehicles.getAutobuses().get(5).set_line(dataOfLines.getLines().get(1));
-        dataOfVehicles.getAutobuses().get(6).set_line(dataOfLines.getLines().get(2));
-        dataOfVehicles.getAutobuses().get(7).set_line(dataOfLines.getLines().get(1));
-        dataOfVehicles.getAutobuses().get(8).set_line(dataOfLines.getLines().get(2));
-        dataOfVehicles.getAutobuses().get(9).set_line(dataOfLines.getLines().get(1));
+        dataOfVehicles.getAutobuses().get(1).set_line(dataOfLines.getLines().get(0));
+        dataOfVehicles.getAutobuses().get(2).set_line(dataOfLines.getLines().get(0));
+        dataOfVehicles.getAutobuses().get(3).set_line(dataOfLines.getLines().get(0));
+        dataOfVehicles.getAutobuses().get(4).set_line(dataOfLines.getLines().get(0));
+        dataOfVehicles.getAutobuses().get(5).set_line(dataOfLines.getLines().get(0));
+        dataOfVehicles.getAutobuses().get(6).set_line(dataOfLines.getLines().get(0));
+        dataOfVehicles.getAutobuses().get(7).set_line(dataOfLines.getLines().get(0));
+        dataOfVehicles.getAutobuses().get(8).set_line(dataOfLines.getLines().get(0));
+        dataOfVehicles.getAutobuses().get(9).set_line(dataOfLines.getLines().get(0));
+
 
         // Add vehicles to map
         elements.addAll(dataOfVehicles.getAutobuses());
+
+
 
         controller.setElements(elements);
         controller.startTime(5);
