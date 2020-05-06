@@ -45,16 +45,10 @@ public class Autobus implements Drawable, TimerUpdate {
     @JsonIgnore
     private Line line;
     @JsonIgnore
-<<<<<<< Updated upstream
-    private Street autobusIsOnStreet = null;
-<<<<<<< HEAD
-=======
-    List<Coordinate> coorsToCompare = new ArrayList<>();
->>>>>>> Stashed changes
 
-=======
+    private Street autobusIsOnStreet = null;
+
     @JsonIgnore
->>>>>>> master
     Boolean first_position = true;
     @JsonIgnore
     Boolean click_position = false;
@@ -62,6 +56,13 @@ public class Autobus implements Drawable, TimerUpdate {
     Coordinate iPosition;
     @JsonIgnore
     Boolean flagForChangeAutobusStreet = false;
+
+    private double percentage;
+
+    static public Boolean turnOnDelay;
+    private String str;
+
+
 
     @JsonIgnore
     @Override
@@ -108,18 +109,18 @@ public class Autobus implements Drawable, TimerUpdate {
         for (int j = 0; j < 4; j++) {
             for (int i = 0; i < line.getListOfDepartures().size(); i++) {
                 if (gui.get(0).getId().equals("2")) {
-                    departures = departures + line.getListOfDepartures().get(1).get(j) + "\t\t\t\t" ;
+                    departures = departures + line.getListOfDepartures().get(1).get(j) + "\t\t" ;
                 }
                 else if(gui.get(0).getId().equals("1")) {
-                    departures = departures + line.getListOfDepartures().get(0).get(j) + "\t\t\t\t";
+                    departures = departures + line.getListOfDepartures().get(0).get(j) + "\t\t";
                 }
             }
             departures = departures + "\n";
         }
 
         for(int i = 0; i < line.getListOfDepartures().size(); i++) {
-            stops = stops + line.getStopList().get(i).getId() + "\t\t\t\t\t\t" + "     ";
-            x = x + 100;
+            stops = stops + line.getStopList().get(i).getId() + "\t\t\t" + "     ";
+            x = x + 80;
         }
 
         System.out.println(gui.get(0).getId());
@@ -231,10 +232,11 @@ public class Autobus implements Drawable, TimerUpdate {
         }
     }
 
-    public void setDelayStreet2(String delayStr) {
+    public void setDelayStreet2(String delayStr, Boolean switcher) {
+        turnOnDelay = switcher;
+        str = delayStr;
         for (int i = 0; i < line.getStreetList().size(); i++) {
             if (delayStr.equals(line.getStreetList().get(i).getId()))
-                System.out.println(line.getStreetList().get(i).getId());
                 line.getStreetList().get(i).setDelayStreet();
         }
     }
@@ -244,17 +246,42 @@ public class Autobus implements Drawable, TimerUpdate {
     public void update(Time mapTime) {
 
         distance += speed;
-<<<<<<< HEAD
         /*
         if ("Street1".equals(line.getStreetList().get(0).getId())) {
             System.out.println(line.getStreetList().get(0).getId());
             System.out.println(line.getStreetList().get(0).delay);
             distance = distance - speed + line.getStreetList().get(0).delay;
         }*/
+        percentage = distance / path.getPathSize();
+
+        //if(autobusIsOnStreet != null)
+            //System.out.println(autobusIsOnStreet.getId());
+
+        for (int i = 0; i < line.getStreetList().size(); i++) {
+            if (line.getStreetList().get(i).delay != 0.0 && turnOnDelay) {
+                try {
+                    if (autobusIsOnStreet.getId().equals(str)) {
+                        speed = line.getStreetList().get(i).delay;
+                        //System.out.println(line.getStreetList().get(i).getId());
+                        //System.out.println(line.getStreetList().get(i).delay);
+                        turnOnDelay = false;
+                    }
+                    else {
+                        speed = 1;
+                    }
+                }
+                catch (NullPointerException e){}
+            }
+            if (line.getStreetList().get(i).getId().equals("Street20")) {
+                //System.out.println(distance);
+            }
+            if(line.getStreetList().get(i).getId().equals("Street4")) {
+                //System.out.println(distance);
+            }
+        }
 
 
-=======
->>>>>>> master
+
         // reverse path of line
         if (path.getPathSize() <= distance) {
             List<Coordinate> reverseList1 = new ArrayList<>();
