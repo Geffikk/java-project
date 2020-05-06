@@ -202,6 +202,19 @@ public class Autobus implements Drawable, TimerUpdate {
         click_position = true;
     }
 
+    public void movePlusHour() {
+        distance += 150;
+    }
+
+    public void moveMinusHour() {
+        if(distance >= 150) {
+            distance -= 150;
+        }
+        else {
+            distance = 0;
+        }
+    }
+
     // Update images in map
     @Override
     public void update(Time mapTime) {

@@ -16,4 +16,6 @@ public interface TimerUpdate {
     void setKokot(Label label, Label label2, Line traceOfStops, Pane content);
     void setPane(Label label, Label label2, Line traceOfStops, Pane pane, Pane content);
     void restartPosition();
+    void movePlusHour();
+    void moveMinusHour();
 }
