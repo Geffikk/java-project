@@ -1,20 +1,15 @@
 package sample.source.map;
 
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import sample.source.imap.Drawable;
-import sample.source.imap.TimerUpdate;
 import sample.source.imap.iStreet;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,6 +24,7 @@ public class Street implements iStreet, Drawable{
     private List<Stop> stops = new ArrayList<>();
     @JsonIgnore
     private List<Shape> gui = new ArrayList<>();
+    @JsonIgnore
     public double delay;
 
     /** Empty constructor for yaml **/

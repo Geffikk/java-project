@@ -1,7 +1,6 @@
 package sample.source.map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import sample.source.imap.Drawable;
@@ -10,7 +9,6 @@ import sample.source.imap.iLine;
 import java.util.*;
 
 public class Line implements iLine, Drawable {
-
     // ID linky
     private String id;
     // Add first street/stop
@@ -30,7 +28,6 @@ public class Line implements iLine, Drawable {
     Stop first_stop;
     @JsonIgnore
     Stop last_stop;
-    //List<Stop> lineStops = new ArrayList<>();
     //List of streets in line
     private List<Street> streetList = new ArrayList<>();
     //List of stops in line
@@ -216,12 +213,14 @@ public class Line implements iLine, Drawable {
         javafx.scene.shape.Line line = null;
         int numberOfCoordiantes = this.abs_map.get(counter).getKey().getCoordinates().size();
 
+        //If street contains 2 coordinates
         if (numberOfCoordiantes == 2){
              line = new javafx.scene.shape.Line(this.abs_map.get(counter).getKey().getCoordinates().get(0).getX(),
                     this.abs_map.get(counter).getKey().getCoordinates().get(0).getY(),
                     this.abs_map.get(counter).getKey().getCoordinates().get(1).getX(),
                     this.abs_map.get(counter).getKey().getCoordinates().get(1).getY());
         }
+        //If street contains more than 2 coordinates
         else{
             for(int i = 0; i<numberOfCoordiantes; i++){
                 if(i == (numberOfCoordiantes - 1)){
@@ -244,6 +243,9 @@ public class Line implements iLine, Drawable {
             else if(this.id.equals("2")) {
                 line.setId("2");
             }
+            else if(this.id.equals("3")) {
+                line.setId("3");
+            }
         }
         else{
             for (Shape lineOfStreet: shapes) {
@@ -252,6 +254,9 @@ public class Line implements iLine, Drawable {
                 }
                 else if(this.id.equals("2")) {
                     lineOfStreet.setId("2");
+                }
+                else if(this.id.equals("3")) {
+                    lineOfStreet.setId("3");
                 }
             }
         }

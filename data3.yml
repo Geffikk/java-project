@@ -20,7 +20,7 @@ lines:
     - &8 x: 600.0
       y: 900.0
     stops:
-    - &9 id: "s10"
+    - &9 id: "s8"
       street: *6
       coordinate:
         &10 x: 600.0
@@ -32,7 +32,7 @@ lines:
     - &13 x: 1000.0
       y: 900.0
     stops:
-    - &14 id: "s17"
+    - &14 id: "s13"
       street: *11
       coordinate:
         &15 x: 1000.0
@@ -44,7 +44,7 @@ lines:
     - &18 x: 1000.0
       y: 700.0
     stops:
-    - &19 id: "s18"
+    - &19 id: "s14"
       street: *16
       coordinate:
         &20 x: 1000.0
@@ -58,12 +58,12 @@ lines:
     - &24 x: 1100.0
       y: 200.0
     stops:
-    - &25 id: "s20"
+    - &25 id: "s16"
       street: *21
       coordinate:
         &26 x: 1100.0
         y: 300.0
-    - &27 id: "s21"
+    - &27 id: "s17"
       street: *21
       coordinate:
         &28 x: 1100.0
@@ -75,7 +75,7 @@ lines:
     - &31 x: 900.0
       y: 100.0
     stops:
-    - &32 id: "s22"
+    - &32 id: "s18"
       street: *29
       coordinate:
         &33 x: 900.0
@@ -87,11 +87,11 @@ lines:
     - &36 x: 700.0
       y: 200.0
     stops:
-    - &37 id: "s25"
+    - &37 id: "s11"
       street: *34
       coordinate:
-        &38 x: 400.0
-        y: 100.0
+        &38 x: 700.0
+        y: 200.0
   - &39 id: "Street11"
     coordinates:
     - &40 x: 700.0
@@ -173,71 +173,70 @@ lines:
     coordinates:
     - &50 x: 500.0
       y: 700.0
-    - &51 x: 700.0
+    - &51 x: 500.0
+      y: 400.0
+    - &52 x: 700.0
       y: 200.0
     stops:
-    - &52 id: "s14"
+    - &53 id: "s10"
       street: *49
       coordinate:
-        &53 x: 700.0
+        &54 x: 500.0
+        y: 400.0
+    - &55 id: "s11"
+      street: *49
+      coordinate:
+        &56 x: 700.0
         y: 200.0
-    - &54 id: "s13"
-      street: *49
-      coordinate:
-        &55 x: 640.0
-        y: 350.0
-    - &56 id: "s12"
-      street: *49
-      coordinate:
-        &57 x: 560.0
-        y: 550.0
-  - &58 id: "Street9"
+  - &57 id: "Street9"
     coordinates:
-    - &59 x: 500.0
+    - &58 x: 500.0
       y: 700.0
-    - &60 x: 400.0
+    - &59 x: 400.0
       y: 600.0
-  - &61 id: "Street5"
+  - &60 id: "Street5"
     coordinates:
-    - &62 x: 300.0
+    - &61 x: 300.0
       y: 600.0
-    - &63 x: 400.0
+    - &62 x: 400.0
       y: 600.0
     stops:
-    - &64 id: "s7"
-      street: *61
+    - &63 id: "s6"
+      street: *60
       coordinate:
-        &65 x: 400.0
+        &64 x: 400.0
         y: 600.0
-  - &66 id: "Street4"
+  - &65 id: "Street4"
     coordinates:
-    - &67 x: 300.0
+    - &66 x: 300.0
       y: 600.0
-    - &68 x: 100.0
+    - &67 x: 100.0
       y: 300.0
     stops:
-    - &69 id: "s6"
-      street: *66
+    - &68 id: "s2"
+      street: *65
       coordinate:
-        &70 x: 200.0
-        y: 450.0
-  - &71 id: "Street2"
+        &69 x: 100.0
+        y: 300.0
+  - &70 id: "Street2"
     coordinates:
-    - &72 x: 100.0
+    - &71 x: 100.0
       y: 300.0
+    - &72 x: 100.0
+      y: 600.0
     - &73 x: 200.0
       y: 800.0
     stops:
-    - &74 id: "s4"
-      street: *71
+    - &74 id: "s3"
+      street: *70
       coordinate:
-        &75 x: 200.0
+        &75 x: 100.0
+        y: 600.0
+    - &76 id: "s4"
+      street: *70
+      coordinate:
+        &77 x: 200.0
         y: 800.0
-    - &76 id: "s3"
-      street: *71
-      coordinate:
-        &77 x: 150.0
-        y: 550.0
   - &78 id: "Street7"
     coordinates:
     - &79 x: 200.0
@@ -245,7 +244,7 @@ lines:
     - &80 x: 600.0
       y: 900.0
     stops:
-    - &81 id: "s10"
+    - &81 id: "s8"
       street: *78
       coordinate:
         &82 x: 600.0
@@ -257,7 +256,7 @@ lines:
     - &85 x: 1000.0
       y: 900.0
     stops:
-    - &86 id: "s17"
+    - &86 id: "s13"
       street: *83
       coordinate:
         &87 x: 1000.0
@@ -269,7 +268,7 @@ lines:
     - &90 x: 1000.0
       y: 700.0
     stops:
-    - &91 id: "s18"
+    - &91 id: "s14"
       street: *88
       coordinate:
         &92 x: 1000.0
@@ -281,17 +280,16 @@ lines:
     - &95 x: 800.0
       y: 700.0
     stops:
-    - &96 id: "s19"
+    - &96 id: "s15"
       street: *93
       coordinate:
         &97 x: 800.0
         y: 700.0
   stopList:
-  - *52
-  - *54
-  - *56
-  - *64
-  - *69
+  - *53
+  - *55
+  - *63
+  - *68
   - *74
   - *76
   - *81
@@ -339,10 +337,6 @@ lines:
     - "02:00"
     - "03:00"
     - "04:00"
-  - - "01:00"
-    - "02:00"
-    - "03:00"
-    - "04:00"
 - id: "3"
   streetList:
   - &98 id: "Street20"
@@ -352,7 +346,7 @@ lines:
     - &100 x: 700.0
       y: 200.0
     stops:
-    - &101 id: "s25"
+    - &101 id: "s11"
       street: *98
       coordinate:
         &102 x: 700.0
@@ -366,16 +360,16 @@ lines:
     - &106 x: 1000.0
       y: 700.0
     stops:
-    - &107 id: "s24"
+    - &107 id: "s18"
       street: *103
       coordinate:
         &108 x: 900.0
-        y: 400.0
-    - &109 id: "s23"
+        y: 100.0
+    - &109 id: "s19"
       street: *98
       coordinate:
         &110 x: 900.0
-        y: 200.0
+        y: 400.0
   - &111 id: "Street15"
     coordinates:
     - &112 x: 1000.0
@@ -383,7 +377,7 @@ lines:
     - &113 x: 800.0
       y: 700.0
     stops:
-    - &114 id: "s19"
+    - &114 id: "s15"
       street: *111
       coordinate:
         &115 x: 800.0
@@ -403,67 +397,64 @@ lines:
     - &131 x: 600.0
       y: 900.0
     stops:
-    - &132 id: "s15"
+    - &132 id: "s12"
       street: *119
       coordinate:
         &133 x: 700.0
         y: 700.0
-    - &134 id: "s16"
-      street: *119
-      coordinate:
-        &135 x: 700.0
-        y: 500.0
-  - &136 id: "Street8"
+  - &134 id: "Street8"
     coordinates:
-    - &137 x: 600.0
+    - &135 x: 600.0
       y: 900.0
-    - &138 x: 500.0
+    - &136 x: 500.0
       y: 700.0
     stops:
-    - &139 id: "s11"
-      street: *136
+    - &137 id: "s9"
+      street: *134
       coordinate:
-        &140 x: 500.0
+        &138 x: 500.0
         y: 700.0
-  - &141 id: "Street9"
+  - &139 id: "Street9"
     coordinates:
-    - &142 x: 500.0
+    - &140 x: 500.0
       y: 700.0
+    - &141 x: 400.0
+      y: 600.0
+  - &142 id: "Street6"
+    coordinates:
     - &143 x: 400.0
       y: 600.0
-  - &144 id: "Street6"
-    coordinates:
-    - &145 x: 400.0
-      y: 600.0
-    - &146 x: 400.0
-      y: 100.0
-    stops:
-    - &147 id: "s9"
-      street: *144
-      coordinate:
-        &148 x: 400.0
-        y: 300.0
-    - &149 id: "s8"
-      street: *144
-      coordinate:
-        &150 x: 400.0
-        y: 500.0
-  - &151 id: "Street1"
-    coordinates:
-    - &152 x: 100.0
+    - &144 x: 300.0
       y: 300.0
-    - &153 x: 400.0
+    - &145 x: 400.0
       y: 100.0
     stops:
-    - &154 id: "s1"
-      street: *151
+    - &146 id: "s6"
+      street: *142
       coordinate:
-        &155 x: 400.0
+        &147 x: 400.0
+        y: 600.0
+    - &148 id: "s7"
+      street: *142
+      coordinate:
+        &149 x: 300.0
+        y: 300.0
+  - &150 id: "Street1"
+    coordinates:
+    - &151 x: 100.0
+      y: 300.0
+    - &152 x: 400.0
+      y: 100.0
+    stops:
+    - &153 id: "s1"
+      street: *150
+      coordinate:
+        &154 x: 400.0
         y: 100.0
-    - &156 id: "s2"
-      street: *151
+    - &155 id: "s2"
+      street: *150
       coordinate:
-        &157 x: 100.0
+        &156 x: 100.0
         y: 300.0
   stopList:
     - *101
@@ -471,12 +462,11 @@ lines:
     - *109
     - *114
     - *132
-    - *134
-    - *139
-    - *147
-    - *149
+    - *137
+    - *145
+    - *148
+    - *153
     - *154
-    - *156
   listOfDepartures:
   - - "21:00"
     - "22:00"
@@ -506,10 +496,6 @@ lines:
     - "22:00"
     - "23:00"
     - "24:00"
-  - - "01:00"
-    - "02:00"
-    - "03:00"
-    - "04:00"
   - - "01:00"
     - "02:00"
     - "03:00"

@@ -3,22 +3,18 @@ package sample.source.map;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.util.StdConverter;
-import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
-import org.yaml.snakeyaml.util.ArrayUtils;
 import sample.source.imap.Drawable;
 import sample.source.imap.TimerUpdate;
 
 import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.*;
-import java.lang.Object;
+
 
 
 @JsonDeserialize(converter = Autobus.AutobusConstruct.class)
@@ -33,29 +29,20 @@ public class Autobus implements Drawable, TimerUpdate {
     @JsonIgnore
     private List<Shape> gui = new ArrayList<>();
     @JsonIgnore
-    private boolean start;
-    @JsonIgnore
-    private Coordinate startOfAutobus;
-    @JsonIgnore
-    private Path temporaryPath;
-    @JsonIgnore
     private Shape daco;
     @JsonIgnore
     private Shape daco1;
     @JsonIgnore
     private Line line;
     @JsonIgnore
-
     private Street autobusIsOnStreet = null;
-
     @JsonIgnore
     Boolean first_position = true;
     @JsonIgnore
     Boolean click_position = false;
     @JsonIgnore
     Coordinate iPosition;
-    @JsonIgnore
-    Boolean flagForChangeAutobusStreet = false;
+
 
     private double percentage;
 
@@ -148,7 +135,7 @@ public class Autobus implements Drawable, TimerUpdate {
             }
             else if (gui.get(0).getId().equals("2")) {
                 if (id.equals("2")) {
-                    System.out.println(content.getChildren().get(i));
+                    //System.out.println(content.getChildren().get(i));
                     daco = (Shape) content.getChildren().get(i);
                     daco.setStrokeWidth(4);
                     content.getChildren().set(i, daco);
@@ -175,8 +162,6 @@ public class Autobus implements Drawable, TimerUpdate {
         this.path = path;
         this.speed = speed;
         this.idOfLine = idOfLine;
-        this.start = true;
-        this.startOfAutobus = position;
         setGui();
     }
 
@@ -201,11 +186,12 @@ public class Autobus implements Drawable, TimerUpdate {
             circle.setId("2");
             gui.add(circle);
         }
+        else if (this.idOfLine.equals("3")){
+            Circle circle = new Circle(position.getX(), position.getY(), 8, Color.BLUE);
+            circle.setId("3");
+            gui.add(circle);
+        }
 
-        Circle circle = new Circle(position.getX(), position.getY(), 8, Color.RED);
-        gui.add(circle);
-        this.start = true;
-        this.startOfAutobus = position;
     }
 
     // Return all GUI elements
@@ -245,6 +231,7 @@ public class Autobus implements Drawable, TimerUpdate {
     @Override
     public void update(Time mapTime) {
 
+
         distance += speed;
         /*
         if ("Street1".equals(line.getStreetList().get(0).getId())) {
@@ -256,7 +243,7 @@ public class Autobus implements Drawable, TimerUpdate {
 
         //if(autobusIsOnStreet != null)
             //System.out.println(autobusIsOnStreet.getId());
-
+        /*
         for (int i = 0; i < line.getStreetList().size(); i++) {
             if (line.getStreetList().get(i).delay != 0.0 && turnOnDelay) {
                 try {
@@ -269,7 +256,7 @@ public class Autobus implements Drawable, TimerUpdate {
                     else {
                         speed = 1;
                     }
-                }
+                }-
                 catch (NullPointerException e){}
             }
             if (line.getStreetList().get(i).getId().equals("Street20")) {
@@ -279,52 +266,22 @@ public class Autobus implements Drawable, TimerUpdate {
                 //System.out.println(distance);
             }
         }
-
+        */
 
 
         // reverse path of line
         if (path.getPathSize() <= distance) {
-            List<Coordinate> reverseList1 = new ArrayList<>();
+            List<Coordinate> reverseList = new ArrayList<>();
             for (int i = path.getPath().size() - 1; i >= 0 ; i--){
                 Coordinate c1 = path.getPath().get(i);
-                reverseList1.add(c1);
+                reverseList.add(c1);
             }
-            Path reversePath1 = new Path (reverseList1);
-            this.path = reversePath1;
+            this.path = new Path (reverseList);
             distance = 0;
-            startOfAutobus = path.getPath().get(0);
-        }
-        else {
-            //if autobus doesnt start on begging of path modifie path
-            if (!path.getPath().get(0).equals(startOfAutobus)) {
-                if (this.start) {
-                    List<Coordinate> tempList = new ArrayList<>();
-                    int index = path.getPath().indexOf(startOfAutobus);
-                    for (int j = index; j < path.getPath().size(); j++) {
-                        tempList.add(path.getPath().get(j));
-                    }
-                    this.temporaryPath = new Path(tempList);
-                    this.start = false;
-
-                }
-                if (this.temporaryPath != null) {
-                    //reverse path
-                    if (this.temporaryPath.getPathSize() <= distance) {
-                        List<Coordinate> reverseList2 = new ArrayList<>();
-                        for (int i = path.getPath().size() - 1; i >= 0; i--) {
-                            Coordinate c1 = path.getPath().get(i);
-                            reverseList2.add(c1);
-                        }
-                        Path reversePath2 = new Path(reverseList2);
-                        this.path = reversePath2;
-                        distance = 0;
-                        startOfAutobus = path.getPath().get(0);
-                    }
-                }
-            }
         }
 
-        Coordinate coords = path.getCoordinateByDistance(distance, path, startOfAutobus, this);
+        //calculate new coordinates
+        Coordinate coords = path.getCoordinateByDistance(distance,this);
 
         if (first_position) {
             iPosition = coords;
@@ -336,50 +293,56 @@ public class Autobus implements Drawable, TimerUpdate {
             click_position = false;
         }
 
+        //move autobus
         moveGui(coords);
+        //set new position of autobus
         position = coords;
     }
 
-    public void setAutobusIsOnStreet(Street street) {
-        this.autobusIsOnStreet = street;
-    }
 
-    // Get position of vehicle
+
+    /** Get position of autobus (getter for yaml) **/
     public Coordinate getPosition() {
         return position;
     }
 
-    // Get speed of vehicle
+    /** Get speed of autobus (getter for yaml) **/
     public double getSpeed() {
         return speed;
     }
 
-    // Get path of vehicle
+    /** Get path of autobus (getter for yaml) **/
     public Path getPath() {
         return path;
     }
 
+    /** Get id of line of autobus (getter for yaml) **/
     public String getIdOfLine() {
         return idOfLine;
     }
 
-    public void set_line(Line line){
-        this.line = line;
-    }
-
+    /** Get line of autobus **/
     public Line getLine() {
         return line;
     }
 
-    public Street getAutobusIsOnStreet() {
-        return autobusIsOnStreet;
+
+    /** Set line of autobus (setting lines in main)**/
+    public void set_line(Line line){
+        this.line = line;
     }
 
-    public Coordinate getStartOfAutobus() {
-        return startOfAutobus;
+    /** Set street on which autobus is**/
+    public void setAutobusIsOnStreet(Street street) {
+        this.autobusIsOnStreet = street;
     }
 
-    // Overide functions toString for printing
+    /** Set distance to autobus (setting starting distance in main)**/
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    /** To string function **/
     @Override
     public String toString() {
         return "Autobus{" +
@@ -388,7 +351,7 @@ public class Autobus implements Drawable, TimerUpdate {
                 '}';
     }
 
-
+    /** Converter for setting gui after read from yaml**/
     static class AutobusConstruct extends StdConverter<Autobus, Autobus> {
         @Override
         public Autobus convert(Autobus autobus) {
