@@ -18,6 +18,6 @@ public interface TimerUpdate {
     void restartPosition();
     void movePlusHour();
     void moveMinusHour();
-    void setDelayStreet2(String delayStr, Boolean switcher, Label slowStreetText,float howSlow);
+    void setDelayStreet2(String delayStr, Boolean switcher, Label slowStreetText, double howSlow);
     void setBaseTime(double travelInTime, double travelInTimeActual);
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import sample.source.imap.Drawable;
@@ -101,9 +102,14 @@ public class Stop implements iStop, Drawable {
     /** Paint stop to GUI **/
     @JsonIgnore
     public List<Shape> getGUI() {
+
+        Rectangle rect = new Rectangle(coordinate.getX() - 6, coordinate.getY() - 6, 12, 12);
+        rect.setStroke(Color.BLACK);
+        rect.setFill(Color.GREY);
+
         return Arrays.asList(
                 new Text(coordinate.getX() - 22, coordinate.getY() + 20, this.id),
-                new Circle(coordinate.getX(), coordinate.getY(), 6, Color.GREEN));
+                rect);
     }
 
 }

@@ -70,6 +70,11 @@ public class Autobus implements Drawable, TimerUpdate {
     private String str;
 
     @JsonIgnore
+    public void setDistance(double startDistance) {
+        distance = startDistance;
+    }
+
+    @JsonIgnore
     @Override
     public void setKokot(Label label, Label label2, javafx.scene.shape.Line traceOfStops, Pane content) {
         for (Shape shape : gui) {
@@ -242,21 +247,21 @@ public class Autobus implements Drawable, TimerUpdate {
         }
     }
 
-    public void setDelayStreet2(String delayStr, Boolean switcher, Label slowStreetText, float howSlow) {
+    public void setDelayStreet2(String delayStr, Boolean switcher, Label slowStreetText, double howSlow) {
         turnOnDelay = switcher;
         str = delayStr;
         slowStreets.add(delayStr);
 
         for(int i = 0; i < this.line.getStreetList().size(); i++) {
             if (this.line.getStreetList().get(i).getId().equals(str)) {
-                this.line.getStreetList().get(i).delay = howSlow;
+                this.line.getStreetList().get(i).delay = howSlow/(3.0/2.0);
             }
         }
         //System.out.println(slowStreets.size());
         //System.out.println(slowStreets);
         for(String street: slowStreets) {
-            slowStreetText.setText(street);
-            slowStreetText.setText("\n");
+            //slowStreetText.setText(street);
+            //slowStreetText.setText("\n");
         }
     }
 
@@ -330,11 +335,10 @@ public class Autobus implements Drawable, TimerUpdate {
         if(this.autobusIsOnStreet != null) {
             for(String street : slowStreets) {
                 if (this.autobusIsOnStreet.getId().equals(street)) {
-                    autobusIsOnStreet.delay = autobusIsOnStreet.delay/(3.0/2.0);
                     speed = autobusIsOnStreet.delay;
                 }
                 else {
-                    speed = 0.5;
+                    speed = 1;
                 }
             }
         }
