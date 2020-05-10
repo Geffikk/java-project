@@ -42,11 +42,9 @@ import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.text.ParseException;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class Controller {
 
@@ -58,11 +56,13 @@ public class Controller {
     private Time mapTime = new Time(06, 20, 0);
     private float scale;
     private String delayStr;
+    private Float howSlow;
 
     //main timeline
     private Timeline timeline = new Timeline();
     private AnimationTimer timer;
     private Integer i=0;
+    private String startTime = "06:20:00";
 
     @FXML
     private TextField timeScale;
@@ -78,19 +78,17 @@ public class Controller {
     private Line traceOfStops;
     @FXML
     private TextField delayStreet;
-
     @FXML
     private ImageView iv;
     @FXML
     private TextField specificTime;
+    @FXML
+    private Label slowStreetsLabel;
+    @FXML
+    private TextField setHowSlow;
 
     private static Integer switcherSong = 0;
     private MediaPlayer mediaPlayer;
-    /*
-    @FXML
-    public void onReset() {
-        odchody.setVisible(false);
-    }*/
 
     @FXML
     public void setImages() {
@@ -108,7 +106,6 @@ public class Controller {
         for (TimerUpdate update: updates) {
             update.movePlusHour();
         }
-
     }
 
     @FXML
@@ -117,7 +114,6 @@ public class Controller {
         for (TimerUpdate update: updates) {
             update.moveMinusHour();
         }
-
     }
 
     @FXML
@@ -128,7 +124,6 @@ public class Controller {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Invalind time scale");
                 alert.showAndWait();
             }
-            scale = (scale + 2);
             timer.stop();
             startTime(scale);
         } catch (NumberFormatException e) {
@@ -141,8 +136,10 @@ public class Controller {
     private void setDelay() {
         Boolean switcher = true;
         delayStr = delayStreet.getText();
+        howSlow = Float.parseFloat(setHowSlow.getText());
+
         for(TimerUpdate update : updates) {
-            update.setDelayStreet2(delayStr, switcher);
+            update.setDelayStreet2(delayStr, switcher, slowStreetsLabel, howSlow);
         }
     }
 
@@ -197,7 +194,7 @@ public class Controller {
                     showTime.setText(mapTime.toString());
                     mapTime.setSeconds(mapTime.getSeconds() + 1);
                 }
-                if (i % (scale + 3) == 0) {
+                if (i % (scale) == 0) {
                     for (TimerUpdate update : updates) {
                         update.setKokot(showDepartures, showPathStops, traceOfStops, content);
                         update.setPane(showDepartures, showPathStops, traceOfStops, rightSide, content);
@@ -214,9 +211,27 @@ public class Controller {
     @FXML
     public void setSpecTime() throws ParseException {
         String fajr_prayertime = specificTime.getText();
-        DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-        java.sql.Time timeValue = new java.sql.Time(formatter.parse(fajr_prayertime).getTime());
-        System.out.println(timeValue);
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        Date d1 = format.parse(fajr_prayertime);
+        Date d2 = format.parse(mapTime.toString());
+        Date d3 = format.parse("6:20:00");
+
+        mapTime = new Time(d1.getHours(), d1.getMinutes(), d1.getSeconds());
+        double timeDiffActual = d2.getTime() - d3.getTime();
+        double iHourActual = timeDiffActual / 3600000;
+        double allMinuesActual = iHourActual * 60;
+        //System.out.println(allMinuesActual);
+
+
+        double timeDiff = d1.getTime() - d2.getTime();
+        double iHour = timeDiff / 3600000;
+        double allMinutes = iHour * 60;
+        //System.out.println(allMinutes);
+
+        for (TimerUpdate update : updates) {
+            update.setBaseTime(allMinutes, allMinuesActual);
+        }
+
     }
 
     @FXML
@@ -234,7 +249,6 @@ public class Controller {
             mediaPlayer.pause();
             switcherSong = 1;
         }
-
         if (mediaPlayer.getCurrentTime().equals(mediaPlayer.getTotalDuration()))
             switcherSong = 0;
     }

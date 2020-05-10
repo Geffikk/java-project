@@ -29,7 +29,7 @@ public class Street implements iStreet, Drawable{
     private List<Stop> stops = new ArrayList<>();
     @JsonIgnore
     private List<Shape> gui = new ArrayList<>();
-    public double delay;
+    public double delay = 1;
 
     /** Empty constructor for yaml **/
     public Street() {
@@ -39,7 +39,6 @@ public class Street implements iStreet, Drawable{
     public Street(String id, Coordinate... coordinates) {
         this.id = id;
         this.coordinates = new ArrayList<>(Arrays.asList(coordinates));
-        this.delay = 0;
     }
 
     /** Not used **/
@@ -160,9 +159,4 @@ public class Street implements iStreet, Drawable{
             return shapes;
         }
     }
-
-    public void setDelayStreet() {
-            delay = 0.5;
-    }
-
 }

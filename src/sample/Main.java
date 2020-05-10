@@ -50,9 +50,6 @@ public class Main extends Application {
         YAMLFactory factory = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
         ObjectMapper mapper = new ObjectMapper(factory);
 
-
-
-
         // Load streets and stops
         DataStreets dataOfStreets = mapper.readValue(new File("data2.yml"), DataStreets.class);
         // Add STREETS to map
@@ -97,7 +94,6 @@ public class Main extends Application {
 
         DataAutobuses dataOfVehicles = mapper.readValue(new File("data.yml"), DataAutobuses.class);
 
-
         dataOfVehicles.getAutobuses().get(0).set_line(dataOfLines.getLines().get(0));
         dataOfVehicles.getAutobuses().get(1).set_line(dataOfLines.getLines().get(0));
         dataOfVehicles.getAutobuses().get(2).set_line(dataOfLines.getLines().get(0));
@@ -109,11 +105,9 @@ public class Main extends Application {
         dataOfVehicles.getAutobuses().get(8).set_line(dataOfLines.getLines().get(0));
         dataOfVehicles.getAutobuses().get(9).set_line(dataOfLines.getLines().get(0));
 
-
         // Add vehicles to map
         elements.addAll(dataOfVehicles.getAutobuses());
         controller.setImages();
-
 
         controller.setElements(elements);
         controller.startTime(5);

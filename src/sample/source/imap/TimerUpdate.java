@@ -11,7 +11,6 @@ import java.time.LocalTime;
 import java.sql.Time;
 import java.util.List;
 
-
 public interface TimerUpdate {
     void update(Time mapTime);
     void setKokot(Label label, Label label2, Line traceOfStops, Pane content);
@@ -19,5 +18,6 @@ public interface TimerUpdate {
     void restartPosition();
     void movePlusHour();
     void moveMinusHour();
-    void setDelayStreet2(String delayStr, Boolean switcher);
+    void setDelayStreet2(String delayStr, Boolean switcher, Label slowStreetText,float howSlow);
+    void setBaseTime(double travelInTime, double travelInTimeActual);
 }
