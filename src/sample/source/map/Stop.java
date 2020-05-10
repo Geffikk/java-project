@@ -78,13 +78,12 @@ public class Stop implements iStop, Drawable {
         return this.streetOfStop;
     }
 
-    /** Set street by stop **/
+    /** Set street to stop **/
     public void setStreet(Street s) {
         streetOfStop = s;
     }
 
-
-    // Override function equal
+    /** Override equal function**/
     public boolean equals(Object obj) {
         if (!(obj instanceof Stop)) {
             return false;

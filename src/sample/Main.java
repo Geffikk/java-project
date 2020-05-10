@@ -12,24 +12,8 @@ import javafx.stage.Stage;
 import sample.source.imap.Drawable;
 import sample.source.map.*;
 
-import java.io.IOException;
-import java.net.CookiePolicy;
-import java.net.URL;
-//import com.google.transit.realtime.GtfsRealtime.FeedEntity;
-//import com.google.transit.realtime.GtfsRealtime.FeedMessage;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JOptionPane;
-import javax.xml.crypto.Data;
-
 import java.io.File;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Main extends Application {
@@ -50,17 +34,19 @@ public class Main extends Application {
         YAMLFactory factory = new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
         ObjectMapper mapper = new ObjectMapper(factory);
 
+<<<<<<< HEAD
+=======
+        
+>>>>>>> master
         // Load streets and stops
         DataStreets dataOfStreets = mapper.readValue(new File("data2.yml"), DataStreets.class);
         // Add STREETS to map
         elements.addAll(dataOfStreets.getStreets());
 
-
         // Load lines
         DataLines dataOfLines = mapper.readValue(new File("data3.yml"), DataLines.class);
 
         // Make route of each line
-
         for (Line line: dataOfLines.getLines()) {
 
             List<Street> streetsOfLine = line.getStreetList();
@@ -91,9 +77,9 @@ public class Main extends Application {
         }
 
         // Load vehicles and their path
-
         DataAutobuses dataOfVehicles = mapper.readValue(new File("data.yml"), DataAutobuses.class);
 
+<<<<<<< HEAD
         dataOfVehicles.getAutobuses().get(0).set_line(dataOfLines.getLines().get(0));
         dataOfVehicles.getAutobuses().get(1).set_line(dataOfLines.getLines().get(0));
         dataOfVehicles.getAutobuses().get(2).set_line(dataOfLines.getLines().get(0));
@@ -109,8 +95,64 @@ public class Main extends Application {
         elements.addAll(dataOfVehicles.getAutobuses());
         controller.setImages();
 
+=======
+        //assing line 1 to first 10 autobuses and starting position(distance)
+        for(int i = 0; i < 10; i++){
+            //assing line to autobus
+            dataOfVehicles.getAutobuses().get(i).set_line(dataOfLines.getLines().get(0));
+            //lenght of path
+            double lenghtOfPath = dataOfVehicles.getAutobuses().get(i).getPath().getPathSize();
+            //10 autobuses on line so lenghtOfPath/10
+            double distanceToAdd = lenghtOfPath/10;
+            //add path to autobus based on direction of path
+            if(i%2 == 0){
+                dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*i);
+            }
+            else{
+                dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*(10 - i));
+            }
+        }
+
+        //assing line 2 to next 10 autobuses and starting position(distance)
+        for(int j = 10; j < 20; j++){
+            //assing line to autobus
+            dataOfVehicles.getAutobuses().get(j).set_line(dataOfLines.getLines().get(1));
+            //lenght of path
+            double lenghtOfPath = dataOfVehicles.getAutobuses().get(j).getPath().getPathSize();
+            //10 autobuses on line so lenghtOfPath/10
+            double distanceToAdd = lenghtOfPath/10;
+            //add path to autobus based on direction of path
+            if(j%2 == 0){
+                dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(j - 10));
+            }
+            else{
+                dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(10 - (j - 10)));
+            }
+        }
+
+        //assing line 3 to next 10 autobuses and starting position(distance)
+        for(int z = 20; z < 30; z++){
+            //assing line to autobus
+            dataOfVehicles.getAutobuses().get(z).set_line(dataOfLines.getLines().get(2));
+            //lenght of path
+            double lenghtOfPath = dataOfVehicles.getAutobuses().get(z).getPath().getPathSize();
+            //10 autobuses on line so lenghtOfPath/10
+            double distanceToAdd = lenghtOfPath/10;
+            //add path to autobus based on direction of path
+            if(z%2 == 0){
+                dataOfVehicles.getAutobuses().get(z).setDistance(distanceToAdd*(z - 20));
+            }
+            else{
+                dataOfVehicles.getAutobuses().get(z).setDistance(distanceToAdd*(10 - (z - 20)));
+            }
+        }
+
+        // Add vehicles to map
+        elements.addAll(dataOfVehicles.getAutobuses());
+
+        controller.setImages();
+>>>>>>> master
         controller.setElements(elements);
         controller.startTime(5);
-        //mapper.writeValue(new File("data.yml"), data);
     }
 }
