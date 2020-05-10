@@ -13,6 +13,7 @@ import sample.source.imap.TimerUpdate;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -38,14 +39,11 @@ public class Autobus implements Drawable, TimerUpdate {
     private Line line;
     @JsonIgnore
     private Street autobusIsOnStreet = null;
-<<<<<<< HEAD
     @JsonIgnore
     private List<String> slowStreets = new ArrayList<>();
     @JsonIgnore
     private double distanceAfterTravelInTime = 0;
 
-=======
->>>>>>> master
     @JsonIgnore
     Boolean first_position = true;
     @JsonIgnore
@@ -212,13 +210,6 @@ public class Autobus implements Drawable, TimerUpdate {
             gui.add(circle);
         }
 
-<<<<<<< HEAD
-        //Circle circle = new Circle(position.getX(), position.getY(), 8, Color.RED);
-        //gui.add(circle);
-        this.start = true;
-        this.startOfAutobus = position;
-=======
->>>>>>> master
     }
 
     // Return all GUI elements
@@ -272,7 +263,6 @@ public class Autobus implements Drawable, TimerUpdate {
             System.out.println(distance);
         }
 
-<<<<<<< HEAD
         if(gui.get(0).getId().equals("1")){
             System.out.println("ZVYSOK");
             System.out.println(distanceAfterTravelInTime);
@@ -287,8 +277,8 @@ public class Autobus implements Drawable, TimerUpdate {
         double i = 0;
         if (distanceAfterTravelInTime > 0) {
             i = distanceAfterTravelInTime;
-            while (i > path.getPathSize()*2) {
-                i = i - path.getPathSize()*2;
+            while (i > path.getPathSize() * 2) {
+                i = i - path.getPathSize() * 2;
                 //System.out.println("-----------------");
                 //System.out.println(i);
                 switcherReverse++;
@@ -303,36 +293,6 @@ public class Autobus implements Drawable, TimerUpdate {
                     //System.out.println(distance);
                     //System.out.println(path.getPath());
                 }
-                over50 = true;
-=======
-
-        distance += speed;
-        /*
-        if ("Street1".equals(line.getStreetList().get(0).getId())) {
-            System.out.println(line.getStreetList().get(0).getId());
-            System.out.println(line.getStreetList().get(0).delay);
-            distance = distance - speed + line.getStreetList().get(0).delay;
-        }*/
-        percentage = distance / path.getPathSize();
-
-        //if(autobusIsOnStreet != null)
-            //System.out.println(autobusIsOnStreet.getId());
-        /*
-        for (int i = 0; i < line.getStreetList().size(); i++) {
-            if (line.getStreetList().get(i).delay != 0.0 && turnOnDelay) {
-                try {
-                    if (autobusIsOnStreet.getId().equals(str)) {
-                        speed = line.getStreetList().get(i).delay;
-                        //System.out.println(line.getStreetList().get(i).getId());
-                        //System.out.println(line.getStreetList().get(i).delay);
-                        turnOnDelay = false;
-                    }
-                    else {
-                        speed = 1;
-                    }
-                }-
-                catch (NullPointerException e){}
->>>>>>> master
             }
         }
         else if (distanceAfterTravelInTime < 0) {
@@ -345,7 +305,6 @@ public class Autobus implements Drawable, TimerUpdate {
                 distance = path.getPathSize() + distance;
             }
         }
-<<<<<<< HEAD
     }
 
     // Update images in map
@@ -360,9 +319,6 @@ public class Autobus implements Drawable, TimerUpdate {
             //System.out.println(distance);
             //System.out.println(path.getPath());
         }
-=======
-        */
->>>>>>> master
 
         if(this.autobusIsOnStreet != null) {
             for(String street : slowStreets) {
@@ -377,61 +333,16 @@ public class Autobus implements Drawable, TimerUpdate {
 
         // reverse path of line
         if (path.getPathSize() <= distance) {
-<<<<<<< HEAD
-            /*
-            List<Coordinate> reverseList1 = new ArrayList<>();
-            for (int i = path.getPath().size() - 1; i > 0; i--) {
-=======
-            List<Coordinate> reverseList = new ArrayList<>();
-            for (int i = path.getPath().size() - 1; i >= 0 ; i--){
->>>>>>> master
-                Coordinate c1 = path.getPath().get(i);
-                reverseList.add(c1);
-            }
-<<<<<<< HEAD
-            Path reversePath1 = new Path (reverseList1);
-            this.path = reversePath1;*/
             Collections.reverse(path.getPath());
-=======
-            this.path = new Path (reverseList);
->>>>>>> master
             distance = 0;
         }
 
-<<<<<<< HEAD
-                }
-                if (this.temporaryPath != null && !over50) {
-                    //reverse path
-                    if (this.temporaryPath.getPathSize() <= distance) {
-                        /*
-                        List<Coordinate> reverseList2 = new ArrayList<>();
-                        for (int i = path.getPath().size() - 1; i >= 0; i--) {
-                            Coordinate c1 = path.getPath().get(i);
-                            reverseList2.add(c1);
-                        }
-                        Path reversePath2 = new Path(reverseList2);
-                        this.path = reversePath2;*/
-                        Collections.reverse(path.getPath());
-                        distance = 0;
-                        startOfAutobus = path.getPath().get(0);
-                    }
-                }
-                else {
-                    startOfAutobus = path.getPath().get(0);
-                }
-            }
-        }
-
-        Coordinate coords = path.getCoordinateByDistance(distance, path, startOfAutobus, this);
-=======
         //calculate new coordinates
         Coordinate coords = path.getCoordinateByDistance(distance,this);
->>>>>>> master
 
         if (gui.get(0).getId().equals("3")) {
             //System.out.println(coords);
         }
-
 
         if (first_position) {
             iPosition = coords;
@@ -485,11 +396,6 @@ public class Autobus implements Drawable, TimerUpdate {
     /** Set street on which autobus is**/
     public void setAutobusIsOnStreet(Street street) {
         this.autobusIsOnStreet = street;
-    }
-
-    /** Set distance to autobus (setting starting distance in main)**/
-    public void setDistance(double distance) {
-        this.distance = distance;
     }
 
     /** To string function **/

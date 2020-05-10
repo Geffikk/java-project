@@ -24,12 +24,8 @@ public class Street implements iStreet, Drawable{
     private List<Stop> stops = new ArrayList<>();
     @JsonIgnore
     private List<Shape> gui = new ArrayList<>();
-<<<<<<< HEAD
-    public double delay = 1;
-=======
     @JsonIgnore
-    public double delay;
->>>>>>> master
+    public double delay = 1;
 
     /** Empty constructor for yaml **/
     public Street() {

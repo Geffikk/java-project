@@ -10,8 +10,6 @@ package sample;
 
 /* Imports */
 import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.ScrollEvent;
@@ -173,7 +171,6 @@ public class Controller {
             }
         };
         timer.start();
-
     }
 
     @FXML
@@ -199,7 +196,5 @@ public class Controller {
         for (TimerUpdate update : updates) {
             update.setBaseTime(allMinutes, allMinutesActual);
         }
-
     }
-
 }
