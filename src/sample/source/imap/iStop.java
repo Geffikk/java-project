@@ -1,21 +1,40 @@
 package sample.source.imap;
 
 import sample.source.map.Coordinate;
-import sample.source.map.Stop;
 import sample.source.map.Street;
-import java.util.List;
 
 public interface iStop {
 
-    static Stop defaultStop(String stop1, Coordinate c1) {
-        Stop stop = new Stop(stop1, c1);
-        return stop;
-    }
+    /**
+     * Get street of stop (getter for yaml)
+     * @return -> street where is stop */
+    Street getStreet();
 
-    public boolean inStreet(List<Coordinate> street);
-    public Street getStreet();
-    public void setStreet(Street s);
-    public String getId();
-    public Coordinate getCoordinate();
+    /**
+     * Set street to stop
+     * @param s -> street */
+    void setStreet(Street s);
+
+    /**
+     * Return id of stop (getter for yaml)
+     * @return -> id */
+    String getId();
+
+    /**
+     * Get coordinates of stop (getter for yaml)
+     * @return -> coordinate */
+    Coordinate getCoordinate();
+
+    /**
+     * Override equal function
+     * @param obj -> stop to compare
+     * @return -> return true if stops are equal */
+    boolean equals(Object obj);
+
+    /**
+     * Return ID of stop
+     * @return -> string format */
+    String toString();
+
 }
 

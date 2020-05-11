@@ -1,11 +1,13 @@
 package sample.source.map;
 
+import sample.source.imap.iDataStreets;
+
 import java.util.List;
 
 /** Class for store info about all streets and stops on map **/
-public class DataStreets {
-    //List of streets
-    private List<Street> streets;
+public class DataStreets implements iDataStreets {
+
+    private List<Street> streets; /* list of streets */
 
     /** Empty constructor for yaml **/
     public DataStreets() {
@@ -16,7 +18,6 @@ public class DataStreets {
         this.streets = streets;
     }
 
-    /** Return list of streets (getter for yaml) **/
     public List<Street> getStreets() {
         return streets;
     }

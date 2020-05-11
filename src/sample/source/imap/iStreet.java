@@ -2,35 +2,43 @@ package sample.source.imap;
 
 import sample.source.map.Coordinate;
 import sample.source.map.Stop;
-import sample.source.map.Street;
 
 import java.util.List;
 
 public interface iStreet {
 
-    static Street defaultStreet(String id, Coordinate... coordinate) {
-        Street str = new Street(id, coordinate);
-        if(str.rightAngle()) {
-            return str;
-        }
-        else {
-            return null;
-        }
-    }
-
-    public boolean rightAngle();
-
+    /**
+     * Return begin coordinates of street
+     * @return -> first coordinate of street */
     Coordinate begin();
 
+    /**
+     * Return last coordinates of street
+     * @return -> last coordinate of street */
     Coordinate end();
 
+    /**
+     * Get all coordinates of street
+     * @return -> coordinates of street */
     List<Coordinate> getCoordinates();
 
-    boolean follows(Street s2);
-
-    boolean addStop(Stop stop1);
-
+    /**
+     * Get list of stops
+     * @return -> list of stops */
     java.util.List<Stop> getStops();
 
+    /**
+     * Get id of street
+     * @return -> id of street */
     java.lang.String getId();
+
+    /**
+     * slowdown vehicle
+     * @return -> delay */
+    double getDelay();
+
+    /**
+     * Get id of street
+     * @return -> string format ID */
+    String toString();
 }

@@ -1,17 +1,17 @@
 package sample.source.map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import sample.source.imap.iPath;
 
 import java.util.List;
 
-public class Path {
+public class Path implements iPath {
 
-    private List<Coordinate> path;
+    private List<Coordinate> path; /* list of coordinates (make path of vehicle) */
 
+    public Path() {}
 
-    public Path() {
-    }
-
+    /**  Constructor for path <path> **/
     public Path(List<Coordinate> path) {
         this.path = path;
     }
@@ -20,15 +20,15 @@ public class Path {
         return path;
     }
 
-    /** Distance between two coordinates **/
+    /**
+     * Distance between two coordinates
+     * @param a -> first coor
+     * @param b -> second coor
+     * @return -> distance between coordinates */
     private double getDistanceBetweenCoordinates(Coordinate a, Coordinate b) {
-        // Everything ok
         return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
-
     }
 
-
-    /** Calculate new coordinates after move **/
     public Coordinate getCoordinateByDistance(double distance, Autobus autobus) {
 
         // Length of all ways in path
@@ -66,7 +66,7 @@ public class Path {
             length += getDistanceBetweenCoordinates(a, b);
         }
 
-        if (a == null || b == null) {
+        if (a == null) {
             return null;
         }
 
@@ -75,8 +75,6 @@ public class Path {
         return new Coordinate(a.getX() + (b.getX() - a.getX()) * driven, a.getY() + (b.getY() - a.getY()) * driven);
     }
 
-
-    // Return size of all the way
     @JsonIgnore
     public double getPathSize() {
         double size = 0;

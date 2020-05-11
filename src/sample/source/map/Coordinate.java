@@ -3,18 +3,21 @@ package sample.source.map;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import sample.source.imap.iCoordinate;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-public class Coordinate {
+public class Coordinate implements iCoordinate {
 
-    // Coordinate x,y
-    private double x;
-    private double y;
+    private double x; /* coordinate X */
+    private double y; /* coordinate Y */
 
-    // Coordinates
     private Coordinate() {
     }
 
+    /**
+     * Constructor of coordines (coordinates have to be positive)
+     * @param x -> coordinate X
+     * @param y -> coordinate Y */
     public Coordinate(double x, double y) {
         if (x > 0 && y > 0) {
             this.x = x;
@@ -22,26 +25,14 @@ public class Coordinate {
         }
     }
 
-    // Create base coordinates
-    public static Coordinate create(int x, int y) {
-
-        if (x < 0 || y < 0) {
-            return null;
-        }
-        return new Coordinate(x, y);
-    }
-
-    /** Return X **/
     public double getX() {
         return x;
     }
 
-    /** Return Y **/
     public double getY() {
         return y;
     }
 
-    /** Override function equal **/
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -55,7 +46,6 @@ public class Coordinate {
         return a.getX() == (getX()) && a.getY() == (getY());
     }
 
-    // Override function toString for printing
     @Override
     public String toString() {
         return "Coordinate{" +

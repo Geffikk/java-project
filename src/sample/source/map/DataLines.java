@@ -1,22 +1,22 @@
 package sample.source.map;
 
+import sample.source.imap.iDataLines;
+
 import java.util.List;
 
 /** Class for store info about all lines on map **/
-public class DataLines {
-    //List of lines
-    private List<Line> lines;
+public class DataLines implements iDataLines {
+
+    private List<Line> lines; /* list of lines */
 
     /** Empty constructor for yaml **/
-    public DataLines() {
-    }
+    public DataLines() {}
 
     /** Normal constructor **/
     public DataLines(List<Line> lines) {
         this.lines = lines;
     }
 
-    /** Return list of lines (getter for yaml) **/
     public List<Line> getLines() {
         return lines;
     }

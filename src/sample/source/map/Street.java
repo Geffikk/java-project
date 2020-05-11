@@ -18,14 +18,11 @@ import java.util.List;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Street implements iStreet, Drawable{
 
-    // Street ID, List<Coordinates>, List<Stops>
-    private String id;
-    private List<Coordinate> coordinates;
-    private List<Stop> stops = new ArrayList<>();
+    private String id; /* street ID */
+    private List<Coordinate> coordinates; /* list of coordinates */
+    private List<Stop> stops = new ArrayList<>(); /* list of stops */
     @JsonIgnore
-    private List<Shape> gui = new ArrayList<>();
-    @JsonIgnore
-    public double delay = 1;
+    public double delay = 1; /* represent load of street (slowdown vehicle) */
 
     /** Empty constructor for yaml **/
     public Street() {
@@ -37,88 +34,38 @@ public class Street implements iStreet, Drawable{
         this.coordinates = new ArrayList<>(Arrays.asList(coordinates));
     }
 
-    /** Not used **/
-    @Override
-    public boolean rightAngle() {
-        boolean switcher = true;
-        double x = 0;
-        double y = 0;
-        double result_x;
-        double result_y;
-
-        for(Coordinate coordinate:this.coordinates)
-        {
-            result_x = coordinate.getX() - x;
-            result_y = coordinate.getY() - y;
-
-            if (result_x != 0 && result_y != 0 && !switcher) {
-                return false;
-            }
-
-            switcher = false;
-            x = coordinate.getX();
-            y = coordinate.getY();
-        }
-        return true;
-    }
-
-    /** Return begin coordinates of street **/
     @Override
     public Coordinate begin() {
         return this.coordinates.get(0);
     }
 
-    /** Return last coordinates of street **/
     @Override
     public Coordinate end() {
         return this.coordinates.get(this.coordinates.size() - 1);
     }
 
-    /** Get all coordinates of street **/
     @Override
     public List<Coordinate> getCoordinates() {
         return Collections.unmodifiableList(this.coordinates);
     }
 
-    /** Return delay **/
     public double getDelay() { return this.delay; }
 
-    /** Return true if one street follow next one **/
-    @Override
-    public boolean follows(Street s2) {
-        return (s2.begin().equals(begin()) || s2.begin().equals(end()) || s2.end().equals(end()) || s2.end().equals(begin()));
-    }
-
-    /** add stop to street **/
-    @Override
-    public boolean addStop(Stop stop1) {
-        if(stop1.inStreet(this.coordinates)) {
-            this.stops.add(stop1);
-            stop1.setStreet(this);
-            return true;
-        }
-        return false;
-    }
-
-    /** Get list of stops **/
     @Override
     public List<Stop> getStops() {
         return stops;
     }
 
-    /** Get id of street **/
     @Override
     public String getId() {
         return id;
     }
 
-    /** Get id of street **/
     @Override
     public String toString() {
         return String.format("street(%s)", id);
     }
 
-    /** Paint streets to GUI **/
     @JsonIgnore
     @Override
     public List<Shape> getGUI() {
@@ -134,8 +81,7 @@ public class Street implements iStreet, Drawable{
 
         }
         //Gui for street with 3 and more coords
-        else
-        {
+        else {
             int numberOfCoordiantes = coordinates.size();
             for(int i = 0; i<numberOfCoordiantes; i++){
                 if(i == numberOfCoordiantes - 1){

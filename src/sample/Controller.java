@@ -12,17 +12,15 @@ package sample;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
-import javafx.util.Duration;
 import sample.source.imap.Drawable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import sample.source.imap.TimerUpdate;
-import javafx.animation.KeyValue;
+
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -33,10 +31,7 @@ public class Controller {
     private List<TimerUpdate> updates = new ArrayList<>(); /* update */
     private Time mapTime = new Time(6, 20, 0); /* base time map */
     private AnimationTimer timer; /* timeline for updates */
-    private int i = 0;
-    private static Integer switcherSong = 0; /* pause on/off song */
-    private MediaPlayer mediaPlayer; /* store media */
-    private double howSlow;
+    private int modifyTimer = 0; /* change time value */
 
     @FXML
     private Pane content; /* main pane */
@@ -63,9 +58,10 @@ public class Controller {
     @FXML
     private Slider speedLevel;
 
-    /** Set image SAD Presov to bottom right corner **/
+    /** set image SAD Presov to bottom right corner **/
     @FXML
     public void setImages() {
+
         Image image = new Image("file:///C:\\Users\\Geffik\\Desktop\\java-project\\src\\sample\\logo_sad_presov.png");
         iv.setImage(image);
         iv.setScaleX(2.05);
@@ -74,8 +70,10 @@ public class Controller {
         iv.setTranslateX(20);
     }
 
+    /** set speed of system **/
     @FXML
     public void setSpeedLevel() {
+
         System.out.println(speedLevel.getValue());
         double scale = speedLevel.getValue();
         scale += 3;
@@ -83,43 +81,32 @@ public class Controller {
         startTime(scale);
     }
 
+    /* center slider cursor (only integer value) */
     @FXML
     private void centerCursorOnDelay() {
-        if(setTrafficLevel.getValue() < 0.5) {
-            setTrafficLevel.setValue(0);
-            howSlow = 1;
-        }
-        else if(setTrafficLevel.getValue() < 1.5) {
-            setTrafficLevel.setValue(1);
-            howSlow = 0.75;
-        }
-        else if(setTrafficLevel.getValue() < 2.5) {
-            setTrafficLevel.setValue(2);
-            howSlow = 0.5;
-        }
-        else {
-            setTrafficLevel.setValue(3);
-            howSlow = 0.25;
-        }
+
+        if(setTrafficLevel.getValue() < 0.5) { setTrafficLevel.setValue(0); }
+        else if(setTrafficLevel.getValue() < 1.5) { setTrafficLevel.setValue(1); }
+        else if(setTrafficLevel.getValue() < 2.5) { setTrafficLevel.setValue(2); }
+        else { setTrafficLevel.setValue(3); }
     }
 
+    /** interactive activity (set load on street) **/
     @FXML
     private void setDelay() {
+
+        double howSlow;
         if(setTrafficLevel.getValue() < 0.5) { howSlow = 1; }
         else if(setTrafficLevel.getValue() < 1.5) { howSlow = 0.75; }
         else if(setTrafficLevel.getValue() < 2.5) { howSlow = 0.5; }
         else { howSlow = 0.25; }
 
-        System.out.println(howSlow);
-
-        Boolean switcher = true;
-        String delayStr = delayStreet.getText();
-
         for(TimerUpdate update : updates) {
-            update.setDelayStreet2(delayStr, switcher, slowStreetsLabel, howSlow);
+            update.setDelayStreet(delayStreet.getText(), true, slowStreetsLabel, howSlow);
         }
     }
 
+    /** modify zoom of all system **/
     @FXML
     private void onZoom(ScrollEvent event) {
         event.consume();
@@ -137,6 +124,7 @@ public class Controller {
         content.layout();
     }
 
+    /** set elements to gui **/
     public void setElements(List<Drawable> elements) {
 
         for (Drawable drawable : elements) {
@@ -147,24 +135,42 @@ public class Controller {
         }
     }
 
+    /** timer of aplication (system is updated every n seconds) **/
     public void startTime(double scale) {
 
         showTime.setTranslateX(10);
         timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                i++;
-                if (i >= 32767) {
-                    i = 0;
+
+                specificTime.setOnKeyPressed(e -> {
+                    if (e.getCode() == KeyCode.ENTER) {
+                        try {
+                            setSpecTime();
+                        } catch (ParseException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
+
+                setTrafficLevel.setOnKeyPressed(e -> {
+                    if (e.getCode() == KeyCode.ENTER) {
+                        setDelay();
+                    }
+                });
+
+                modifyTimer++;
+                if (modifyTimer >= 32767) {
+                    modifyTimer = 0;
                 }
-                if(i % scale < 1) {
+                if(modifyTimer % scale < 1) {
                     showTime.setText(mapTime.toString());
                     mapTime.setSeconds(mapTime.getSeconds() + 1);
                 }
-                if (i % scale < 1) {
+                if (modifyTimer % scale < 1) {
                     for (TimerUpdate update : updates) {
-                        update.setKokot(showDepartures, showPathStops, traceOfStops, content);
-                        update.setPane(showDepartures, showPathStops, traceOfStops, rightSide, content);
+                        update.onClickVehicle(showDepartures, showPathStops, traceOfStops, content);
+                        update.onClickPane(showDepartures, showPathStops, traceOfStops, rightSide, content);
                         update.update(mapTime);
                     }
                 }
@@ -173,25 +179,22 @@ public class Controller {
         timer.start();
     }
 
+    /** set default time to aplication **/
     @FXML
     public void setSpecTime() throws ParseException {
-        String fajr_prayertime = specificTime.getText();
+
+        String shiftInTime = specificTime.getText();
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-        Date d1 = format.parse(fajr_prayertime);
+        Date d1 = format.parse(shiftInTime);
         Date d2 = format.parse(mapTime.toString());
         Date d3 = format.parse("6:20:00");
 
         mapTime = new Time(d1.getHours(), d1.getMinutes(), d1.getSeconds());
         double timeDiffActual = d2.getTime() - d3.getTime();
-        double iHourActual = timeDiffActual / 3600000;
-        double allMinutesActual = iHourActual * 60;
-        //System.out.println(allMinuesActual);
-
+        double allMinutesActual = (timeDiffActual / 3600000) * 60;
 
         double timeDiff = d1.getTime() - d2.getTime();
-        double iHour = timeDiff / 3600000;
-        double allMinutes = iHour * 60;
-        //System.out.println(allMinutes);
+        double allMinutes = (timeDiff / 3600000) * 60;
 
         for (TimerUpdate update : updates) {
             update.setBaseTime(allMinutes, allMinutesActual);
