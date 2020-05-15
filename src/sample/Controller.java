@@ -21,7 +21,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import sample.source.imap.TimerUpdate;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -61,7 +60,9 @@ public class Controller {
     @FXML
     private Label actPositionText;
 
-    /** Set image SAD Presov to bottom right corner **/
+    /**
+     * Set image SAD Presov to bottom right corner
+     */
     @FXML
     public void setImages() {
 
@@ -73,7 +74,9 @@ public class Controller {
         iv.setTranslateX(20);
     }
 
-    /** Set speed of system **/
+    /**
+     *  speed of system
+     */
     @FXML
     public void setSpeedLevel() {
 
@@ -83,7 +86,9 @@ public class Controller {
         startTime(scale);
     }
 
-    /* Center slider cursor (only integer value) */
+    /**
+     * Center slider cursor (only integer value)
+     */
     @FXML
     private void centerCursorOnDelay() {
 
@@ -93,7 +98,9 @@ public class Controller {
         else { setTrafficLevel.setValue(3); }
     }
 
-    /** Interactive activity (set load on street) **/
+    /**
+     * Interactive activity (set load on street)
+     */
     @FXML
     private void setDelay() {
 
@@ -108,7 +115,9 @@ public class Controller {
         }
     }
 
-    /** Modify zoom of all system **/
+    /**
+     * Modify zoom of all system
+     */
     @FXML
     private void onZoom(ScrollEvent event) {
         event.consume();
@@ -123,7 +132,10 @@ public class Controller {
         content.layout();
     }
 
-    /** Set elements to gui **/
+    /**
+     * Set elements to gui
+     * @param elements elements to set
+     */
     public void setElements(List<Drawable> elements) {
 
         for (Drawable drawable : elements) {
@@ -134,7 +146,10 @@ public class Controller {
         }
     }
 
-    /** Timer of aplication (system is updated every n seconds) **/
+    /**
+     * Timer of aplication (system is updated every n seconds)
+     * @param scale timer scale
+     */
     public void startTime(double scale) {
 
         showTime.setTranslateX(10);
@@ -184,7 +199,10 @@ public class Controller {
         timer.start();
     }
 
-    /** Set default time to aplication **/
+    /** 
+      * Set default time to aplication 
+      *	@exception ParseException error
+      */
     @FXML
     public void setSpecTime() throws ParseException {
 

@@ -15,6 +15,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+
+/**
+ * Class represents Street
+ */
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Street implements iStreet, Drawable{
 
@@ -24,15 +28,12 @@ public class Street implements iStreet, Drawable{
     @JsonIgnore
     public double delay = 1; /* represent load of street (slowdown vehicle) */
 
-    /** Empty constructor for yaml **/
+    /**
+     * Empty constructor for yaml
+     */
     public Street() {
     }
 
-    /** Normal constructor **/
-    public Street(String id, Coordinate... coordinates) {
-        this.id = id;
-        this.coordinates = new ArrayList<>(Arrays.asList(coordinates));
-    }
 
     @Override
     public Coordinate begin() {

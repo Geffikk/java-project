@@ -15,13 +15,14 @@ import javafx.scene.shape.Shape;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 
 import static java.lang.Math.abs;
 
-
+/**
+ * Class represents Autobus
+ */
 @JsonDeserialize(converter = Autobus.AutobusConstruct.class)
 public class Autobus implements Drawable, TimerUpdate, iAutobus {
 
@@ -48,25 +49,41 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
     static boolean oneColor = true;
     static public Boolean turnOnDelay;
 
-    /** Empty constructor for yaml */
-    private Autobus() {
+
+    //                                    TimerUpdate Interface
+    @Override
+    public void update(Time mapTime) {
+
+        distance += speed/(3.0/2.0);
+
+
+        if(this.autobusIsOnStreet != null) {
+            for(String street : slowStreets) {
+                if (this.autobusIsOnStreet.getId().equals(street)) {
+                    speed = autobusIsOnStreet.delay;
+                }
+                else {
+                    speed = 1;
+                }
+            }
+        }
+
+        // reverse path of line
+        if (path.getPathSize() <= distance) {
+            Collections.reverse(path.getPath());
+            distance = 0;
+        }
+
+        //calculate new coordinates
+        Coordinate coords = path.getCoordinateByDistance(distance,this);
+
+        //move vehicle
+        moveGui(coords);
+        //set new position of vehicle
+        position = coords;
     }
 
-    /** Normal constructor */
-    public Autobus(Coordinate position, double speed, Path path, String idOfLine) {
-        this.position = position;
-        this.path = path;
-        this.speed = speed;
-        this.idOfLine = idOfLine;
-        setGui();
-    }
 
-    @JsonIgnore
-    public void setDistance(double startDistance) {
-        distance = startDistance;
-    }
-
-    @JsonIgnore
     @Override
     public void onClickVehicle(Label actualPosition, Label label, Label label2, javafx.scene.shape.Line traceOfStops, Pane content, Label actPositionText) {
         for (Shape shape : gui) {
@@ -74,13 +91,68 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
         }
     }
 
-    @JsonIgnore
     @Override
     public void onClickPane(Label actualPosition, Label label, Label label2, javafx.scene.shape.Line traceOfStops, Pane pane, Pane content, Label actPositionText) {
         pane.setOnMouseClicked(mouseEvent -> clearDepartures(actualPosition, label, label2, traceOfStops, pane, content, actPositionText));
     }
 
-    @JsonIgnore
+    @Override
+    public void setDelayStreet(String delayStr, Boolean switcher, double howSlow) {
+        turnOnDelay = switcher;
+        boolean isThere = false;
+
+        for(String street: slowStreets) {
+            if (street.equals(delayStr)) {
+                isThere = true;
+                break;
+            }
+        }
+
+        if(!isThere) {
+            slowStreets.add(delayStr);
+        }
+
+        for(int i = 0; i < this.line.getStreetList().size(); i++) {
+            if (this.line.getStreetList().get(i).getId().equals(delayStr)) {
+                this.line.getStreetList().get(i).delay = howSlow/(3.0/2.0);
+            }
+        }
+    }
+
+    @Override
+    public void setBaseTime(double travelInTime) {
+        double distanceAfterTravelInTime = (travelInTime / 60) * 799.9999999999894;
+
+        double i;
+        if (distanceAfterTravelInTime > 0) {
+            i = distanceAfterTravelInTime;
+            while (i > path.getPathSize()) {
+                i = i - path.getPathSize();
+                Collections.reverse(path.getPath());
+            }
+
+            distance = distance + i;
+            if (distance > path.getPathSize()) {
+                distance = distance - path.getPathSize();
+                Collections.reverse(path.getPath());
+            }
+        }
+        else if (distanceAfterTravelInTime < 0) {
+            i = abs(distanceAfterTravelInTime);
+            while (i > path.getPathSize()) {
+                i = i - path.getPathSize();
+                Collections.reverse(path.getPath());
+            }
+            distance = distance - i;
+            if (distance < 0) {
+                distance = distance + path.getPathSize();
+                Collections.reverse(path.getPath());
+            }
+        }
+    }
+
+    //                                   iAutobus Interface
+    @Override
     public void clearDepartures(Label actualPosition, Label label, Label label2, javafx.scene.shape.Line traceOfStops, Pane pane, Pane content, Label actPositionText) {
         label.setText("");
         label2.setText("");
@@ -116,20 +188,20 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
         }
     }
 
-    @JsonIgnore
+    @Override
     public void setDepartures(Label actualPosition, Label label, Label label2, javafx.scene.shape.Line traceOfStops, Pane content, Label actPositionText){
         StringBuilder departures = new StringBuilder();
         StringBuilder stops = new StringBuilder();
         double x = 0;
         for (int j = 0; j < 27; j++) {
-            for (int i = 0; i < line.getListOfDepartures().size(); i++) {
+            for (int i = 0; i < line.getListOfDepartures1().size(); i++) {
                 try {
                     if (gui.get(0).getId().equals("2")) {
-                        departures.append(line.getListOfDepartures().get(i).get(j)).append("\t\t");
+                        departures.append(line.getListOfDepartures1().get(i).get(j)).append("\t\t");
                     } else if (gui.get(0).getId().equals("1")) {
-                        departures.append(line.getListOfDepartures().get(i).get(j)).append("\t\t");
+                        departures.append(line.getListOfDepartures1().get(i).get(j)).append("\t\t");
                     } else if (gui.get(0).getId().equals("3")) {
-                        departures.append(line.getListOfDepartures().get(i).get(j)).append("\t\t");
+                        departures.append(line.getListOfDepartures1().get(i).get(j)).append("\t\t");
                     }
                 }
                 catch (IndexOutOfBoundsException e) {
@@ -139,8 +211,8 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
             departures.append("\n");
         }
 
-        System.out.println(line.getListOfDepartures().size());
-        for (int i = 0; i < line.getListOfDepartures().size(); i++) {
+        System.out.println(line.getListOfDepartures1().size());
+        for (int i = 0; i < line.getListOfDepartures1().size(); i++) {
             stops.append(line.getStopList().get(i).getId()).append("\t\t\t").append("     ");
             x = x + 80;
         }
@@ -209,6 +281,20 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
         traceOfStops.setEndX(x);
     }
 
+    //                                      Drawable Interface
+    @Override
+    public List<Shape> getGUI() {
+        return gui;
+    }
+
+    //                                      Private Functions
+
+    /**
+     * Empty constructor for yaml
+     */
+    private Autobus() {
+    }
+
     /**
      * Move with pictures in map
      * @param coordinate New coordinates of vehicle
@@ -221,7 +307,8 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
     }
 
     /**
-     * Set gui (vehicles) to map */
+     * Set gui (vehicles) to map
+     */
     private void setGui(){
 
         switch (this.idOfLine) {
@@ -229,11 +316,7 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
                 Circle circle = new Circle(position.getX(), position.getY(), 8, Color.RED);
                 circle.setStroke(Color.BLACK);
                 circle.setId("1");
-<<<<<<< Updated upstream
                 if(oneColor) {
-=======
-                if(oneColor){
->>>>>>> Stashed changes
                     circle = new Circle(position.getX(), position.getY(), 8, Color.RED);
                     circle.setId("4");
                     oneColor = false;
@@ -259,127 +342,13 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
 
     }
 
-    /**
-     * Return all GUI elements
-     * @return -> vehicle
-     */
-    @JsonIgnore
-    @Override
-    public List<Shape> getGUI() {
-        return gui;
-    }
 
-    public void setDelayStreet(String delayStr, Boolean switcher, double howSlow) {
-        turnOnDelay = switcher;
-        boolean isThere = false;
+    //                                            Getters
 
-        for(String street: slowStreets) {
-            if (street.equals(delayStr)) {
-                isThere = true;
-                break;
-            }
-        }
-
-        if(!isThere) {
-            slowStreets.add(delayStr);
-        }
-
-        for(int i = 0; i < this.line.getStreetList().size(); i++) {
-            if (this.line.getStreetList().get(i).getId().equals(delayStr)) {
-                this.line.getStreetList().get(i).delay = howSlow/(3.0/2.0);
-            }
-        }
-    }
-
-    public void setBaseTime(double travelInTime) {
-        double distanceAfterTravelInTime = (travelInTime / 60) * 799.9999999999894;
-
-        double i;
-        if (distanceAfterTravelInTime > 0) {
-            i = distanceAfterTravelInTime;
-            while (i > path.getPathSize()) {
-                i = i - path.getPathSize();
-                Collections.reverse(path.getPath());
-            }
-
-            distance = distance + i;
-            if (distance > path.getPathSize()) {
-                distance = distance - path.getPathSize();
-                Collections.reverse(path.getPath());
-            }
-        }
-        else if (distanceAfterTravelInTime < 0) {
-            i = abs(distanceAfterTravelInTime);
-            while (i > path.getPathSize()) {
-                i = i - path.getPathSize();
-                Collections.reverse(path.getPath());
-            }
-            distance = distance - i;
-            if (distance < 0) {
-                distance = distance + path.getPathSize();
-                Collections.reverse(path.getPath());
-            }
-<<<<<<< Updated upstream
-        }
-        if(gui.get(0).getId().equals("4")){
-            System.out.printf("MODRE AUTO dlzka celej cesty -> (%s) \n", path.getPathSize()*2);
-            System.out.printf("Celkova potrebna dlzka na prejdenie -> (%s) \n", distanceAfterTravelInTime);
-            System.out.printf("Aktualna vzdialenost vozidla -> (%s)\n",distance);
-            System.out.println("---------------------------------------------------------");
-=======
-
->>>>>>> Stashed changes
-        }
-    }
-
-    @Override
-    public void update(Time mapTime) {
-
-        distance += speed/(3.0/2.0);
-
-        if (gui.get(0).getId().equals("4")) {
-            //System.out.println(distance);
-            if(mapTime.toString().equals("07:20:00")) {
-                System.out.println(distance);
-            }
-        }
-
-        if(this.autobusIsOnStreet != null) {
-            for(String street : slowStreets) {
-                if (this.autobusIsOnStreet.getId().equals(street)) {
-                    speed = autobusIsOnStreet.delay;
-                }
-                else {
-                    speed = 1;
-                }
-            }
-        }
-
-        // reverse path of line
-        if (path.getPathSize() <= distance) {
-            Collections.reverse(path.getPath());
-            distance = 0;
-        }
-
-        //calculate new coordinates
-        Coordinate coords = path.getCoordinateByDistance(distance,this);
-
-        //move vehicle
-        moveGui(coords);
-        //set new position of vehicle
-        position = coords;
-    }
-
-    /**
-     * Get position of autobus (getter for yaml)
-     * @return -> position */
     public Coordinate getPosition() {
         return position;
     }
 
-    /**
-     * Get speed of autobus (getter for yaml)
-     * @return -> speed */
     public double getSpeed() {
         return speed;
     }
@@ -388,9 +357,6 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
         return path;
     }
 
-    /**
-     * Get id of line of autobus (getter for yaml)
-     * @return -> id of line */
     public String getIdOfLine() {
         return idOfLine;
     }
@@ -398,6 +364,9 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
     public Line getLine() {
         return line;
     }
+
+
+    //                                              Setters
 
     public void set_line(Line line){
         this.line = line;
@@ -407,6 +376,12 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
         this.autobusIsOnStreet = street;
     }
 
+    public void setDistance(double startDistance) {
+        distance = startDistance;
+    }
+
+
+    //                                              Others
     @Override
     public String toString() {
         return "Autobus{" +
@@ -415,7 +390,9 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
                 '}';
     }
 
-    /** Converter for setting gui after read from yaml**/
+    /**
+     * Converter for setting gui after read from yaml
+     * */
     static class AutobusConstruct extends StdConverter<Autobus, Autobus> {
         @Override
         public Autobus convert(Autobus autobus) {

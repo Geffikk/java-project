@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import sample.source.imap.iCoordinate;
 
+/**
+ * Class represents Coordinate
+ */
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Coordinate implements iCoordinate {
 
@@ -16,8 +19,8 @@ public class Coordinate implements iCoordinate {
 
     /**
      * Constructor of coordines (coordinates have to be positive)
-     * @param x -> coordinate X
-     * @param y -> coordinate Y */
+     * @param x coordinate X
+     * @param y coordinate Y */
     public Coordinate(double x, double y) {
         if (x > 0 && y > 0) {
             this.x = x;

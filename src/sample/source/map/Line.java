@@ -7,9 +7,14 @@ import sample.source.imap.iLine;
 
 import java.util.*;
 
+
+/**
+ * Class represents Line
+ */
 public class Line implements iLine, Drawable {
 
     private String id; /* id line */
+    private String timeID;
     @JsonIgnore
     Street str_before; /* load street before */
     @JsonIgnore /* immutable list with lines */
@@ -18,37 +23,18 @@ public class Line implements iLine, Drawable {
     static int counter = 0;
     private List<Street> streetList = new ArrayList<>(); /* list of streets in line */
     private List<Stop> stopList = new ArrayList<>(); /* list of stops in line */
-    private List<ArrayList<String>> listOfDepartures = new ArrayList<>(); /* list of lists of departures in line */
+    private List<ArrayList<String>> listOfDepartures1 = new ArrayList<>(); /* list of lists of departures in line */
+    private List<ArrayList<String>> listOfDepartures2 = new ArrayList<>(); /* list of lists of departures in line */
 
-    /** Empty constructor for yaml**/
+    /**
+     * Empty constructor for yaml
+     */
     private Line() {
     }
 
-    /** Normal constructor **/
-    public Line(String id) {
-        this.id = id;
-    }
+    //                                       iLine Interface
 
-    /**
-     * Return id of line (getter for yaml)
-     * @return -> ID */
-    public String getId() {
-        return id;
-    }
-
-    public List<Stop> getStopList() {
-        return stopList;
-    }
-
-    public List<Street> getStreetList() {
-        return streetList;
-    }
-
-    public List<ArrayList<String>> getListOfDepartures() {
-        return listOfDepartures;
-    }
-
-    @JsonIgnore
+    @Override
     public void addStreetAndStopToAbsMap(Street street, Stop stop){
         this.abs_map.add(new AbstractMap.SimpleImmutableEntry<>(street, stop));
         if(stop != null){
@@ -57,12 +43,44 @@ public class Line implements iLine, Drawable {
     }
 
     @Override
-    @JsonIgnore
     public List<AbstractMap.SimpleImmutableEntry<Street, Stop>> getRoute() {
         return new ArrayList<>(abs_map);
     }
 
-    @JsonIgnore
+    //                                         Getters
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String getTimeID() {
+        return timeID;
+    }
+
+    @Override
+    public List<Stop> getStopList() {
+        return stopList;
+    }
+
+    @Override
+    public List<Street> getStreetList() {
+        return streetList;
+    }
+
+    @Override
+    public List<ArrayList<String>> getListOfDepartures1() {
+        return listOfDepartures1;
+    }
+
+    @Override
+    public List<ArrayList<String>> getListOfDepartures2() {
+        return listOfDepartures2;
+    }
+
+    //                                      Drawable Interface
+    @Override
     public List<Shape> getGUI() {
 
         //If there is street with more than 2 coordiantes

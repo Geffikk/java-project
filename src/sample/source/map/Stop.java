@@ -13,6 +13,9 @@ import sample.source.imap.iStop;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class represents Stop
+ */
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Stop implements iStop, Drawable {
 
@@ -20,14 +23,11 @@ public class Stop implements iStop, Drawable {
     private Coordinate coordinate; /* coordinate of stop */
     private Street streetOfStop; /* under which street is this stop */
 
-    /** Empty constructor for yaml **/
+    /**
+     * Empty constructor for yaml
+     */
     public Stop() {}
 
-    /** Normal constructor **/
-    public Stop(String id, Coordinate coordinate) {
-        this.id = id;
-        this.coordinate = coordinate;
-    }
 
     public String getId() {
         return id;

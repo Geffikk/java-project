@@ -5,16 +5,15 @@ import sample.source.imap.iPath;
 
 import java.util.List;
 
+/**
+ * Class represents Path
+ */
 public class Path implements iPath {
 
     private List<Coordinate> path; /* list of coordinates (make path of vehicle) */
 
     public Path() {}
 
-    /**  Constructor for path <path> */
-    public Path(List<Coordinate> path) {
-        this.path = path;
-    }
 
     public List<Coordinate> getPath() {
         return path;
@@ -22,9 +21,9 @@ public class Path implements iPath {
 
     /**
      * Distance between two coordinates
-     * @param a -> first coor
-     * @param b -> second coor
-     * @return -> distance between coordinates
+     * @param a first coor
+     * @param b second coor
+     * @return distance between coordinates
      */
     private double getDistanceBetweenCoordinates(Coordinate a, Coordinate b) {
         return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
