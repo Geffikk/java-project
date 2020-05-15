@@ -92,12 +92,12 @@
                            </font>
                         </Label>
                         <Line fx:id="traceOfStops" endX="-124.00001525878906" endY="-61.599998474121094" fill="BLACK" layoutX="152.0" layoutY="140.0" startX="-124.00001525878906" startY="-61.599998474121094" stroke="#f2f2f2" strokeWidth="3.0" translateY="-35.0" visible="false" />
-                        <Label fx:id="actPositionText" layoutX="1373.0" layoutY="14.0" prefHeight="46.0" prefWidth="265.0" text="ACTUAL POSITION:" translateX="70.0" visible="false">
+                        <Label fx:id="actPositionText" layoutX="1373.0" layoutY="14.0" prefHeight="46.0" prefWidth="265.0" text="ACTUAL POSITION:" translateX="80.0" visible="false">
                            <font>
                               <Font name="Arial Narrow Bold" size="25.0" />
                            </font>
                         </Label>
-                        <Label fx:id="actualPositionLabel" layoutX="1619.0" layoutY="18.0" prefHeight="38.0" prefWidth="174.0" translateX="30.0">
+                        <Label fx:id="actualPositionLabel" layoutX="1619.0" layoutY="18.0" prefHeight="38.0" prefWidth="174.0" translateX="40.0">
                            <font>
                               <Font name="Arial Narrow Bold" size="25.0" />
                            </font>

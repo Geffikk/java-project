@@ -13,6 +13,7 @@ import sample.source.imap.Drawable;
 import sample.source.map.*;
 
 import java.io.File;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,17 +89,21 @@ public class Main extends Application {
             if(i<6){
                 if(i%2 == 0){
                     dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*i);
+                    dataOfVehicles.getAutobuses().get(i).setStartDistance(distanceToAdd*i);
                 }
                 else{
                     dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*(5 - i));
+                    dataOfVehicles.getAutobuses().get(i).setStartDistance(distanceToAdd*(5 - i));
                 }
             }
             else{
                 if(i%2 == 0){
                     dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*(i - 5));
+                    dataOfVehicles.getAutobuses().get(i).setStartDistance(distanceToAdd*(i - 5));
                 }
                 else{
                     dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*(5 - (i - 5)));
+                    dataOfVehicles.getAutobuses().get(i).setStartDistance(distanceToAdd*(5 - (i - 5)));
                 }
             }
         }
@@ -115,17 +120,21 @@ public class Main extends Application {
             if(j<16){
                 if(j%2 == 0){
                     dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(j - 10));
+                    dataOfVehicles.getAutobuses().get(j).setStartDistance(distanceToAdd*(j - 10));
                 }
                 else{
                     dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(5 - (j - 10)));
+                    dataOfVehicles.getAutobuses().get(j).setStartDistance(distanceToAdd*(5 - (j - 10)));
                 }
             }
             else{
                 if(j%2 == 0){
                     dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(j - 15));
+                    dataOfVehicles.getAutobuses().get(j).setStartDistance(distanceToAdd*(j - 15));
                 }
                 else{
-                    dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(5 - (j - 15)));
+                    dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(j - 15));
+                    dataOfVehicles.getAutobuses().get(j).setStartDistance(distanceToAdd*(j - 15));
                 }
             }
         }
@@ -142,17 +151,21 @@ public class Main extends Application {
             if(z<26){
                 if(z%2 == 0){
                     dataOfVehicles.getAutobuses().get(z).setDistance(distanceToAdd*(z - 20));
+                    dataOfVehicles.getAutobuses().get(z).setStartDistance(distanceToAdd*(z - 20));
                 }
                 else{
                     dataOfVehicles.getAutobuses().get(z).setDistance(distanceToAdd*(5 - (z - 20)));
+                    dataOfVehicles.getAutobuses().get(z).setStartDistance(distanceToAdd*(5 - (z - 20)));
                 }
             }
             else{
                 if(z%2 == 0){
                     dataOfVehicles.getAutobuses().get(z).setDistance(distanceToAdd*(z - 25));
+                    dataOfVehicles.getAutobuses().get(z).setStartDistance(distanceToAdd*(z - 25));
                 }
                 else{
                     dataOfVehicles.getAutobuses().get(z).setDistance(distanceToAdd*(5 - (z - 25)));
+                    dataOfVehicles.getAutobuses().get(z).setStartDistance(distanceToAdd*(5 - (z - 25)));
                 }
             }
         }

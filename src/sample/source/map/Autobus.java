@@ -45,9 +45,25 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
     private List<String> slowStreets = new ArrayList<>(); /* list of load streets */
     @JsonIgnore
     private String slowStreetsString = "";
-
+    @JsonIgnore
     static boolean oneColor = true;
+    @JsonIgnore
     static public Boolean turnOnDelay;
+    @JsonIgnore
+    private double startDistance;
+
+    @JsonIgnore
+    public void setPauseOnSleep(Time pauseOnSleep) {
+        this.pauseOnSleep = pauseOnSleep;
+    }
+
+    @JsonIgnore
+    private Time pauseOnSleep;
+
+    @JsonIgnore
+    public void setStartDistance(double startDistance) {
+        this.startDistance = startDistance;
+    }
 
 
     //                                    TimerUpdate Interface
@@ -342,9 +358,130 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
 
     }
 
+<<<<<<< Updated upstream
 
     //                                            Getters
 
+=======
+    /**
+     * Return all GUI elements
+     * @return -> vehicle
+     */
+    @JsonIgnore
+    @Override
+    public List<Shape> getGUI() {
+        return gui;
+    }
+
+    public void setDelayStreet(String delayStr, Boolean switcher, double howSlow) {
+        turnOnDelay = switcher;
+        boolean isThere = false;
+
+        for(String street: slowStreets) {
+            if (street.equals(delayStr)) {
+                isThere = true;
+                break;
+            }
+        }
+
+        if(!isThere) {
+            slowStreets.add(delayStr);
+        }
+
+        for(int i = 0; i < this.line.getStreetList().size(); i++) {
+            if (this.line.getStreetList().get(i).getId().equals(delayStr)) {
+                this.line.getStreetList().get(i).delay = howSlow/(3.0/2.0);
+            }
+        }
+    }
+
+    public void setBaseTime(double travelInTime) {
+        double distanceAfterTravelInTime = (travelInTime / 60) * 799.9999999999894;
+
+        double i;
+        if (distanceAfterTravelInTime > 0) {
+            i = distanceAfterTravelInTime;
+            while (i > path.getPathSize()) {
+                i = i - path.getPathSize();
+                Collections.reverse(path.getPath());
+            }
+
+            distance = distance + i;
+            if (distance > path.getPathSize()) {
+                distance = distance - path.getPathSize();
+                Collections.reverse(path.getPath());
+            }
+        }
+        else if (distanceAfterTravelInTime < 0) {
+            i = distanceAfterTravelInTime;
+            while (i < -path.getPathSize()) {
+                i = i + path.getPathSize();
+                Collections.reverse(path.getPath());
+            }
+            distance = distance + i;
+            if (distance < 0) {
+                distance = distance + path.getPathSize();
+                Collections.reverse(path.getPath());
+            }
+        }
+        if(gui.get(0).getId().equals("4")){
+            System.out.printf("MODRE AUTO dlzka celej cesty -> (%s) \n", path.getPathSize()*2);
+            System.out.printf("Celkova potrebna dlzka na prejdenie -> (%s) \n", distanceAfterTravelInTime);
+            System.out.printf("Aktualna vzdialenost vozidla -> (%s)\n",distance);
+            System.out.println("---------------------------------------------------------");
+        }
+    }
+
+    @Override
+    public void update(Time mapTime) {
+
+        Time timeNight = new Time(23, 59, 59);
+        Time timeDay = new Time(6, 20, 0);
+
+        if(mapTime.after(timeDay) && mapTime.before(timeNight)) {
+            gui.get(0).setVisible(true);
+            distance += speed / (3.0 / 2.0);
+
+            if (gui.get(0).getId().equals("4")) {
+                if (mapTime.toString().equals("07:20:00")) {
+                    System.out.println(distance);
+                }
+            }
+
+            if (this.autobusIsOnStreet != null) {
+                for (String street : slowStreets) {
+                    if (this.autobusIsOnStreet.getId().equals(street)) {
+                        speed = autobusIsOnStreet.delay;
+                    } else {
+                        speed = 1;
+                    }
+                }
+            }
+
+            // reverse path of line
+            if (path.getPathSize() <= distance) {
+                Collections.reverse(path.getPath());
+                distance = 0;
+            }
+
+            //calculate new coordinates
+            Coordinate coords = path.getCoordinateByDistance(distance, this);
+
+            //move vehicle
+            moveGui(coords);
+            //set new position of vehicle
+            position = coords;
+        }
+        else {
+            gui.get(0).setVisible(false);
+            distance = startDistance;
+        }
+    }
+
+    /**
+     * Get position of autobus (getter for yaml)
+     * @return -> position */
+>>>>>>> Stashed changes
     public Coordinate getPosition() {
         return position;
     }
