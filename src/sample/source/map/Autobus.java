@@ -1,6 +1,5 @@
 package sample.source.map;
 
-import org.yaml.snakeyaml.util.ArrayUtils;
 import sample.source.imap.Drawable;
 import sample.source.imap.TimerUpdate;
 import sample.source.imap.iAutobus;
@@ -49,11 +48,11 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
     static boolean oneColor = true;
     static public Boolean turnOnDelay;
 
-    /** Empty constructor for yaml **/
+    /** Empty constructor for yaml */
     private Autobus() {
     }
 
-    /** Normal constructor **/
+    /** Normal constructor */
     public Autobus(Coordinate position, double speed, Path path, String idOfLine) {
         this.position = position;
         this.path = path;
@@ -212,7 +211,8 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
 
     /**
      * Move with pictures in map
-     * @param coordinate -> new coordinates of vehicle */
+     * @param coordinate New coordinates of vehicle
+     */
     private void moveGui(Coordinate coordinate) {
         for (Shape shape : gui) {
             shape.setTranslateX(coordinate.getX() - position.getX() + shape.getTranslateX());
@@ -229,7 +229,11 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
                 Circle circle = new Circle(position.getX(), position.getY(), 8, Color.RED);
                 circle.setStroke(Color.BLACK);
                 circle.setId("1");
+<<<<<<< Updated upstream
                 if(oneColor) {
+=======
+                if(oneColor){
+>>>>>>> Stashed changes
                     circle = new Circle(position.getX(), position.getY(), 8, Color.RED);
                     circle.setId("4");
                     oneColor = false;
@@ -315,12 +319,16 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
                 distance = distance + path.getPathSize();
                 Collections.reverse(path.getPath());
             }
+<<<<<<< Updated upstream
         }
         if(gui.get(0).getId().equals("4")){
             System.out.printf("MODRE AUTO dlzka celej cesty -> (%s) \n", path.getPathSize()*2);
             System.out.printf("Celkova potrebna dlzka na prejdenie -> (%s) \n", distanceAfterTravelInTime);
             System.out.printf("Aktualna vzdialenost vozidla -> (%s)\n",distance);
             System.out.println("---------------------------------------------------------");
+=======
+
+>>>>>>> Stashed changes
         }
     }
 

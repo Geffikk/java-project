@@ -11,7 +11,7 @@ public class Path implements iPath {
 
     public Path() {}
 
-    /**  Constructor for path <path> **/
+    /**  Constructor for path <path> */
     public Path(List<Coordinate> path) {
         this.path = path;
     }
@@ -24,7 +24,8 @@ public class Path implements iPath {
      * Distance between two coordinates
      * @param a -> first coor
      * @param b -> second coor
-     * @return -> distance between coordinates */
+     * @return -> distance between coordinates
+     */
     private double getDistanceBetweenCoordinates(Coordinate a, Coordinate b) {
         return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
     }
