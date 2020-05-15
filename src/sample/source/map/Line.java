@@ -14,7 +14,6 @@ import java.util.*;
 public class Line implements iLine, Drawable {
 
     private String id; /* id line */
-    private String timeID;
     @JsonIgnore
     Street str_before; /* load street before */
     @JsonIgnore /* immutable list with lines */
@@ -54,10 +53,6 @@ public class Line implements iLine, Drawable {
         return id;
     }
 
-    @Override
-    public String getTimeID() {
-        return timeID;
-    }
 
     @Override
     public List<Stop> getStopList() {

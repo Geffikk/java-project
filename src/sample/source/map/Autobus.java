@@ -28,6 +28,7 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
 
     // Vehicle <position> <speed> <distance> <path>
     private Coordinate position; /* position of vehicle */
+    private String timeID;
     private double speed = 0; /* speed of vehicle */
     private Path path; /* path of vehicle */
     private String idOfLine; /* identification of line, (which vehicle, which line) */
@@ -345,24 +346,34 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
 
     //                                            Getters
 
+    @Override
     public Coordinate getPosition() {
         return position;
     }
 
+    @Override
     public double getSpeed() {
         return speed;
     }
 
+    @Override
     public Path getPath() {
         return path;
     }
 
+    @Override
     public String getIdOfLine() {
         return idOfLine;
     }
 
+    @Override
     public Line getLine() {
         return line;
+    }
+
+    @Override
+    public String getTimeID() {
+        return timeID;
     }
 
 

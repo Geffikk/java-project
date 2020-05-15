@@ -14,11 +14,6 @@ public interface iLine {
      */
     String getId();
 
-    /**
-     * Return time string (getter for yaml)
-     * @return time string
-     */
-    String getTimeID();
 
     /**
      * Return list of stops in line (getter for yaml)
