@@ -38,31 +38,38 @@ public interface iAutobus {
      * Get position of autobus (getter for yaml)
      * @return position
      */
-    public Coordinate getPosition();
+     Coordinate getPosition();
+
+
+    /**
+     * Return time string (getter for yaml)
+     * @return time string
+     */
+    String getTimeID();
 
     /**
      * Get speed of autobus (getter for yaml)
      * @return speed
      */
-    public double getSpeed();
+    double getSpeed();
 
     /**
      * Get path of autobus (getter for yaml)
      * @return path
      */
-    public Path getPath();
+    Path getPath();
 
     /**
      * Get id of line of autobus (getter for yaml)
      * @return id of line
      */
-    public String getIdOfLine();
+    String getIdOfLine();
 
     /**
      * Get line of autobus (getter for yaml)
      * @return line
      */
-    public Line getLine();
+    Line getLine();
 
     /**
      * Set line of autobus (setting lines in main)

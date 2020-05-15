@@ -1,6 +1,5 @@
 lines:
 - id: "1"
-  timeID: "10:10:00"
   streetList:
   - &1 id: "Street3"
     coordinates:
@@ -382,7 +381,6 @@ lines:
 =======
 >>>>>>> Stashed changes
 - id: "2"
-  timeID: "10:10:00"
   streetList:
   - &49 id: "Street10"
     coordinates:
@@ -787,7 +785,6 @@ lines:
 =======
 >>>>>>> Stashed changes
 - id: "3"
-  timeID: "10:10:00"
   streetList:
   - &98 id: "Street17"
     coordinates:
