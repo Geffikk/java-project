@@ -6,13 +6,15 @@ import java.util.List;
 
 public interface iDataLines {
 
-    /**
+    /****************************************
      * Return list of lines (getter for yaml)
-     * @return -> list of lines */
+     * @return -> list of lines
+     ****************************************/
     List<Line> getLines();
 
-    /**
+    /**************************
      * To string function
-     * @return -> string format */
+     * @return -> string format
+     **************************/
     String toString();
 }

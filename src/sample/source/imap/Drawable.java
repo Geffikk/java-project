@@ -5,8 +5,9 @@ import java.util.List;
 
 public interface Drawable {
 
-    /**
+    /**********************
      * Paint streets to GUI
-     * @return -> GUI */
+     * @return -> GUI
+     **********************/
     List<Shape> getGUI();
 }

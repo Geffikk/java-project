@@ -21,6 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import sample.source.imap.TimerUpdate;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -52,13 +53,15 @@ public class Controller {
     @FXML
     private TextField specificTime; /* modify default time */
     @FXML
-    private Label slowStreetsLabel; /* display streets with delay */
-    @FXML
     private Slider setTrafficLevel; /* set load to traffic */
     @FXML
-    private Slider speedLevel;
+    private Slider speedLevel; /* speed of system */
+    @FXML
+    private Label actualPositionLabel; /* label for display actual position */
+    @FXML
+    private Label actPositionText;
 
-    /** set image SAD Presov to bottom right corner **/
+    /** Set image SAD Presov to bottom right corner **/
     @FXML
     public void setImages() {
 
@@ -70,18 +73,17 @@ public class Controller {
         iv.setTranslateX(20);
     }
 
-    /** set speed of system **/
+    /** Set speed of system **/
     @FXML
     public void setSpeedLevel() {
 
-        System.out.println(speedLevel.getValue());
         double scale = speedLevel.getValue();
         scale += 3;
         timer.stop();
         startTime(scale);
     }
 
-    /* center slider cursor (only integer value) */
+    /* Center slider cursor (only integer value) */
     @FXML
     private void centerCursorOnDelay() {
 
@@ -91,7 +93,7 @@ public class Controller {
         else { setTrafficLevel.setValue(3); }
     }
 
-    /** interactive activity (set load on street) **/
+    /** Interactive activity (set load on street) **/
     @FXML
     private void setDelay() {
 
@@ -102,20 +104,17 @@ public class Controller {
         else { howSlow = 0.25; }
 
         for(TimerUpdate update : updates) {
-            update.setDelayStreet(delayStreet.getText(), true, slowStreetsLabel, howSlow);
+            update.setDelayStreet(delayStreet.getText(), true, howSlow);
         }
     }
 
-    /** modify zoom of all system **/
+    /** Modify zoom of all system **/
     @FXML
     private void onZoom(ScrollEvent event) {
         event.consume();
         double zoom = event.getDeltaY() > 0 ? 1.1 : 0.9;
-        System.out.println(event.getDeltaY());
-        System.out.println(content.getScaleX());
-        System.out.println(content.getScaleY());
 
-        if (content.getScaleX() < 0.8058044288328456) {
+        if (content.getScaleX() < 0.9) {
             zoom = 1.01;
         }
 
@@ -124,7 +123,7 @@ public class Controller {
         content.layout();
     }
 
-    /** set elements to gui **/
+    /** Set elements to gui **/
     public void setElements(List<Drawable> elements) {
 
         for (Drawable drawable : elements) {
@@ -135,7 +134,7 @@ public class Controller {
         }
     }
 
-    /** timer of aplication (system is updated every n seconds) **/
+    /** Timer of aplication (system is updated every n seconds) **/
     public void startTime(double scale) {
 
         showTime.setTranslateX(10);
@@ -159,18 +158,24 @@ public class Controller {
                     }
                 });
 
+                delayStreet.setOnKeyPressed(e -> {
+                    if (e.getCode() == KeyCode.ENTER) {
+                        setDelay();
+                    }
+                });
+
                 modifyTimer++;
                 if (modifyTimer >= 32767) {
                     modifyTimer = 0;
                 }
                 if(modifyTimer % scale < 1) {
                     showTime.setText(mapTime.toString());
-                    mapTime.setSeconds(mapTime.getSeconds() + 1);
+                    mapTime.setSeconds(mapTime.getSeconds() + 3);
                 }
                 if (modifyTimer % scale < 1) {
                     for (TimerUpdate update : updates) {
-                        update.onClickVehicle(showDepartures, showPathStops, traceOfStops, content);
-                        update.onClickPane(showDepartures, showPathStops, traceOfStops, rightSide, content);
+                        update.onClickVehicle(actualPositionLabel,showDepartures, showPathStops, traceOfStops, content, actPositionText);
+                        update.onClickPane(actualPositionLabel, showDepartures, showPathStops, traceOfStops, rightSide, content, actPositionText);
                         update.update(mapTime);
                     }
                 }
@@ -179,25 +184,30 @@ public class Controller {
         timer.start();
     }
 
-    /** set default time to aplication **/
+    /** Set default time to aplication **/
     @FXML
     public void setSpecTime() throws ParseException {
 
         String shiftInTime = specificTime.getText();
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-        Date d1 = format.parse(shiftInTime);
-        Date d2 = format.parse(mapTime.toString());
-        Date d3 = format.parse("6:20:00");
+        try {
+            Date d1 = format.parse(shiftInTime);
+            Date d2 = format.parse(mapTime.toString());
 
-        mapTime = new Time(d1.getHours(), d1.getMinutes(), d1.getSeconds());
-        double timeDiffActual = d2.getTime() - d3.getTime();
-        double allMinutesActual = (timeDiffActual / 3600000) * 60;
+            mapTime = new Time(d1.getHours(), d1.getMinutes(), d1.getSeconds());
 
-        double timeDiff = d1.getTime() - d2.getTime();
-        double allMinutes = (timeDiff / 3600000) * 60;
+            double timeDiff = d1.getTime() - d2.getTime();
+            double allMinutes = (timeDiff / 3600000) * 60;
 
-        for (TimerUpdate update : updates) {
-            update.setBaseTime(allMinutes, allMinutesActual);
+            System.out.println(allMinutes);
+
+            for (TimerUpdate update : updates) {
+                update.setBaseTime(allMinutes);
+            }
+        }
+        catch (ParseException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid time format");
+            alert.showAndWait();
         }
     }
 }

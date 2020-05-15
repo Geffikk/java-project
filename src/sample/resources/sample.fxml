@@ -26,26 +26,21 @@
                <font>
                   <Font name="Agency FB" size="17.0" />
                </font></Button>
-            <ImageView fx:id="iv" fitHeight="60.0" fitWidth="350.0" layoutX="211.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="iv" fitHeight="60.0" fitWidth="350.0" layoutX="211.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true" translateY="-2.0">
                <image>
                   <Image url="@../logo_sad_presov.png" />
                </image>
             </ImageView>
-            <Button layoutX="15.0" layoutY="166.0" mnemonicParsing="false" onAction="#setSpecTime" prefHeight="34.0" prefWidth="141.0" text="Set spec time">
+            <Button layoutX="15.0" layoutY="172.0" mnemonicParsing="false" onAction="#setSpecTime" prefHeight="34.0" prefWidth="141.0" text="Set spec time" translateX="-1.0" translateY="-2.0">
                <font>
                   <Font name="Agency FB" size="17.0" />
                </font></Button>
-            <TextField fx:id="specificTime" layoutX="14.0" layoutY="134.0" onKeyPressed="#setSpecTime" prefHeight="31.0" prefWidth="142.0" translateY="-1.0">
+            <TextField fx:id="specificTime" layoutX="14.0" layoutY="137.0" onKeyPressed="#setSpecTime" prefHeight="31.0" prefWidth="142.0" translateY="-1.0">
                <font>
                   <Font size="15.0" />
                </font></TextField>
-            <Label alignment="CENTER" layoutX="10.0" layoutY="324.0" prefHeight="42.0" prefWidth="191.0" text="Streets with slow traffic" textAlignment="CENTER">
-               <font>
-                  <Font name="Agency FB" size="22.0" />
-               </font>
-            </Label>
-            <Slider fx:id="setTrafficLevel" blockIncrement="1.0" layoutX="156.0" layoutY="247.0" majorTickUnit="1.0" max="3.0" minorTickCount="1" onMouseReleased="#centerCursorOnDelay" showTickLabels="true" showTickMarks="true" value="1.0" />
-            <Slider fx:id="speedLevel" blockIncrement="1.0" layoutX="16.0" layoutY="39.0" majorTickUnit="1.0" max="2.0" min="-2.0" minorTickCount="5" onMouseDragged="#setSpeedLevel" prefHeight="54.0" prefWidth="139.0" showTickLabels="true" showTickMarks="true" />
+            <Slider fx:id="setTrafficLevel" blockIncrement="1.0" layoutX="167.0" layoutY="247.0" majorTickUnit="1.0" max="3.0" minorTickCount="1" onMouseReleased="#centerCursorOnDelay" showTickLabels="true" showTickMarks="true" value="1.0" />
+            <Slider fx:id="speedLevel" blockIncrement="1.0" layoutX="16.0" layoutY="48.0" majorTickUnit="1.0" max="2.0" min="-2.0" minorTickCount="5" onMouseDragged="#setSpeedLevel" prefHeight="54.0" prefWidth="139.0" showTickLabels="true" showTickMarks="true" />
             <Label layoutX="16.0" layoutY="14.0" prefHeight="30.0" prefWidth="187.0" text="Speed of aplication" textFill="#6c6c6c">
                <font>
                   <Font name="Agency FB" size="27.0" />
@@ -56,7 +51,7 @@
                   <Font name="Agency FB" size="27.0" />
                </font>
             </Label>
-            <Label layoutX="15.0" layoutY="93.0" text="Default time" textFill="#6c6c6c">
+            <Label layoutX="15.0" layoutY="102.0" text="Default time" textFill="#6c6c6c">
                <font>
                   <Font name="Agency FB" size="27.0" />
                </font>
@@ -86,17 +81,27 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="1790.0" style="-fx-background-color: lightgrey;">
                      <children>
-                        <Label fx:id="showDepartures" layoutX="28.0" layoutY="66.0" prefHeight="190.0" prefWidth="1586.0">
+                        <Label fx:id="showDepartures" layoutX="26.0" layoutY="56.0" prefHeight="190.0" prefWidth="1322.0" translateY="-35.0">
                            <font>
                               <Font name="Arial Rounded MT Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="showPathStops" layoutX="18.0" layoutY="8.0" prefHeight="70.0" prefWidth="1589.0">
+                        <Label fx:id="showPathStops" layoutX="29.0" layoutY="25.0" prefHeight="70.0" prefWidth="1290.0" translateX="15.0" translateY="-20.0">
                            <font>
                               <Font name="Impact" size="17.0" />
                            </font>
                         </Label>
-                        <Line fx:id="traceOfStops" endX="-124.00000762939453" endY="-83.59993743896484" fill="BLACK" layoutX="152.0" layoutY="140.0" startX="-124.00000762939453" startY="-83.59993743896484" stroke="#f2f2f2" strokeWidth="3.0" visible="false" />
+                        <Line fx:id="traceOfStops" endX="-124.00001525878906" endY="-61.599998474121094" fill="BLACK" layoutX="152.0" layoutY="140.0" startX="-124.00001525878906" startY="-61.599998474121094" stroke="#f2f2f2" strokeWidth="3.0" translateY="-25.0" visible="false" />
+                        <Label fx:id="actPositionText" layoutX="1373.0" layoutY="14.0" prefHeight="46.0" prefWidth="265.0" text="ACTUAL POSITION:" translateX="30.0" visible="false">
+                           <font>
+                              <Font name="Bell MT" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="actualPositionLabel" layoutX="1619.0" layoutY="18.0" prefHeight="38.0" prefWidth="174.0" translateX="30.0">
+                           <font>
+                              <Font name="Bell MT" size="25.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content>

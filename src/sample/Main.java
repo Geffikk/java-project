@@ -83,13 +83,23 @@ public class Main extends Application {
             //lenght of path
             double lenghtOfPath = dataOfVehicles.getAutobuses().get(i).getPath().getPathSize();
             //10 autobuses on line so lenghtOfPath/10
-            double distanceToAdd = lenghtOfPath/10;
+            double distanceToAdd = lenghtOfPath/5;
             //add path to autobus based on direction of path
-            if(i%2 == 0){
-                dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*i);
+            if(i<6){
+                if(i%2 == 0){
+                    dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*i);
+                }
+                else{
+                    dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*(5 - i));
+                }
             }
             else{
-                dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*(10 - i));
+                if(i%2 == 0){
+                    dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*(i - 5));
+                }
+                else{
+                    dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*(5 - (i - 5)));
+                }
             }
         }
 
@@ -100,13 +110,23 @@ public class Main extends Application {
             //lenght of path
             double lenghtOfPath = dataOfVehicles.getAutobuses().get(j).getPath().getPathSize();
             //10 autobuses on line so lenghtOfPath/10
-            double distanceToAdd = lenghtOfPath/10;
+            double distanceToAdd = lenghtOfPath/5;
             //add path to autobus based on direction of path
-            if(j%2 == 0){
-                dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(j - 10));
+            if(j<16){
+                if(j%2 == 0){
+                    dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(j - 10));
+                }
+                else{
+                    dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(5 - (j - 10)));
+                }
             }
             else{
-                dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(10 - (j - 10)));
+                if(j%2 == 0){
+                    dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(j - 15));
+                }
+                else{
+                    dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(5 - (j - 15)));
+                }
             }
         }
 
@@ -117,13 +137,23 @@ public class Main extends Application {
             //lenght of path
             double lenghtOfPath = dataOfVehicles.getAutobuses().get(z).getPath().getPathSize();
             //10 autobuses on line so lenghtOfPath/10
-            double distanceToAdd = lenghtOfPath/10;
+            double distanceToAdd = lenghtOfPath/5;
             //add path to autobus based on direction of path
-            if(z%2 == 0){
-                dataOfVehicles.getAutobuses().get(z).setDistance(distanceToAdd*(z - 20));
+            if(z<26){
+                if(z%2 == 0){
+                    dataOfVehicles.getAutobuses().get(z).setDistance(distanceToAdd*(z - 20));
+                }
+                else{
+                    dataOfVehicles.getAutobuses().get(z).setDistance(distanceToAdd*(5 - (z - 20)));
+                }
             }
             else{
-                dataOfVehicles.getAutobuses().get(z).setDistance(distanceToAdd*(10 - (z - 20)));
+                if(z%2 == 0){
+                    dataOfVehicles.getAutobuses().get(z).setDistance(distanceToAdd*(z - 25));
+                }
+                else{
+                    dataOfVehicles.getAutobuses().get(z).setDistance(distanceToAdd*(5 - (z - 25)));
+                }
             }
         }
 
