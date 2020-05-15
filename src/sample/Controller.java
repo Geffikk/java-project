@@ -206,7 +206,7 @@ public class Controller {
             }
         }
         catch (ParseException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid time format");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid time format (Time format HH:mm:ss)");
             alert.showAndWait();
         }
     }

@@ -122,21 +122,25 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
         StringBuilder departures = new StringBuilder();
         StringBuilder stops = new StringBuilder();
         double x = 0;
-        for (int j = 0; j < 4; j++) {
+        for (int j = 0; j < 27; j++) {
             for (int i = 0; i < line.getListOfDepartures().size(); i++) {
-                if (gui.get(0).getId().equals("2")) {
-                    departures.append(line.getListOfDepartures().get(i).get(j)).append("\t\t");
+                try {
+                    if (gui.get(0).getId().equals("2")) {
+                        departures.append(line.getListOfDepartures().get(i).get(j)).append("\t\t");
+                    } else if (gui.get(0).getId().equals("1")) {
+                        departures.append(line.getListOfDepartures().get(i).get(j)).append("\t\t");
+                    } else if (gui.get(0).getId().equals("3")) {
+                        departures.append(line.getListOfDepartures().get(i).get(j)).append("\t\t");
+                    }
                 }
-                else if(gui.get(0).getId().equals("1")) {
-                    departures.append(line.getListOfDepartures().get(i).get(j)).append("\t\t");
-                }
-                else if(gui.get(0).getId().equals("3")) {
-                    departures.append(line.getListOfDepartures().get(i).get(j)).append("\t\t");
+                catch (IndexOutOfBoundsException e) {
+                    continue;
                 }
             }
             departures.append("\n");
         }
 
+        System.out.println(line.getListOfDepartures().size());
         for (int i = 0; i < line.getListOfDepartures().size(); i++) {
             stops.append(line.getStopList().get(i).getId()).append("\t\t\t").append("     ");
             x = x + 80;
@@ -225,6 +229,11 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
                 Circle circle = new Circle(position.getX(), position.getY(), 8, Color.RED);
                 circle.setStroke(Color.BLACK);
                 circle.setId("1");
+                if(oneColor) {
+                    circle = new Circle(position.getX(), position.getY(), 8, Color.RED);
+                    circle.setId("4");
+                    oneColor = false;
+                }
                 gui.add(circle);
                 break;
             }
@@ -306,14 +315,12 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
                 distance = distance + path.getPathSize();
                 Collections.reverse(path.getPath());
             }
-
-            if(gui.get(0).getId().equals("3")){
-                System.out.printf("MODRE AUTO dlzka celej cesty -> (%s) \n", path.getPathSize()*2);
-                System.out.printf("Celkova potrebna dlzka na prejdenie -> (%s) \n", distanceAfterTravelInTime);
-                System.out.printf("Zredukovana dlzka na prejdenie -> (%s) \n", i);
-                System.out.printf("Aktualna vzdialenost vozidla -> (%s)\n",distance);
-                System.out.println("---------------------------------------------------------");
-            }
+        }
+        if(gui.get(0).getId().equals("4")){
+            System.out.printf("MODRE AUTO dlzka celej cesty -> (%s) \n", path.getPathSize()*2);
+            System.out.printf("Celkova potrebna dlzka na prejdenie -> (%s) \n", distanceAfterTravelInTime);
+            System.out.printf("Aktualna vzdialenost vozidla -> (%s)\n",distance);
+            System.out.println("---------------------------------------------------------");
         }
     }
 
@@ -321,6 +328,13 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
     public void update(Time mapTime) {
 
         distance += speed/(3.0/2.0);
+
+        if (gui.get(0).getId().equals("4")) {
+            //System.out.println(distance);
+            if(mapTime.toString().equals("07:20:00")) {
+                System.out.println(distance);
+            }
+        }
 
         if(this.autobusIsOnStreet != null) {
             for(String street : slowStreets) {

@@ -226,6 +226,11 @@ streets:
     coordinate:
       &96 x: 900.0
       y: 100.0
+  - &113 id: "s17"
+    street: *92
+    coordinate:
+      &114 x: 1100.0
+      y: 200.0
 - &97 id: "Street18"
   coordinates:
   - &98 x: 900.0
