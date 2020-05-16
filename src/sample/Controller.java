@@ -17,8 +17,6 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import sample.source.imap.Drawable;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import sample.source.imap.TimerUpdate;
 
 import java.sql.Time;
@@ -48,8 +46,6 @@ public class Controller {
     @FXML
     private TextField delayStreet; /* modify speed on street */
     @FXML
-    private ImageView iv; /* display image (SAD Presov) */
-    @FXML
     private TextField specificTime; /* modify default time */
     @FXML
     private Slider setTrafficLevel; /* set load to traffic */
@@ -60,19 +56,6 @@ public class Controller {
     @FXML
     private Label actPositionText;
 
-    /**
-     * Set image SAD Presov to bottom right corner
-     */
-    @FXML
-    public void setImages() {
-
-        Image image = new Image("file:///C:\\Users\\Geffik\\Desktop\\java-project\\src\\sample\\logo_sad_presov.png");
-        iv.setImage(image);
-        iv.setScaleX(2.05);
-        iv.setScaleY(2.05);
-        iv.setTranslateY(280);
-        iv.setTranslateX(20);
-    }
 
     /**
      *  speed of system
@@ -148,7 +131,7 @@ public class Controller {
 
     /**
      * Timer of aplication (system is updated every n seconds)
-     * @param scale timer scale
+     * @param scale scale of time
      */
     public void startTime(double scale) {
 
@@ -201,7 +184,7 @@ public class Controller {
 
     /** 
       * Set default time to aplication 
-      *	@exception ParseException error
+      *	@exception ParseException when time is in wrong format
       */
     @FXML
     public void setSpecTime() throws ParseException {

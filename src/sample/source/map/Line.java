@@ -1,5 +1,14 @@
+/**
+ -  PROJECT: Simulacia liniek MHD
+ -  Authors: Maroš Geffert <xgeffe00>, Patrik Tomov <xtomov02>
+ -  Date: 10.5.2020
+ -  School: VUT Brno
+ */
+
+/* Package */
 package sample.source.map;
 
+/* Imports */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javafx.scene.shape.Shape;
 import sample.source.imap.Drawable;

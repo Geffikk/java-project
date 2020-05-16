@@ -1,5 +1,14 @@
+/**
+ -  PROJECT: Simulacia liniek MHD
+ -  Authors: Maroš Geffert <xgeffe00>, Patrik Tomov <xtomov02>
+ -  Date: 10.5.2020
+ -  School: VUT Brno
+ */
+
+/* Package */
 package sample.source.map;
 
+/* Imports */
 import sample.source.imap.Drawable;
 import sample.source.imap.TimerUpdate;
 import sample.source.imap.iAutobus;
@@ -13,13 +22,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-
 
 import static java.lang.Math.abs;
 
@@ -54,19 +59,10 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
     static public Boolean turnOnDelay;
     @JsonIgnore
     private double startDistance;
-
-    public void setDirection(boolean direction) {
-        this.direction = direction;
-    }
-
     @JsonIgnore
     public boolean direction;
 
 
-    @JsonIgnore
-    public void setStartDistance(double startDistance) {
-        this.startDistance = startDistance;
-    }
 
 
     // TimerUpdate Interface
@@ -443,6 +439,14 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
     }
 
     // Setters
+
+    public void setDirection(boolean direction) {
+        this.direction = direction;
+    }
+
+    public void setStartDistance(double startDistance) {
+        this.startDistance = startDistance;
+    }
 
     public void set_line(Line line){
         this.line = line;

@@ -1,5 +1,14 @@
+/**
+ -  PROJECT: Simulacia liniek MHD
+ -  Authors: Maroš Geffert <xgeffe00>, Patrik Tomov <xtomov02>
+ -  Date: 10.5.2020
+ -  School: VUT Brno
+ */
+
+/* Package */
 package sample;
 
+/* Imports */
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator;
@@ -13,7 +22,6 @@ import sample.source.imap.Drawable;
 import sample.source.map.*;
 
 import java.io.File;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +29,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/layout.fxml"));
         BorderPane root = loader.load();
         primaryStage.setTitle("Map");
 
@@ -37,12 +45,12 @@ public class Main extends Application {
 
 
         // Load streets and stops
-        DataStreets dataOfStreets = mapper.readValue(new File("data2.yml"), DataStreets.class);
+        DataStreets dataOfStreets = mapper.readValue(new File("dataOfStreetsAndStops.yml"), DataStreets.class);
         // Add STREETS to map
         elements.addAll(dataOfStreets.getStreets());
 
         // Load lines
-        DataLines dataOfLines = mapper.readValue(new File("data3.yml"), DataLines.class);
+        DataLines dataOfLines = mapper.readValue(new File("dataOfLines.yml"), DataLines.class);
 
         // Make route of each line
         for (Line line: dataOfLines.getLines()) {
@@ -75,7 +83,7 @@ public class Main extends Application {
         }
 
         // Load vehicles and their path
-        DataAutobuses dataOfVehicles = mapper.readValue(new File("data.yml"), DataAutobuses.class);
+        DataAutobuses dataOfVehicles = mapper.readValue(new File("dataOfAutobuses.yml"), DataAutobuses.class);
 
         //assing line 1 to first 10 autobuses and starting position(distance)
         for(int i = 0; i < 10; i++){
@@ -199,7 +207,6 @@ public class Main extends Application {
         // Add vehicles to map
         elements.addAll(dataOfVehicles.getAutobuses());
 
-        controller.setImages();
         controller.setElements(elements);
         controller.startTime(5);
     }
