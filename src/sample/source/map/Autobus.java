@@ -39,6 +39,11 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
     private double speed = 0; /* speed of vehicle */
     private Path path; /* path of vehicle */
     private String idOfLine; /* identification of line, (which vehicle, which line) */
+
+    public double getDistance() {
+        return distance;
+    }
+
     @JsonIgnore
     private double distance = 0; /* driven distance */
     @JsonIgnore
@@ -54,7 +59,7 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
     @JsonIgnore
     private String slowStreetsString = "";
     @JsonIgnore
-    static boolean oneColor = true;
+    private boolean oneColor = true;
     @JsonIgnore
     static public Boolean turnOnDelay;
     @JsonIgnore
@@ -69,8 +74,16 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
     @Override
     public void update(Time mapTime) {
 
+        /*
+        if(oneColor) {
+            if(gui.get(0).getId().equals("2")) {
+                System.out.println(distance);
+            }
+            oneColor = false;
+        }*/
+
         Time pauseOnSleep = new Time(23,59,59);
-        if(mapTime.before(pauseOnSleep) && mapTime.after(new Time(6,20,0))) {
+        if(mapTime.before(pauseOnSleep) && mapTime.after(new Time(6,19,59))) {
 
             distance += speed/(3.0/2.0);
             gui.get(0).setVisible(true);
@@ -243,9 +256,11 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
     public void setDepartures(Label actualPosition, Label label, Label label2, javafx.scene.shape.Line traceOfStops, Pane content, Label actPositionText){
         StringBuilder departures = new StringBuilder();
         StringBuilder stops = new StringBuilder();
-        System.out.println(direction);
         double x = 0;
+        boolean jumpAway = false;
+        int numberOfDepartures = 0;
         for (int j = 0; j < 27; j++) {
+            numberOfDepartures++;
             for (int i = 0; i < line.getListOfDepartures1().size(); i++) {
                 try {
                     if(direction) {
@@ -268,13 +283,16 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
                     }
                 }
                 catch (IndexOutOfBoundsException e) {
-                    continue;
+                    jumpAway = true;
+                    break;
                 }
+            }
+            if (jumpAway) {
+                numberOfDepartures--;
+                break;
             }
             departures.append("\n");
         }
-
-        System.out.println(line.getListOfDepartures1().size());
         try {
             if(direction) {
                 for (int i = 0; i < line.getStopList().size(); i++) {
@@ -283,7 +301,6 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
                 }
             }
             else {
-                System.out.println(line.getStopList());
                 for (int i = line.getStopList().size()-1; i >= 0; i--) {
                     stops.append(line.getStopList().get(i).getId()).append("\t\t\t").append("     ");
                     x = x + 80;
@@ -292,8 +309,6 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
         }
         catch (IndexOutOfBoundsException e) {
         }
-
-        System.out.println(gui.get(0).getId());
 
         for (int f = 0; f<content.getChildren().size(); f++){
             /* stronger line (after click on gui) */
@@ -349,6 +364,13 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
         label.setText(departures.toString());
         label2.setText(stops.toString());
         label2.setTranslateX(8);
+
+        if(numberOfDepartures == 19) {
+            label.setPrefHeight(580);
+        }
+        else {
+            label.setPrefHeight(700);
+        }
 
         traceOfStops.setVisible(true);
         traceOfStops.setStroke(Color.RED);

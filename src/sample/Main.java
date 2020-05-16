@@ -106,24 +106,20 @@ public class Main extends Application {
                 if(i%2 == 0){
                     dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*i);
                     dataOfVehicles.getAutobuses().get(i).setStartDistance(distanceToAdd*i);
-                    dataOfVehicles.getAutobuses().get(i).setDirection(true);
                 }
                 else{
                     dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*(5 - i));
                     dataOfVehicles.getAutobuses().get(i).setStartDistance(distanceToAdd*(5 - i));
-                    dataOfVehicles.getAutobuses().get(i).setDirection(false);
                 }
             }
             else{
                 if(i%2 == 0){
                     dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*(i - 5));
                     dataOfVehicles.getAutobuses().get(i).setStartDistance(distanceToAdd*(i - 5));
-                    dataOfVehicles.getAutobuses().get(i).setDirection(true);
                 }
                 else{
                     dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*(5 - (i - 5)));
                     dataOfVehicles.getAutobuses().get(i).setStartDistance(distanceToAdd*(5 - (i - 5)));
-                    dataOfVehicles.getAutobuses().get(i).setDirection(false);
                 }
             }
         }
@@ -160,8 +156,8 @@ public class Main extends Application {
                     dataOfVehicles.getAutobuses().get(j).setStartDistance(distanceToAdd*(j - 15));
                 }
                 else{
-                    dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(j - 15));
-                    dataOfVehicles.getAutobuses().get(j).setStartDistance(distanceToAdd*(j - 15));
+                    dataOfVehicles.getAutobuses().get(j).setDistance(distanceToAdd*(5 - (j - 15)));
+                    dataOfVehicles.getAutobuses().get(j).setStartDistance(distanceToAdd*(5 - (j - 15)));
                 }
             }
         }
@@ -172,10 +168,10 @@ public class Main extends Application {
             dataOfVehicles.getAutobuses().get(z).set_line(dataOfLines.getLines().get(2));
 
             if(dataOfVehicles.getAutobuses().get(z).getPath().getPath().get(0).equals(new Coordinate(1100, 200))) {
-                dataOfVehicles.getAutobuses().get(z).setDirection(true);
+                dataOfVehicles.getAutobuses().get(z).setDirection(false);
             }
             else {
-                dataOfVehicles.getAutobuses().get(z).setDirection(false);
+                dataOfVehicles.getAutobuses().get(z).setDirection(true);
             }
             //lenght of path
             double lenghtOfPath = dataOfVehicles.getAutobuses().get(z).getPath().getPathSize();
