@@ -12,11 +12,14 @@ public class Path implements iPath {
 
     private List<Coordinate> path; /* list of coordinates (make path of vehicle) */
 
-    public Path() {}
 
+    //                                     Private Functions
 
-    public List<Coordinate> getPath() {
-        return path;
+    /**
+     * Empty constructor for yaml
+     */
+    private Path() {
+
     }
 
     /**
@@ -28,6 +31,8 @@ public class Path implements iPath {
     private double getDistanceBetweenCoordinates(Coordinate a, Coordinate b) {
         return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
     }
+
+    //                                iPath Interface
 
     public Coordinate getCoordinateByDistance(double distance, Autobus autobus) {
 
@@ -75,12 +80,16 @@ public class Path implements iPath {
         return new Coordinate(a.getX() + (b.getX() - a.getX()) * driven, a.getY() + (b.getY() - a.getY()) * driven);
     }
 
-    @JsonIgnore
     public double getPathSize() {
         double size = 0;
         for(int i=0; i< path.size() - 1; i++) {
             size += getDistanceBetweenCoordinates(path.get(i), path.get(i+1));
         }
         return size;
+    }
+
+
+    public List<Coordinate> getPath() {
+        return path;
     }
 }

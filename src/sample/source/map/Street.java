@@ -31,9 +31,10 @@ public class Street implements iStreet, Drawable{
     /**
      * Empty constructor for yaml
      */
-    public Street() {
+    private Street() {
     }
 
+    //                                       iStreet Interface
 
     @Override
     public Coordinate begin() {
@@ -50,6 +51,7 @@ public class Street implements iStreet, Drawable{
         return Collections.unmodifiableList(this.coordinates);
     }
 
+    @Override
     public double getDelay() { return this.delay; }
 
     @Override
@@ -66,6 +68,9 @@ public class Street implements iStreet, Drawable{
     public String toString() {
         return String.format("street(%s)", id);
     }
+
+
+    //                                       Drawable Interface
 
     @JsonIgnore
     @Override

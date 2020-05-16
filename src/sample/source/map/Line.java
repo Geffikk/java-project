@@ -76,6 +76,7 @@ public class Line implements iLine, Drawable {
 
     //                                      Drawable Interface
     @Override
+    @JsonIgnore
     public List<Shape> getGUI() {
 
         //If there is street with more than 2 coordiantes

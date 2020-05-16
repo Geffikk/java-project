@@ -26,25 +26,32 @@ public class Stop implements iStop, Drawable {
     /**
      * Empty constructor for yaml
      */
-    public Stop() {}
+    private Stop() {
 
+    }
 
+    //                                   iStop Interface
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public Coordinate getCoordinate() {
         return coordinate;
     }
 
+    @Override
     public Street getStreet() {
         return this.streetOfStop;
     }
 
+    @Override
     public void setStreet(Street s) {
         streetOfStop = s;
     }
 
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Stop)) {
             return false;
@@ -57,6 +64,8 @@ public class Stop implements iStop, Drawable {
     public String toString() {
         return String.format("stop(%s)", id);
     }
+
+    //                                      Drawable Interface
 
     @JsonIgnore
     public List<Shape> getGUI() {

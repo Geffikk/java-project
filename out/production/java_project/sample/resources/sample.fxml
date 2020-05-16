@@ -27,7 +27,11 @@
                   <Font name="Agency FB" size="17.0" />
                </font></Button>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             <ImageView fx:id="iv" fitHeight="60.0" fitWidth="350.0" layoutX="211.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true" translateY="-2.0">
+=======
+            <ImageView fx:id="iv" fitHeight="60.0" fitWidth="350.0" layoutX="211.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true" translateY="-5.0">
+>>>>>>> Stashed changes
 =======
             <ImageView fx:id="iv" fitHeight="60.0" fitWidth="350.0" layoutX="211.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true" translateY="-5.0">
 >>>>>>> Stashed changes
@@ -82,10 +86,15 @@
       <AnchorPane prefHeight="186.0" prefWidth="1648.0" style="-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-width: 2px; -fx-border-style: solid;" BorderPane.alignment="CENTER">
          <children>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             <ScrollPane layoutX="12.0" layoutY="12.0" prefHeight="168.0" prefWidth="1630.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="9.0">
+=======
+            <ScrollPane layoutX="12.0" layoutY="12.0" prefHeight="300.0" prefWidth="1630.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="9.0">
+>>>>>>> Stashed changes
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="1790.0" style="-fx-background-color: lightgrey;">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="699.0" prefWidth="1790.0" style="-fx-background-color: lightgrey;">
                      <children>
+<<<<<<< Updated upstream
                         <Label fx:id="showDepartures" layoutX="26.0" layoutY="56.0" prefHeight="190.0" prefWidth="1322.0" translateY="-35.0">
 =======
             <ScrollPane layoutX="12.0" layoutY="12.0" prefHeight="300.0" prefWidth="1630.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="9.0">
@@ -94,12 +103,19 @@
                      <children>
                         <Label fx:id="showDepartures" layoutX="26.0" layoutY="56.0" prefHeight="700.0" prefWidth="1322.0" translateY="-80.0">
 >>>>>>> Stashed changes
+=======
+                        <Label fx:id="showDepartures" layoutX="26.0" layoutY="56.0" prefHeight="700.0" prefWidth="1322.0" translateY="-80.0">
+>>>>>>> Stashed changes
                            <font>
                               <Font name="Arial Rounded MT Bold" size="16.0" />
                            </font>
                         </Label>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <Label fx:id="showPathStops" layoutX="29.0" layoutY="25.0" prefHeight="70.0" prefWidth="1290.0" translateX="15.0" translateY="-20.0">
+=======
+                        <Label fx:id="showPathStops" layoutX="29.0" layoutY="25.0" prefHeight="70.0" prefWidth="1290.0" translateX="15.0" translateY="-30.0">
+>>>>>>> Stashed changes
 =======
                         <Label fx:id="showPathStops" layoutX="29.0" layoutY="25.0" prefHeight="70.0" prefWidth="1290.0" translateX="15.0" translateY="-30.0">
 >>>>>>> Stashed changes
@@ -108,14 +124,20 @@
                            </font>
                         </Label>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <Line fx:id="traceOfStops" endX="-124.00001525878906" endY="-61.599998474121094" fill="BLACK" layoutX="152.0" layoutY="140.0" startX="-124.00001525878906" startY="-61.599998474121094" stroke="#f2f2f2" strokeWidth="3.0" translateY="-25.0" visible="false" />
                         <Label fx:id="actPositionText" layoutX="1373.0" layoutY="14.0" prefHeight="46.0" prefWidth="265.0" text="ACTUAL POSITION:" translateX="30.0" visible="false">
+=======
+                        <Line fx:id="traceOfStops" endX="-124.00001525878906" endY="-61.599998474121094" fill="BLACK" layoutX="152.0" layoutY="140.0" startX="-124.00001525878906" startY="-61.599998474121094" stroke="#f2f2f2" strokeWidth="3.0" translateY="-35.0" visible="false" />
+                        <Label fx:id="actPositionText" layoutX="1373.0" layoutY="14.0" prefHeight="46.0" prefWidth="265.0" text="ACTUAL POSITION:" translateX="70.0" visible="false">
+>>>>>>> Stashed changes
                            <font>
-                              <Font name="Bell MT" size="25.0" />
+                              <Font name="Arial Narrow Bold" size="25.0" />
                            </font>
                         </Label>
                         <Label fx:id="actualPositionLabel" layoutX="1619.0" layoutY="18.0" prefHeight="38.0" prefWidth="174.0" translateX="30.0">
                            <font>
+<<<<<<< Updated upstream
                               <Font name="Bell MT" size="25.0" />
 =======
                         <Line fx:id="traceOfStops" endX="-124.00001525878906" endY="-61.599998474121094" fill="BLACK" layoutX="152.0" layoutY="140.0" startX="-124.00001525878906" startY="-61.599998474121094" stroke="#f2f2f2" strokeWidth="3.0" translateY="-35.0" visible="false" />
@@ -126,6 +148,9 @@
                         </Label>
                         <Label fx:id="actualPositionLabel" layoutX="1619.0" layoutY="18.0" prefHeight="38.0" prefWidth="174.0" translateX="40.0">
                            <font>
+                              <Font name="Arial Narrow Bold" size="25.0" />
+>>>>>>> Stashed changes
+=======
                               <Font name="Arial Narrow Bold" size="25.0" />
 >>>>>>> Stashed changes
                            </font>

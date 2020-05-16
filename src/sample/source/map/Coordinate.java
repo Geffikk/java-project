@@ -20,7 +20,8 @@ public class Coordinate implements iCoordinate {
     /**
      * Constructor of coordines (coordinates have to be positive)
      * @param x coordinate X
-     * @param y coordinate Y */
+     * @param y coordinate Y
+     */
     public Coordinate(double x, double y) {
         if (x > 0 && y > 0) {
             this.x = x;

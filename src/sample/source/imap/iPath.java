@@ -8,12 +8,6 @@ import java.util.List;
 public interface iPath {
 
     /**
-     * Return path of vehicle
-     * @return path
-     */
-    List<Coordinate> getPath();
-
-    /**
      * Calculate new coordinates after move
      * @param distance actual distance of vehicle
      * @param autobus vehicle
@@ -26,5 +20,11 @@ public interface iPath {
      * @return size of all path
      */
     double getPathSize();
+
+    /**
+     * Return path of vehicle
+     * @return path
+     */
+    List<Coordinate> getPath();
 
 }

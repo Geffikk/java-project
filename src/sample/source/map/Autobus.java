@@ -361,6 +361,7 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
 
     //  Drawable Interface
     @Override
+    @JsonIgnore
     public List<Shape> getGUI() {
         return gui;
     }
