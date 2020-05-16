@@ -40,13 +40,6 @@ public interface iAutobus {
      */
      Coordinate getPosition();
 
-
-    /**
-     * Return time string (getter for yaml)
-     * @return time string
-     */
-    String getTimeID();
-
     /**
      * Get speed of autobus (getter for yaml)
      * @return speed

@@ -61,7 +61,6 @@ coordinates:
   y: 200.0
 autobuses:
 - position: *1
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -89,7 +88,6 @@ autobuses:
       y: 300.0
   idOfLine: "1"
 - position: *2
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -117,7 +115,6 @@ autobuses:
       y: 600.0
   idOfLine: "1"
 - position: *3
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -145,7 +142,6 @@ autobuses:
       y: 300.0
   idOfLine: "1"
 - position: *4
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -173,7 +169,6 @@ autobuses:
       y: 600.0
   idOfLine: "1"
 - position: *5
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -201,7 +196,6 @@ autobuses:
       y: 300.0
   idOfLine: "1"
 - position: *6
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -229,7 +223,6 @@ autobuses:
       y: 600.0
   idOfLine: "1"
 - position: *7
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -257,7 +250,6 @@ autobuses:
       y: 600.0
   idOfLine: "1"
 - position: *8
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -285,7 +277,6 @@ autobuses:
       y: 300.0
   idOfLine: "1"
 - position: *9
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -313,7 +304,6 @@ autobuses:
       y: 600.0
   idOfLine: "1"
 - position: *10
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -341,7 +331,6 @@ autobuses:
       y: 300.0
   idOfLine: "1"
 - position: *11
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -371,7 +360,6 @@ autobuses:
       y: 700.0
   idOfLine: "2"
 - position: *12
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -401,7 +389,6 @@ autobuses:
       y: 200.0
   idOfLine: "2"
 - position: *13
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -431,7 +418,6 @@ autobuses:
       y: 700.0
   idOfLine: "2"
 - position: *14
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -461,7 +447,6 @@ autobuses:
       y: 200.0
   idOfLine: "2"
 - position: *15
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -491,7 +476,6 @@ autobuses:
       y: 700.0
   idOfLine: "2"
 - position: *16
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -521,7 +505,6 @@ autobuses:
       y: 200.0
   idOfLine: "2"
 - position: *17
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -551,7 +534,6 @@ autobuses:
       y: 200.0
   idOfLine: "2"
 - position: *18
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -581,7 +563,6 @@ autobuses:
       y: 700.0
   idOfLine: "2"
 - position: *19
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -611,7 +592,6 @@ autobuses:
       y: 200.0
   idOfLine: "2"
 - position: *20
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -641,7 +621,6 @@ autobuses:
       y: 700.0
   idOfLine: "2"
 - position: *21
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -675,7 +654,6 @@ autobuses:
       y: 300.0
   idOfLine: "3"
 - position: *22
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -709,7 +687,6 @@ autobuses:
       y: 200.0
   idOfLine: "3"
 - position: *23
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -743,7 +720,6 @@ autobuses:
       y: 300.0
   idOfLine: "3"
 - position: *24
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -777,7 +753,6 @@ autobuses:
       y: 200.0
   idOfLine: "3"
 - position: *25
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -811,7 +786,6 @@ autobuses:
       y: 300.0
   idOfLine: "3"
 - position: *26
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -845,7 +819,6 @@ autobuses:
       y: 200.0
   idOfLine: "3"
 - position: *27
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -879,7 +852,6 @@ autobuses:
       y: 200.0
   idOfLine: "3"
 - position: *28
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -913,7 +885,6 @@ autobuses:
       y: 300.0
   idOfLine: "3"
 - position: *29
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
@@ -947,7 +918,6 @@ autobuses:
       y: 200.0
   idOfLine: "3"
 - position: *30
-  timeID: "10:00:00"
   speed: 1
   path:
     path:
