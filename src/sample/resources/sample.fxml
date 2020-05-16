@@ -81,7 +81,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="699.0" prefWidth="1790.0" style="-fx-background-color: lightgrey;">
                      <children>
-                        <Label fx:id="showDepartures" layoutX="26.0" layoutY="56.0" prefHeight="700.0" prefWidth="1322.0" translateY="-80.0">
+                        <Label fx:id="showDepartures" layoutX="26.0" layoutY="56.0" prefHeight="700.0" prefWidth="1322.0" translateY="-105.0">
                            <font>
                               <Font name="Arial Rounded MT Bold" size="16.0" />
                            </font>
