@@ -26,6 +26,14 @@
                <font>
                   <Font name="Agency FB" size="17.0" />
                </font></Button>
+<<<<<<< Updated upstream:src/sample/resources/layout.fxml
+=======
+            <ImageView fx:id="iv" fitHeight="60.0" fitWidth="350.0" layoutX="211.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true" translateY="-5.0">
+               <image>
+                  <Image url="@../logo_sad_presov.png" />
+               </image>
+            </ImageView>
+>>>>>>> Stashed changes:out/production/java_project/sample/resources/sample.fxml
             <Button layoutX="15.0" layoutY="172.0" mnemonicParsing="false" onAction="#setSpecTime" prefHeight="34.0" prefWidth="141.0" text="Set spec time" translateX="-1.0" translateY="-2.0">
                <font>
                   <Font name="Agency FB" size="17.0" />
