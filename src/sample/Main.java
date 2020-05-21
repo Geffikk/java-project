@@ -58,6 +58,14 @@ public class Main extends Application {
             List<Street> streetsOfLine = line.getStreetList();
 
             for (Street str: streetsOfLine) {
+                for (Street strToAdd:dataOfStreets.getStreets()) {
+
+                    if (str.getId().equals(strToAdd.getId())){
+                        strToAdd.setLineToStreet(line);
+                        break;
+                    }
+                }
+
                 List<Stop> stopsOfStreet = str.getStops();
                 if (stopsOfStreet.size() == 0){
                     line.addStreetAndStopToAbsMap(str, null);
@@ -74,6 +82,7 @@ public class Main extends Application {
             }
         }
 
+
         // Add all STOPS on each street to map
         for (Street street: dataOfStreets.getStreets()) {
             List<Stop> stops = street.getStops();
@@ -89,6 +98,7 @@ public class Main extends Application {
         for(int i = 0; i < 10; i++){
             //assing line to autobus
             dataOfVehicles.getAutobuses().get(i).set_line(dataOfLines.getLines().get(0));
+
 
             if(dataOfVehicles.getAutobuses().get(i).getPath().getPath().get(0).equals(new Coordinate(300, 600))) {
                 dataOfVehicles.getAutobuses().get(i).setDirection(true);
@@ -110,6 +120,7 @@ public class Main extends Application {
                 else{
                     dataOfVehicles.getAutobuses().get(i).setDistance(distanceToAdd*(5 - i));
                     dataOfVehicles.getAutobuses().get(i).setStartDistance(distanceToAdd*(5 - i));
+
                 }
             }
             else{

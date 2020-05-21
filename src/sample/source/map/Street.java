@@ -36,6 +36,8 @@ public class Street implements iStreet, Drawable{
     private List<Stop> stops = new ArrayList<>(); /* list of stops */
     @JsonIgnore
     public double delay = 1; /* represent load of street (slowdown vehicle) */
+    @JsonIgnore
+    private List<Boolean> arrayOfLines =  new ArrayList<>();
 
     /**
      * Empty constructor for yaml
@@ -78,6 +80,31 @@ public class Street implements iStreet, Drawable{
         return String.format("street(%s)", id);
     }
 
+    @JsonIgnore
+    public void setLineToStreet(sample.source.map.Line line) {
+        String idOfLine = line.getId();
+        if(this.arrayOfLines.isEmpty()){
+            this.arrayOfLines.add(false);
+            this.arrayOfLines.add(false);
+            this.arrayOfLines.add(false);
+        }
+
+        switch (idOfLine){
+            case "1":
+                this.arrayOfLines.set(0,true);
+                break;
+            case "2":
+                this.arrayOfLines.set(1,true);
+                break;
+            case "3":
+                this.arrayOfLines.set(2,true);
+                break;
+            default:
+                break;
+        }
+    }
+
+
 
     //                                       Drawable Interface
 
@@ -116,4 +143,6 @@ public class Street implements iStreet, Drawable{
             return shapes;
         }
     }
+
+
 }
