@@ -59,13 +59,6 @@ public class Main extends Application {
             List<Street> streetsOfLine = line.getStreetList();
 
             for (Street str: streetsOfLine) {
-                for (Street strToAdd:dataOfStreets.getStreets()) {
-
-                    if (str.getId().equals(strToAdd.getId())){
-                        strToAdd.setLineToStreet(line);
-                        break;
-                    }
-                }
 
                 List<Stop> stopsOfStreet = str.getStops();
                 if (stopsOfStreet.size() == 0){

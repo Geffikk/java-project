@@ -41,14 +41,13 @@ public class Street implements iStreet, Drawable, TimerUpdate2 {
     private static List<Street> obchadzka = new ArrayList<>();
     @JsonIgnore
     public double delay = 1; /* represent load of street (slowdown vehicle) */
-    @JsonIgnore
     private List<Boolean> arrayOfLines =  new ArrayList<>();
 
     /*********************************************************
      * Return array which represent how mauch lines has street
      * @return - boolean array
      *********************************************************/
-    @JsonIgnore
+
     public List<Boolean> getArrayOfLines() {
         return arrayOfLines;
     }
@@ -105,6 +104,8 @@ public class Street implements iStreet, Drawable, TimerUpdate2 {
     public String toString() {
         return String.format("street(%s)", id);
     }
+
+
 
     @JsonIgnore
     public void setLineToStreet(sample.source.map.Line line) {

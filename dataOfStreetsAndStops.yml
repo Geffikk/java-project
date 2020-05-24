@@ -16,6 +16,10 @@ streets:
     coordinate:
       &7 x: 100.0
       y: 300.0
+  arrayOfLines:
+  - true
+  - false
+  - true
 - &8 id: "Street2"
   coordinates:
   - &9 x: 100.0
@@ -35,6 +39,10 @@ streets:
     coordinate:
       &15 x: 200.0
       y: 800.0
+  arrayOfLines:
+  - false
+  - true
+  - false
 - &16 id: "Street3"
   coordinates:
   - &17 x: 200.0
@@ -47,6 +55,10 @@ streets:
     coordinate:
       &20 x: 300.0
       y: 600.0
+  arrayOfLines:
+  - true
+  - false
+  - false
 - &21 id: "Street4"
   coordinates:
   - &22 x: 300.0
@@ -59,6 +71,10 @@ streets:
     coordinate:
       &25 x: 100.0
       y: 300.0
+  arrayOfLines:
+  - false
+  - true
+  - false
 - &26 id: "Street5"
   coordinates:
   - &27 x: 300.0
@@ -71,6 +87,10 @@ streets:
     coordinate:
       &30 x: 400.0
       y: 600.0
+  arrayOfLines:
+  - false
+  - true
+  - false
 - &31 id: "Street6"
   coordinates:
   - &32 x: 400.0
@@ -90,6 +110,10 @@ streets:
     coordinate:
       &38 x: 300.0
       y: 300.0
+  arrayOfLines:
+  - false
+  - false
+  - true
 - &39 id: "Street7"
   coordinates:
   - &40 x: 200.0
@@ -102,6 +126,10 @@ streets:
     coordinate:
       &43 x: 600.0
       y: 900.0
+  arrayOfLines:
+  - true
+  - true
+  - false
 - &44 id: "Street8"
   coordinates:
   - &45 x: 600.0
@@ -114,12 +142,20 @@ streets:
     coordinate:
       &48 x: 500.0
       y: 700.0
+  arrayOfLines:
+  - false
+  - false
+  - true
 - &49 id: "Street9"
   coordinates:
   - &50 x: 500.0
     y: 700.0
   - &51 x: 400.0
     y: 600.0
+  arrayOfLines:
+  - false
+  - true
+  - true
 - &52 id: "Street10"
   coordinates:
   - &53 x: 500.0
@@ -139,12 +175,20 @@ streets:
     coordinate:
       &59 x: 700.0
       y: 200.0
+  arrayOfLines:
+  - false
+  - true
+  - false
 - &60 id: "Street11"
   coordinates:
   - &61 x: 700.0
     y: 200.0
   - &62 x: 400.0
     y: 100.0
+  arrayOfLines:
+  - true
+  - false
+  - false
 - &63 id: "Street12"
   coordinates:
   - &64 x: 500.0
@@ -159,6 +203,10 @@ streets:
     coordinate:
       &68 x: 700.0
       y: 700.0
+  arrayOfLines:
+  - false
+  - false
+  - true
 - &69 id: "Street13"
   coordinates:
   - &70 x: 600.0
@@ -171,6 +219,10 @@ streets:
     coordinate:
       &73 x: 1000.0
       y: 900.0
+  arrayOfLines:
+  - true
+  - true
+  - false
 - &74 id: "Street14"
   coordinates:
   - &75 x: 1000.0
@@ -183,6 +235,10 @@ streets:
     coordinate:
       &78 x: 1000.0
       y: 700.0
+  arrayOfLines:
+  - true
+  - true
+  - false
 - &79 id: "Street15"
   coordinates:
   - &80 x: 1000.0
@@ -195,6 +251,10 @@ streets:
     coordinate:
       &83 x: 800.0
       y: 700.0
+  arrayOfLines:
+  - false
+  - true
+  - true
 - &84 id: "Street16"
   coordinates:
   - &85 x: 1000.0
@@ -214,6 +274,10 @@ streets:
     coordinate:
       &91 x: 1100.0
       y: 200.0
+  arrayOfLines:
+  - true
+  - false
+  - false
 - &92 id: "Street17"
   coordinates:
   - &93 x: 1100.0
@@ -231,6 +295,10 @@ streets:
     coordinate:
       &114 x: 1100.0
       y: 200.0
+  arrayOfLines:
+  - true
+  - false
+  - false
 - &97 id: "Street18"
   coordinates:
   - &98 x: 900.0
@@ -250,12 +318,20 @@ streets:
     coordinate:
       &104 x: 900.0
       y: 400.0
+  arrayOfLines:
+  - true
+  - false
+  - true
 - &105 id: "Street19"
   coordinates:
   - &106 x: 800.0
     y: 700.0
   - &107 x: 700.0
     y: 200.0
+  arrayOfLines:
+  - false
+  - false
+  - true
 - &108 id: "Street20"
   coordinates:
   - &109 x: 900.0
@@ -268,3 +344,7 @@ streets:
     coordinate:
       &112 x: 700.0
       y: 200.0
+  arrayOfLines:
+  - true
+  - false
+  - true
