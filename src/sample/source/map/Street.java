@@ -105,8 +105,6 @@ public class Street implements iStreet, Drawable, TimerUpdate2 {
         return String.format("street(%s)", id);
     }
 
-
-
     @JsonIgnore
     public void setLineToStreet(sample.source.map.Line line) {
         String idOfLine = line.getId();
@@ -199,7 +197,13 @@ public class Street implements iStreet, Drawable, TimerUpdate2 {
 
             shape.setStrokeWidth(10);
             shape.setOnMouseClicked(mouseEvent -> addToNewTrace(shape));
+        }
+    }
 
+    @Override
+    public void setShapes1() {
+        for(Shape shape: gui) {
+            shape.setStrokeWidth(1);
         }
     }
 
@@ -260,7 +264,7 @@ public class Street implements iStreet, Drawable, TimerUpdate2 {
 
     public double getPathSize() {
         double size = 0;
-        for(int i=0; i< obchadzka.size() - 1; i++) {
+        for(int i=0; i< obchadzka.size(); i++) {
             for(int j=0; j< obchadzka.get(i).getCoordinates().size()-1; j++) {
                 Coordinate a = obchadzka.get(i).getCoordinates().get(j);
                 Coordinate b = obchadzka.get(i).getCoordinates().get(j+1);

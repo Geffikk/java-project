@@ -98,7 +98,6 @@ public class Path implements iPath {
 
     public double getPartPathSize(Street street) {
         double size = 0;
-        System.out.println(path);
         for(int i=0; i< path.size() - 1; i++) {
             if(path.get(i).equals(street.getCoordinates().get(0)) || path.get(i).equals(street.getCoordinates().get(street.getCoordinates().size()-1))) {
                 break;

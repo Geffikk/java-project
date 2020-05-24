@@ -31,4 +31,6 @@ public interface TimerUpdate2 {
 
     void clearArray();
 
+    void setShapes1();
+
 }

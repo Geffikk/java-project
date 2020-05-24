@@ -84,7 +84,7 @@ public class Controller {
 
         if(closedStreet != null) {
             for (TimerUpdate2 update2 : updates2) {
-                //update2.update2(mapTime, closedStreet);
+                update2.update2(mapTime, closedStreet);
             }
         }
     }
@@ -93,6 +93,10 @@ public class Controller {
     public void setNewRoute(){
         if (closeStreetText == null) {
             System.out.println("ERROR text is null");
+        }
+
+        for(TimerUpdate2 update2: updates2) {
+            update2.setShapes1();
         }
 
         for(TimerUpdate update: updates) {
