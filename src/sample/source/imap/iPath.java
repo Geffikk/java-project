@@ -11,6 +11,7 @@ package sample.source.imap;
 /* Imports */
 import sample.source.map.Autobus;
 import sample.source.map.Coordinate;
+import sample.source.map.Street;
 
 import java.util.List;
 
@@ -35,5 +36,7 @@ public interface iPath {
      * @return path
      */
     List<Coordinate> getPath();
+
+    double getPartPathSize(Street street);
 
 }

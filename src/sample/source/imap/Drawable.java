@@ -1,3 +1,4 @@
+
 /**
  -  PROJECT: Simulacia liniek MHD
  -  Authors: Maroš Geffert <xgeffe00>, Patrik Tomov <xtomov02>
@@ -11,8 +12,6 @@ package sample.source.imap;
 /* Imports */
 import javafx.scene.shape.Shape;
 import java.util.List;
-
-
 public interface Drawable {
 
     /**

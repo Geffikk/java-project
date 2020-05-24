@@ -54,10 +54,9 @@
                   <Font name="Berlin Sans FB" size="25.0" />
                </font>
             </Label>
-            <TextField fx:id="nameOfClosedStreet" layoutX="11.0" layoutY="329.0" />
-            <Button layoutX="11.0" layoutY="362.0" mnemonicParsing="false" onAction="#setCloseStreet" text="Close street" />
-            <Button layoutX="92.0" layoutY="362.0" mnemonicParsing="false" onAction="#setNewRoute" text="Set New Trace" />
-            <Button layoutX="184.0" layoutY="362.0" mnemonicParsing="false" onAction="#clearTrace" text="Button" />
+            <TextField fx:id="nameOfClosedStreet" layoutX="16.0" layoutY="338.0" />
+            <Button layoutX="16.0" layoutY="372.0" mnemonicParsing="false" onAction="#setCloseStreet" text="Close Street" />
+            <Button layoutX="16.0" layoutY="408.0" mnemonicParsing="false" onAction="#setNewRoute" text="Set new trace" />
          </children></AnchorPane>
    </right>
    <center>

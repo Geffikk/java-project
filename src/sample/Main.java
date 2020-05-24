@@ -19,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import sample.source.imap.Drawable;
+import sample.source.imap.TimerUpdate2;
 import sample.source.map.*;
 
 import java.io.File;

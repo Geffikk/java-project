@@ -57,4 +57,7 @@ public interface iStreet {
      * @return string format ID
      *****************************/
     String toString();
+
+    double getDistanceBetweenCoordinates(Coordinate a, Coordinate b);
+    double getPathSize();
 }

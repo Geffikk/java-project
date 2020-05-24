@@ -10,6 +10,7 @@ package sample.source.map;
 
 /* Imports */
 import sample.source.imap.Drawable;
+import sample.source.imap.TimerUpdate2;
 import sample.source.imap.TimerUpdate;
 import sample.source.imap.iAutobus;
 
@@ -22,9 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static java.lang.Math.abs;
 
@@ -59,16 +58,17 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
     @JsonIgnore
     private String slowStreetsString = "";
     @JsonIgnore
-    private boolean oneColor = true;
+    private static int oneColor = 0;
     @JsonIgnore
     static public Boolean turnOnDelay;
     @JsonIgnore
     private double startDistance;
     @JsonIgnore
     public boolean direction;
-
-
-
+    @JsonIgnore
+    private Coordinate lastCoord;
+    @JsonIgnore
+    static int removeFromObchadzka = 0;
 
     // TimerUpdate Interface
     @Override
@@ -81,6 +81,10 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
             }
             oneColor = false;
         }*/
+
+        if(gui.get(0).getId().equals("4")) {
+            //System.out.println(distance);
+        }
 
         Time pauseOnSleep = new Time(23,59,59);
         if(mapTime.before(pauseOnSleep) && mapTime.after(new Time(6,19,59))) {
@@ -215,7 +219,160 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
         }
     }
 
-    //                                   iAutobus Interface
+    @Override
+    public void testNewRoute(Street closedStreet) {
+        int i = 0;
+        int j = 0;
+
+        System.out.println(closedStreet.getArrayOfLines());
+        if(closedStreet.getArrayOfLines().get(0)) {
+
+            //System.out.println(path.getPath());
+                /*
+                if (direction && distance > path.getPartPathSize(closedStreet)) {
+                    distance = distance + closedStreet.getObchadzka().get(0).getPathSize();
+                    System.out.println("---------------------------------");
+                    System.out.println("Get path to closed street");
+                    System.out.println(path.getPartPathSize(closedStreet));
+                    System.out.println("---------------------------------");
+                    System.out.println("Cela Path");
+                    System.out.println(path.getPathSize());
+                    System.out.println(path.getPath());
+                } else if (!direction && distance > path.getPartPathSize(closedStreet)) {
+                    //distance = distance + closedStreet.getObchadzka().get(0).getPathSize();
+                    System.out.println("---------------------------------");
+                    System.out.println("Get path to closed street");
+                    System.out.println(path.getPartPathSize(closedStreet));
+                    System.out.println("---------------------------------");
+                    System.out.println("Cela Path");
+                    System.out.println(path.getPathSize());
+                    System.out.println(path.getPath());
+                }*/
+        }
+
+        for(Street street: line.getStreetList()) {
+
+            /*
+            if(oneColor) {
+                System.out.println(street.getObchadzka());
+                System.out.println(street.getObchadzka().get(0));
+                System.out.println(closedStreet.getCoordinates().get(0));
+                oneColor = false;
+            }*/
+            i++;
+            if(street.equals(closedStreet)) {
+                // Street11 right coordinate
+                if(equalCoordinate(closedStreet.getCoordinates().get(0), street.getObchadzka().get(0))) {
+                    Coordinate leftSide = closedStreet.getCoordinates().get(1);
+                    //System.out.println("1 podmienka");
+                    int iterator2 = 1;
+                    while(j < street.getObchadzka().size()){
+                        //System.out.println(street.getObchadzka());
+                        try {
+                            equalCoordinate(lastCoord, street.getObchadzka().get(iterator2));
+                        }
+                        catch (IndexOutOfBoundsException ignored){}
+                        iterator2++;
+                        j++;
+                    }
+                    if(!direction) {
+                        //System.out.println(this.path.getPath());
+                    }
+                    removeFromObchadzka = 0;
+                }
+                // Street11 left coordinate
+                else if(equalCoordinate(closedStreet.getCoordinates().get(1), street.getObchadzka().get(0))) {
+                    Coordinate leftSide = closedStreet.getCoordinates().get(1);
+                    //System.out.println("2 podmienka");
+                    int iterator2 = 1;
+                    while(j < street.getObchadzka().size()){
+                        //System.out.println(street.getObchadzka());
+                        try {
+                            equalCoordinate(lastCoord, street.getObchadzka().get(iterator2));
+                        }
+                        catch (IndexOutOfBoundsException ignored){}
+                        iterator2++;
+                        j++;
+                    }
+                    if(direction) {
+                       //System.out.println(this.path.getPath());
+                    }
+                    removeFromObchadzka = 0;
+                }
+            }
+        }
+    }
+
+    public boolean equalCoordinate(Coordinate mainCoor, Street street2){
+        int j = 0;
+        int iter = 0;
+
+        /*
+        System.out.println(street2.getObchadzka());
+        System.out.println(street2);
+        System.out.println(street2.getCoordinates());
+        System.out.println(mainCoor);
+        System.out.println("----------------------------");
+        */
+
+        for(Coordinate coor : path.getPath()) {
+            j++;
+            if(mainCoor.equals(coor)) {
+                break;
+            }
+        }
+
+        if(mainCoor.equals(street2.getCoordinates().get(0))) {
+
+            if(!direction) {
+                while (iter < street2.getCoordinates().size()-1) {
+                    iter++;
+                    this.path.getPath().add(j, street2.getCoordinates().get(street2.getCoordinates().size()-iter));
+                    //System.out.println(this.path.getPath());
+                }
+                //System.out.println(this.path.getPath());
+            }
+            else {
+                int iter2 = street2.getCoordinates().size();
+                while (iter < street2.getCoordinates().size()-1) {
+                    //System.out.println(this.path.getPath());
+                    iter++;
+                    iter2--;
+                    this.path.getPath().add(j-1, street2.getCoordinates().get(street2.getCoordinates().size()-iter2));
+                }
+            }
+            //System.out.println(this.path.getPath());
+            lastCoord = street2.getCoordinates().get(0);
+            return true;
+        }
+        else if(mainCoor.equals(street2.getCoordinates().get(street2.getCoordinates().size()-1))) {
+
+            if(!direction) {
+                while (iter < street2.getCoordinates().size()-1) {
+                    iter++;
+                    this.path.getPath().add(j, street2.getCoordinates().get(iter-1));
+                    //System.out.println(this.path.getPath());
+                }
+                //System.out.println(this.path.getPath());
+                //System.out.println(this.path.getPath());
+            }
+            else {
+                int iter2 = street2.getCoordinates().size();
+                while (iter < street2.getCoordinates().size()-1) {
+                    //System.out.println(this.path.getPath());
+                    iter++;
+                    iter2--;
+                    this.path.getPath().add(j-1, street2.getCoordinates().get(iter2-1));
+                }
+            }
+            //System.out.println(this.path.getPath());
+            lastCoord = street2.getCoordinates().get(street2.getCoordinates().size()-iter-1);
+            return true;
+        }
+        return false;
+    }
+
+    //iAutobus Interface
     @Override
     public void clearDepartures(Label actualPosition, Label label, Label label2, javafx.scene.shape.Line traceOfStops, Pane pane, Pane content, Label actPositionText) {
         label.setText("");
@@ -377,7 +534,7 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
         traceOfStops.setEndX(x);
     }
 
-    //  Drawable Interface
+    // Drawable Interface
     @Override
     @JsonIgnore
     public List<Shape> getGUI() {
@@ -412,6 +569,11 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
                 Circle circle = new Circle(position.getX(), position.getY(), 8, Color.RED);
                 circle.setStroke(Color.BLACK);
                 circle.setId("1");
+                oneColor++;
+                if(oneColor > 8) {
+                    circle = new Circle(position.getX(), position.getY(), 10, Color.PURPLE);
+                    circle.setId("4");
+                }
                 gui.add(circle);
                 break;
             }

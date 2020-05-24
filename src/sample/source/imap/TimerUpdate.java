@@ -12,6 +12,8 @@ package sample.source.imap;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
+import sample.source.map.Street;
+
 import java.sql.Time;
 
 public interface TimerUpdate {
@@ -58,4 +60,6 @@ public interface TimerUpdate {
      * @param travelInTime time value of shift vehicles
      ************************************************************/
     void setBaseTime(double travelInTime);
+
+    void testNewRoute(Street closedStreet);
 }

@@ -17,7 +17,9 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import sample.source.imap.Drawable;
+import sample.source.imap.TimerUpdate2;
 import sample.source.imap.TimerUpdate;
+import sample.source.map.Street;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -27,6 +29,7 @@ import java.text.ParseException;
 public class Controller {
 
     private List<TimerUpdate> updates = new ArrayList<>(); /* update */
+    private List<TimerUpdate2> updates2 = new ArrayList<>();
     private Time mapTime = new Time(6, 20, 0); /* base time map */
     private AnimationTimer timer; /* timeline for updates */
     private int modifyTimer = 0; /* change time value */
@@ -55,7 +58,45 @@ public class Controller {
     private Label actualPositionLabel; /* label for display actual position */
     @FXML
     private Label actPositionText;
+    @FXML
+    private TextField nameOfClosedStreet;
+    static String closeStreetText = null;
+    static Street closedStreet = null;
 
+    @FXML
+    public void clearTrace(){
+        for(TimerUpdate2 update2:updates2) {
+            update2.clearArray();
+        }
+    }
+
+    @FXML
+    public void setCloseStreet(){
+        closeStreetText = nameOfClosedStreet.getText();
+        closedStreet = null;
+
+        for (TimerUpdate2 update2: updates2) {
+            closedStreet = update2.initializeClosedStreet(closeStreetText);
+            if (closedStreet != null) {
+                break;
+            }
+        }
+
+        for (TimerUpdate2 update2: updates2) {
+            update2.update2(mapTime, closedStreet);
+        }
+    }
+
+    @FXML
+    public void setNewRoute(){
+        if (closeStreetText == null) {
+            System.out.println("ERROR text is null");
+        }
+
+        for(TimerUpdate update: updates) {
+            update.testNewRoute(closedStreet);
+        }
+    }
 
     /**
      *  speed of system
@@ -125,6 +166,9 @@ public class Controller {
             content.getChildren().addAll(drawable.getGUI());
             if(drawable instanceof TimerUpdate) {
                 updates.add((TimerUpdate) drawable);
+            }
+            if(drawable instanceof TimerUpdate2) {
+                updates2.add((TimerUpdate2) drawable);
             }
         }
     }

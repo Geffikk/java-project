@@ -21,7 +21,7 @@ public class Path implements iPath {
     private List<Coordinate> path; /* list of coordinates (make path of vehicle) */
 
 
-    //                                     Private Functions
+    // Private Functions
 
     /**
      * Empty constructor for yaml
@@ -91,6 +91,18 @@ public class Path implements iPath {
     public double getPathSize() {
         double size = 0;
         for(int i=0; i< path.size() - 1; i++) {
+            size += getDistanceBetweenCoordinates(path.get(i), path.get(i+1));
+        }
+        return size;
+    }
+
+    public double getPartPathSize(Street street) {
+        double size = 0;
+        System.out.println(path);
+        for(int i=0; i< path.size() - 1; i++) {
+            if(path.get(i).equals(street.getCoordinates().get(0)) || path.get(i).equals(street.getCoordinates().get(street.getCoordinates().size()-1))) {
+                break;
+            }
             size += getDistanceBetweenCoordinates(path.get(i), path.get(i+1));
         }
         return size;

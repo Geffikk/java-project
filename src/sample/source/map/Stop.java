@@ -17,6 +17,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import sample.source.imap.Drawable;
+import sample.source.imap.TimerUpdate2;
 import sample.source.imap.iStop;
 
 import java.util.Arrays;
