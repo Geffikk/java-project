@@ -224,10 +224,11 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
         int i = 0;
         int j = 0;
 
-        System.out.println(closedStreet.getArrayOfLines());
-        if(closedStreet.getArrayOfLines().get(0)) {
+        for(Street street: line.getStreetList()) {
+            //System.out.println(street);
+            if(street.getArrayOfLines().get(0)) {
 
-            //System.out.println(path.getPath());
+                //System.out.println(path.getPath());
                 /*
                 if (direction && distance > path.getPartPathSize(closedStreet)) {
                     distance = distance + closedStreet.getObchadzka().get(0).getPathSize();
@@ -248,9 +249,7 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
                     System.out.println(path.getPathSize());
                     System.out.println(path.getPath());
                 }*/
-        }
-
-        for(Street street: line.getStreetList()) {
+            }
 
             /*
             if(oneColor) {
@@ -259,12 +258,13 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
                 System.out.println(closedStreet.getCoordinates().get(0));
                 oneColor = false;
             }*/
+
             i++;
             if(street.equals(closedStreet)) {
                 // Street11 right coordinate
                 if(equalCoordinate(closedStreet.getCoordinates().get(0), street.getObchadzka().get(0))) {
                     Coordinate leftSide = closedStreet.getCoordinates().get(1);
-                    //System.out.println("1 podmienka");
+                    System.out.println("1 podmienka");
                     int iterator2 = 1;
                     while(j < street.getObchadzka().size()){
                         //System.out.println(street.getObchadzka());
@@ -274,9 +274,10 @@ public class Autobus implements Drawable, TimerUpdate, iAutobus {
                         catch (IndexOutOfBoundsException ignored){}
                         iterator2++;
                         j++;
+                        System.out.println(this.path.getPath());
                     }
                     if(!direction) {
-                        //System.out.println(this.path.getPath());
+                        ///System.out.println(this.path.getPath());
                     }
                     removeFromObchadzka = 0;
                 }

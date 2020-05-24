@@ -82,8 +82,10 @@ public class Controller {
             }
         }
 
-        for (TimerUpdate2 update2: updates2) {
-            update2.update2(mapTime, closedStreet);
+        if(closedStreet != null) {
+            for (TimerUpdate2 update2 : updates2) {
+                //update2.update2(mapTime, closedStreet);
+            }
         }
     }
 
